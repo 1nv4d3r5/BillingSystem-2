@@ -1,0 +1,46 @@
+﻿body, input, table,td,tr,div,form,label,button,span{
+    font-size:12px;
+}
+.textBox {
+    width:136px;
+}
+.textBox-small {
+    width:60px;
+}
+.textBox-75 {
+    width:75px;
+}
+.content {
+    width:619px;
+}
+.margin-left {
+    margin-left:5px;
+}
+.usercontent {
+    width:375px;
+}
+.drop-small {
+    width:75px;
+}
+.drop-middle {
+    width:100px;
+}
+.myspan1 {
+    width:75px;
+}
+.income-content {
+    width:455px;
+}
+.margin-top {
+  margin-top:5px;
+}
+.margin {
+    margin-left:5px;
+    margin-top:5px;
+}
+
+
+
+
+
+

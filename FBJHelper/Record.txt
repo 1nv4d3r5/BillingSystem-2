@@ -1,0 +1,5 @@
+﻿XmlReader类用于Xml文件的一般读取操作
+XmlTextReader.NodeType: 该属性返回当前节点的类型
+XmlReader.Read()从数据流中读取下一个XML结点，如果读取成功返回True，否则返回False。通常通过该方法的返回值来判断是否达到数据流结尾。
+
+

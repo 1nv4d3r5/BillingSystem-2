@@ -1,0 +1,58 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="UserSetting.htm.cs" Inherits="BillingSystem.Views.SystemSetting.UserSetting" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <script type="text/javascript" lang="ja">
+        function openUserEditWin(code) {
+            showModalDialog("UserAdd.aspx?Code=" + code, "UserAdd.aspx", 'dialogWidth:300px;dialogHeight:200px;center:yes;help:no;resizable:no;status:no');
+        }
+
+        function setWidthSize() {
+         return window.screen.availWidth - window.screen.availWidth * 0.8;
+        }
+
+        function setHeightSize() {
+            return window.screen.availHeight - window.screen.availHeight * 0.8;
+        }
+    </script>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+    <table style="width:100%;">
+        <tr>
+            <td>
+                <asp:Button runat ="server" Text="新增" ID="btnUserAdd" OnClick="btnUserAdd_Click"/>
+                <asp:Button runat="server" Text="查询"  ID="btnUserSelect" OnClick="btnUserSelect_Click"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <asp:DataGrid  runat="server" AutoGenerateColumns="False" Width="100%" Height="100%" ID="UserListDataGrid" BorderColor="Black" BorderStyle="None" BorderWidth="5px" CellPadding="2" CellSpacing="2" HorizontalAlign="Justify" GridLines="Both">
+                    <AlternatingItemStyle BorderStyle="None" />
+                    <Columns>
+                        <asp:BoundColumn ReadOnly="true" DataField="Id" HeaderText="Id" Visible="false"/>
+                        <asp:HyperLinkColumn HeaderText="Code" DataTextField="Code" DataNavigateUrlField="Code" DataNavigateUrlFormatString="javascript:openUserEditWin('{0}')" />
+                        <asp:BoundColumn ReadOnly="true" DataField="Name" HeaderText="Name"/>
+                        <asp:BoundColumn ReadOnly="true" DataField="Password" HeaderText="PassWord"/>
+                        <asp:BoundColumn ReadOnly="true" DataField="EMail" HeaderText="EMail"/>
+                        <asp:BoundColumn ReadOnly="true" DataField="Role" HeaderText="Role"/>
+                        <asp:BoundColumn ReadOnly="true" DataField="Content" HeaderText="Content"/>
+                        <asp:TemplateColumn HeaderText="操作" HeaderStyle-HorizontalAlign="Center" FooterStyle-BorderStyle="None">
+                            <EditItemTemplate>
+                                <asp:ImageButton runat="server" />
+                            </EditItemTemplate>
+<HeaderStyle HorizontalAlign="Center"></HeaderStyle>
+                        </asp:TemplateColumn>
+                    </Columns>
+                </asp:DataGrid>
+            </td>
+        </tr>
+    </table>
+    </div>
+    </form>
+</body>
+</html>
