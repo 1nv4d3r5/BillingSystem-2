@@ -7,6 +7,7 @@
     <title></title>
     <link rel="stylesheet" type="text/css" href="../../Css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="../../Css/css.css" />
+    <script src="../../Scripts/jquery-2.0.3.min.js" type="text/javascript"></script>
     <script lang="ja" type="text/javascript">
         function openIncomEditWin(id) {
             location.replace(" InCome.aspx?Id=" + id);
@@ -39,6 +40,12 @@
             document.getElementById("divSet").style.display = 'none';
             document.getElementById("divIncomeTitle").innerText = "收入管理--查询";
         }
+
+        $(function () {
+            $("#IncomeListDataGrid tr").bind('click', function () {
+                $(this).css('background-color','#dff');
+            });
+        });
     </script>
 </head>
 <body>
