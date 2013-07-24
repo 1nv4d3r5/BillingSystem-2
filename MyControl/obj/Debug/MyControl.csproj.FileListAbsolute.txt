@@ -1,5 +1,0 @@
-D:\BillingSystem\MyControl\bin\Debug\MyControl.dll
-D:\BillingSystem\MyControl\bin\Debug\MyControl.pdb
-D:\BillingSystem\MyControl\obj\Debug\MyControl.dll
-D:\BillingSystem\MyControl\obj\Debug\MyControl.pdb
-D:\BillingSystem\MyControl\obj\Debug\MyControl.csprojResolveAssemblyReference.cache

@@ -51,9 +51,10 @@
         //    });
         //});
         $(function () {
-            $("#ExpensesListDataGrid tr").first().nextAll().bind('click', function () {
+            $("#ExpensesListDataGrid tr").bind('click', function () {
                 //var tr1 = $("#ExpensesListDataGrid tr").first().nextAll();
                 //tr1.each(function (i) {this.style.backgroundColor=['#ccc'] });
+                $("#ExpensesListDataGrid tr.highlight").removeClass('highlight');
                 $(this).toggleClass("highlight");
             });
         });
