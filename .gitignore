@@ -1,4 +1,6 @@
-*/bin
-*/obj
+BillingSystem/bin/
+BillingSystem/obj/
+FBJHelper/obj
+FBJHelper/bin
 *.csproj
 *.suo
