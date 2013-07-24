@@ -38,6 +38,15 @@
     margin-left:5px;
     margin-top:5px;
 }
+.title {
+    margin-top:5px;
+    font-size:18px;
+    font-weight:800;
+}
+.highlight {
+    background:#dff;
+
+}
 
 
 

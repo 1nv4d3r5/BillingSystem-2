@@ -77,6 +77,7 @@
     <Content Include="Images\delete\3.png" />
     <Content Include="Images\delete\4.png" />
     <Content Include="Images\delete\XBOX 360.png" />
+    <Content Include="Scripts\jquery-2.0.3.min.js" />
     <Content Include="Views\BillingSystemMainPage.aspx" />
     <Content Include="Views\Default.aspx" />
     <Content Include="Views\Expenses\Expenses.aspx" />
@@ -237,9 +238,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Scripts\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

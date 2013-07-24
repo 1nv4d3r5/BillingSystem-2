@@ -6,6 +6,7 @@
 <head runat="server">
     <link rel="stylesheet" type="text/css" href="../../Css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="../../Css/css.css" />
+    <script src="../../Scripts/jquery-2.0.3.min.js" type="text/javascript"></script>
     <title></title>
     <script type="text/javascript" lang="ja">
         function openExpensesEditWin(id) {
@@ -40,20 +41,37 @@
             document.getElementById("ExpensesQuery").style.display = 'none';
             document.getElementById("divExpensesTitle").innerText = "支出管理--编辑";
         }
+
+        //$(function () {
+        //    $("#ExpensesListDataGrid tr").first().nextAll().bind('click', function () {
+        //        if ($(this).css("background-color") != $("#ExpensesListDataGrid").css("background-color"))
+        //            $(this).css('background-color', '#ffffff');
+        //        else
+        //            $(this).css('background-color', '#dff');
+        //    });
+        //});
+        $(function () {
+            $("#ExpensesListDataGrid tr").first().nextAll().bind('click', function () {
+                //var tr1 = $("#ExpensesListDataGrid tr").first().nextAll();
+                //tr1.each(function (i) {this.style.backgroundColor=['#ccc'] });
+                $(this).toggleClass("highlight");
+            });
+        });
     </script>
+
 </head>
 <body>
     <form id="Expenses" runat="server" style="width: 99%; height: 100%;">
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
         <div class="margin-left">
             <div>
-                <div id="divExpensesTitle" style="font-size: 18px; margin-top: 5px;">
+                <div id="divExpensesTitle" class="title">
                     支出管理
                 </div>
                 <br />
                 <div id="divSet">
                     <div class="controls controls-row">
-                        <div class="span3">
+                        <div class="span4">
                             <asp:Button runat="server" Text="新增" ID="btnExpensesAdd" CssClass="btn btn-primary" OnClick="btnExpensesAdd_Click" />
                             <asp:Button runat="server" Text="高级查询" ID="btnExpensesQuery" CssClass="btn btn-primary" OnClick="btnExpensesQuery_Click" />
                         </div>
@@ -129,11 +147,11 @@
             <div style="width: 100%; height: auto; margin-top: 15px;">
                 <hr />
             </div>
-            <div >
+            <div>
                 <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                     <ContentTemplate>
                         <asp:DataGrid runat="server" AutoGenerateColumns="false" ID="ExpensesListDataGrid" Width="100%" BorderColor="Black" BorderStyle="None" BorderWidth="5px" CellPadding="2" CellSpacing="2" GridLines="Both" Font-Size="Small"
-                            HeaderStyle-HorizontalAlign="Center" HeaderStyle-VerticalAlign="Middle" ItemStyle-VerticalAlign="Middle" ItemStyle-Font-Size="Small" SelectedItemStyle-BorderColor="Red" OnItemCommand="ExpensesListDataGrid_ItemCommand" >
+                            HeaderStyle-HorizontalAlign="Center" HeaderStyle-VerticalAlign="Middle" ItemStyle-VerticalAlign="Middle" ItemStyle-Font-Size="Small" SelectedItemStyle-BorderColor="Red" OnItemCommand="ExpensesListDataGrid_ItemCommand">
                             <Columns>
                                 <asp:BoundColumn ReadOnly="true" DataField="Id" HeaderText="Id" ItemStyle-Width="5%" Visible="false" />
                                 <asp:HyperLinkColumn HeaderText="卡号" DataTextField="BankCardNumber" DataNavigateUrlField="Id" DataNavigateUrlFormatString="javascript:openExpensesEditWin('{0}')" ItemStyle-Width="10%" />

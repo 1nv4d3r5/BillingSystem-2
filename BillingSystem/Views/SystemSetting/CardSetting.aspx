@@ -8,6 +8,7 @@
     <!--<link rel="stylesheet" type="text/css" href="/Css/css.css"/>-->
     <link rel="stylesheet" type="text/css" href="/Css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="/Css/css.css" />
+    <script src="../../Scripts/jquery-2.0.3.min.js" type="text/javascript"></script>
     <script type="text/javascript" lang="ja">
         function openCardEditWin(Id) {
             //showModalDialog("CardSetting.aspx?CardNumber=" + cardNumber, "CardSetting.aspx", 'dialogWidth:560px;dialogHeight:300px;center:yes;help:no;resizable:no;status:no');
@@ -45,6 +46,18 @@
             document.getElementById("divCardTitle").innerText = "卡信息管理--编辑";
             //window.opener.location = window.opener.location;
         }
+
+        //$(function () {
+        //    $("#CardListDataGrid tr").first().nextAll().bind('click', function () {
+        //        $(this).css('background-color', '#dff');
+        //    });
+        //});
+        $(function () {
+            $("#CardListDataGrid tr").first().nextAll().bind('click', function () {
+
+                $(this).toggleClass("highlight");
+            });
+        });
     </script>
 </head>
 <body>
@@ -52,12 +65,12 @@
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
         <div class="margin-left">
             <div>
-                <div id="divCardTitle" style="font-size: 18px;margin-top:5px;">
+                <div id="divCardTitle" class="title">
                     卡信息管理
                 </div>
                 <br />
                 <div id="divSet">
-                    <div class="row">
+                    <div class="controls controls-row">
                         <div class="span4">
                             <asp:Button runat="server" Text="新增" ID="btnCardAdd" CssClass="btn btn-primary" OnClick="btnCardAdd_Click" />
                             <asp:Button runat="server" Text="高级查询" ID="btnCardQuery" CssClass="btn btn-primary" OnClick="btnCardQuery_Click" />

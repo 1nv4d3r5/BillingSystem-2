@@ -7,6 +7,7 @@
     <title></title>
     <link rel="stylesheet" type="text/css" href="../../Css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="../../Css/css.css" />
+    <script src="../../Scripts/jquery-2.0.3.min.js" type="text/javascript"></script>
     <script type="text/javascript" lang="ja">
         function openUserEditWin(code) {
             //showModalDialog("UserAdd.aspx?Code=" + code, "UserAdd.aspx", 'dialogWidth:300px;dialogHeight:200px;center:yes;help:no;resizable:no;status:no');
@@ -47,6 +48,18 @@
             UserQuery.style.display = 'none';
             this.divUserTitle = "用户信息维护";
         }
+
+        //$(function () {
+        //    $("#UserListDataGrid tr").first().nextAll().bind('click', function () {
+        //        $(this).css('background-color', '#dff');
+        //    });
+        //});
+        $(function () {
+            $("#UserListDataGrid tr").first().nextAll().bind('click', function () {
+
+                $(this).toggleClass("highlight");
+            });
+        });
     </script>
 </head>
 <body>
@@ -54,12 +67,12 @@
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
         <div class="margin-left">
             <div>
-                <div id="divUserTitle" style="font-size: 18px;margin-top:5px;">
+                <div id="divUserTitle" class="title">
                     用户信息维护
                 </div>
                 <br />
                 <div id="divUserSet">
-                    <div class="row">
+                    <div class="controls controls-row">
                         <div class="span4">
                             <asp:Button runat="server" Text="新增" ID="btnUserAdd" CssClass="btn btn-primary" OnClick="btnUserAdd_Click" />
                             <asp:Button runat="server" Text="高级查询" ID="btnUserQuery" CssClass="btn btn-primary" OnClick="btnUserSelect_Click" />

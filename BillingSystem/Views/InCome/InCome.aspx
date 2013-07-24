@@ -41,24 +41,31 @@
             document.getElementById("divIncomeTitle").innerText = "收入管理--查询";
         }
 
+        //$(function () {
+        //    $("#IncomeListDataGrid tr").first().nextAll().bind('click', function () {
+        //        $(this).css('background-color','#dff');
+        //    });
+        //});
+
         $(function () {
-            $("#IncomeListDataGrid tr").bind('click', function () {
-                $(this).css('background-color','#dff');
+            $("#IncomeListDataGrid tr").first().nextAll().bind('click', function () {
+                
+                $(this).toggleClass("highlight");
             });
         });
     </script>
 </head>
 <body>
-    <form id="income" runat="server" style="width: 100%; height: 100%;">
+    <form id="income" runat="server" style="width: 100%; height:100%">
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
         <div class="margin-left">
             <div>
-                <div id="divIncomeTitle" style="font-size:18px;margin-top:5px;">
+                <div id="divIncomeTitle" class="title">
                     收入管理
                 </div>
                 <br />
                 <div id="divSet">
-                    <div class="row">
+                    <div class="controls controls-row">
                         <div class="span4">
                             <asp:Button runat="server" Text="新增" ID="btnIncomeAdd" CssClass="btn btn-primary" OnClick="btnIncomeAdd_Click" />
                             <asp:Button runat="server" Text="高级查询" ID="btnIncomeQuery" CssClass="btn btn-primary" OnClick="btnIncomeQuery_Click" />
