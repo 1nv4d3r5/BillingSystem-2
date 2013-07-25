@@ -22,13 +22,18 @@ namespace BillingSystem.Proxy
         public static int InsertOrUpdatetoBorrowed(BorrowInfo info)
         {
             int iSuccess = 0;
+            int usuccess = 0;
             UserInfo userInfo = UserDAL.GetUserByName(info.Borrower);
             CardInfo cardInfo = CardDAL.GetCardByCardNumber(info.BorrowedAccount, info.Id);
             float amount = 0;
             float borrowAmount = 0;
             if (info.Id > 0)
             {
-                
+                BorrowInfo borrowInfo = BorrowDAL.GetBorrowById(info.Id);
+            }
+            BorrowDAL.InsertOrUpdatetoBorrowed(info,out iSuccess);
+            if (iSuccess > 0)
+            {
             }
             return 0;
         }
