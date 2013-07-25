@@ -49,6 +49,114 @@ namespace BillingSystem.Views {
         protected global::System.Web.UI.WebControls.Button btnBorrowQuery;
         
         /// <summary>
+        /// RadioBorrowAddBorrowType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList RadioBorrowAddBorrowType;
+        
+        /// <summary>
+        /// txtBorrowAddBorrower control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtBorrowAddBorrower;
+        
+        /// <summary>
+        /// divBorrow control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divBorrow;
+        
+        /// <summary>
+        /// txtBorrowAddBorrowAccount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtBorrowAddBorrowAccount;
+        
+        /// <summary>
+        /// RadioBorrowAddLoanType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList RadioBorrowAddLoanType;
+        
+        /// <summary>
+        /// txtBorrowAddLender control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtBorrowAddLender;
+        
+        /// <summary>
+        /// divLoan control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divLoan;
+        
+        /// <summary>
+        /// txtBorrowAddLoanAccount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtBorrowAddLoanAccount;
+        
+        /// <summary>
+        /// txtBorrowAddBorrowAmount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtBorrowAddBorrowAmount;
+        
+        /// <summary>
+        /// txtBorrowAddBorrowDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtBorrowAddBorrowDate;
+        
+        /// <summary>
+        /// txtBorrowAddReturnDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtBorrowAddReturnDate;
+        
+        /// <summary>
+        /// txtBorrowAddContent control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtBorrowAddContent;
+        
+        /// <summary>
         /// btnBorrowAddSubmit control.
         /// </summary>
         /// <remarks>
@@ -65,6 +173,33 @@ namespace BillingSystem.Views {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnBorrowAddCanel;
+        
+        /// <summary>
+        /// txtBorrowQueryBorrower control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtBorrowQueryBorrower;
+        
+        /// <summary>
+        /// txtBorrowQueryBBorrowDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtBorrowQueryBBorrowDate;
+        
+        /// <summary>
+        /// txtBorrowQueryEBorrowDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtBorrowQueryEBorrowDate;
         
         /// <summary>
         /// btnBorrowQuerySubmit control.

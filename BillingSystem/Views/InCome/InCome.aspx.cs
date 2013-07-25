@@ -20,11 +20,11 @@ namespace BillingSystem.Views
         {
             if (!IsPostBack)
             {
-                if (!string.IsNullOrEmpty(Request.QueryString["Id"])) //带参数访问为编辑状态
+                if (!string.IsNullOrEmpty(Request.QueryString["IncomeId"])) //带参数访问为编辑状态
                 {
                     Session["editFlag"] = "true";
                     this.ClientScript.RegisterStartupScript(this.GetType(), "", "DisplayEditIncomediv();", true);
-                    CashIncomeInfo cashInfo = CashIncomeMethods.GetCashIncomeById(Convert.ToInt32(Request.QueryString["Id"]));
+                    CashIncomeInfo cashInfo = CashIncomeMethods.GetCashIncomeById(Convert.ToInt32(Request.QueryString["IncomeId"]));
                     InitializeIncomeAdd(cashInfo);
                 }
                 else
@@ -89,7 +89,7 @@ namespace BillingSystem.Views
             if (Session["editFlag"].Equals("true"))
             {
                 this.ClientScript.RegisterStartupScript(this.GetType(), "", "DisplayEditIncomediv();", true);
-                info.Id = Convert.ToInt32(Request.QueryString["Id"]);
+                info.Id = Convert.ToInt32(Request.QueryString["IncomeId"]);
             }
             else
             {

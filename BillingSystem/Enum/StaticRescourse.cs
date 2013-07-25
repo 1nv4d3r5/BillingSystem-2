@@ -469,5 +469,33 @@ namespace BillingSystem
                 return string.Empty;
             }
         }
+
+        public static string DisplayBorrowORLoanType(int value)
+        {
+            if (value == 1)
+            {
+                return "现金";
+            }
+            else if (value == 2)
+            {
+                return "转账";
+            }
+            else
+            {
+                return string.Empty;
+            }
+        }
+
+        public static bool VisOrCollsDiv(int value)
+        {
+            if (value == 2)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

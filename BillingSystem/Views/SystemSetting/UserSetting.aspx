@@ -56,7 +56,7 @@
         //});
         $(function () {
             $("#UserListDataGrid tr").first().nextAll().bind('click', function () {
-
+                $("#UserListDataGrid tr.highlight").removeClass('highlight');
                 $(this).toggleClass("highlight");
             });
         });
@@ -118,7 +118,7 @@
                 </div>
             </div>
             <hr />
-            <div>
+            <div class="margin-left">
                 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                     <ContentTemplate>
                         <asp:DataGrid runat="server" AutoGenerateColumns="False" ID="UserListDataGrid" Width="100%" BorderColor="Black" BorderStyle="None" BorderWidth="5px" CellPadding="2" CellSpacing="2" GridLines="Both" Font-Size="Small"

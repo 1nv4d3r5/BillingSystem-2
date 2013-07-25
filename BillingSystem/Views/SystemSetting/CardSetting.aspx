@@ -52,9 +52,14 @@
         //        $(this).css('background-color', '#dff');
         //    });
         //});
+        //$(function () {
+        //    $("#CardListDataGrid tr").first().nextAll().bind('click', function () {
+        //      $(this).toggleClass("highlight");
+        //    });
+        //});
         $(function () {
             $("#CardListDataGrid tr").first().nextAll().bind('click', function () {
-
+                $("#CardListDataGrid tr.highlight").removeClass('highlight');
                 $(this).toggleClass("highlight");
             });
         });
@@ -134,7 +139,7 @@
                 </div>
             </div>
             <hr />
-            <div>
+            <div class="margin-left">
                 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                     <ContentTemplate>
                         <asp:DataGrid runat="server" AutoGenerateColumns="false" ID="CardListDataGrid" Width="100%" BorderColor="Black" BorderStyle="None" BorderWidth="5px" CellPadding="2" CellSpacing="2" GridLines="Both" Font-Size="Small"

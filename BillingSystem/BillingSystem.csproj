@@ -99,6 +99,7 @@
   <ItemGroup>
     <Compile Include="Aid\Aid.cs" />
     <Compile Include="Common\Helper.cs" />
+    <Compile Include="DAL\BorrowDAL.cs" />
     <Compile Include="DAL\ExpensesDAL.cs" />
     <Compile Include="Helper\CardHelper.cs" />
     <Compile Include="Helper\HelperCommon.cs" />
@@ -118,11 +119,14 @@
     <Compile Include="Models\Collection\BorrowCollection.cs" />
     <Compile Include="Models\Collection\CardCollection.cs" />
     <Compile Include="Models\Collection\CashIncomeCollection.cs" />
+    <Compile Include="Models\Collection\LoanCollection.cs" />
     <Compile Include="Models\Collection\UserCollection.cs" />
     <Compile Include="Models\Collection\ExpensesCollection.cs" />
+    <Compile Include="Models\LoanInfo.cs" />
     <Compile Include="Models\UserInfo.cs" />
     <Compile Include="Models\ExpensesInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Proxy\BorrowProxy.cs" />
     <Compile Include="Proxy\CardProxy.cs" />
     <Compile Include="Proxy\CashIncomeProxy.cs" />
     <Compile Include="Proxy\ExpensesProxy.cs" />

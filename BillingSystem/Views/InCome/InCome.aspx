@@ -10,7 +10,7 @@
     <script src="../../Scripts/jquery-2.0.3.min.js" type="text/javascript"></script>
     <script lang="ja" type="text/javascript">
         function openIncomEditWin(id) {
-            location.replace(" InCome.aspx?Id=" + id);
+            location.replace(" InCome.aspx?IncomeId=" + id);
         }
 
         function DisplaySysdiv() {
@@ -47,9 +47,14 @@
         //    });
         //});
 
+        //$(function () {
+        //    $("#IncomeListDataGrid tr").first().nextAll().bind('click', function () {                
+        //        $(this).toggleClass("highlight");
+        //    });
+        //});
         $(function () {
             $("#IncomeListDataGrid tr").first().nextAll().bind('click', function () {
-                
+                $("#IncomeListDataGrid tr.highlight").removeClass('highlight');
                 $(this).toggleClass("highlight");
             });
         });
@@ -176,7 +181,7 @@
                 </div>
             </div>
             <hr />
-            <div>
+            <div class="margin-left">
                 <asp:UpdatePanel ID="UpdatePanel4" runat="server">
                     <ContentTemplate>
                         <asp:DataGrid runat="server" AutoGenerateColumns="false" ID="IncomeListDataGrid" Width="100%" BorderColor="Black" BorderStyle="None" BorderWidth="5px" CellPadding="2" CellSpacing="2" GridLines="Both" HeaderStyle-HorizontalAlign="Center"

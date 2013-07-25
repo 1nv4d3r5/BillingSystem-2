@@ -51,9 +51,7 @@
         //    });
         //});
         $(function () {
-            $("#ExpensesListDataGrid tr").bind('click', function () {
-                //var tr1 = $("#ExpensesListDataGrid tr").first().nextAll();
-                //tr1.each(function (i) {this.style.backgroundColor=['#ccc'] });
+            $("#ExpensesListDataGrid tr").first().nextAll().bind('click', function () {
                 $("#ExpensesListDataGrid tr.highlight").removeClass('highlight');
                 $(this).toggleClass("highlight");
             });
@@ -148,7 +146,7 @@
             <div style="width: 100%; height: auto; margin-top: 15px;">
                 <hr />
             </div>
-            <div>
+            <div class="margin-left">
                 <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                     <ContentTemplate>
                         <asp:DataGrid runat="server" AutoGenerateColumns="false" ID="ExpensesListDataGrid" Width="100%" BorderColor="Black" BorderStyle="None" BorderWidth="5px" CellPadding="2" CellSpacing="2" GridLines="Both" Font-Size="Small"
