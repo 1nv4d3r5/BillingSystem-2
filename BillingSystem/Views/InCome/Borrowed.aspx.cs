@@ -27,7 +27,54 @@ namespace BillingSystem.Views
                 {
                     this.ClientScript.RegisterStartupScript(this.GetType(), "", "DisplaySysdiv();", true);
                 }
+                queryList = new List<QueryElement>();
+                BindBorrowListDataGrid(queryList);
             }
+        }
+
+        private void BindBorrowListDataGrid(List<QueryElement> list)
+        {
+            BorrowCollection coll = BorrowedMethods.GetBorrowList(list);
+            this.BorrowListDataGrid.DataSource = coll;
+            this.BorrowListDataGrid.DataBind();
+            //for (int i = 0; i < coll.Count; i++)
+            //{
+            //    BorrowInfo borrowInfo = coll[i];
+            //    UserInfo userInfo = UserMethods.GetUserByName(borrowInfo.Borrower);
+            //    CardInfo cardInfo = CardMethods.GetCardByCardNumber(borrowInfo.BorrowedAccount,userInfo.Id);
+                //string bank = StaticRescourse.DisplayBank(cardInfo.BankId);
+                //this.BorrowListDataGrid.Items[i].Cells[1].Text = StaticRescourse.DisplayIncomeStatus(cashInfo.Status);
+                //this.BorrowListDataGrid.Items[i].Cells[4].Text = StaticRescourse.DisplayIncomeType(cashInfo.IncomeType);
+                //this.BorrowListDataGrid.Items[i].Cells[6].Text = StaticRescourse.DisplayMode(cashInfo.Mode);
+                //this.BorrowListDataGrid.Items[i].Cells[7].Text = StaticRescourse.DisplayRate(cashInfo.Rate);
+                //this.BorrowListDataGrid.Items[i].Cells[8].Text = cashInfo.DepositDate.ToString("yyyy-MM-dd");
+                //if (cashInfo.AutoSave == 1)
+                //{
+                //    this.BorrowListDataGrid.Items[i].Cells[12].Text = "是";
+                //}
+                //else
+                //{
+                //    this.BorrowListDataGrid.Items[i].Cells[12].Text = "否";
+                //}
+                //if (HelperCommon.CompareAccordToRequired(cashInfo.BDate))
+                //{
+                //    this.BorrowListDataGrid.Items[i].Cells[9].Text = cashInfo.BDate.ToString("yyyy-MM-dd");
+                //}
+                //else
+                //{
+                //    this.BorrowListDataGrid.Items[i].Cells[9].Text = string.Empty;
+                //}
+                //if (HelperCommon.CompareAccordToRequired(cashInfo.EDate))
+                //{
+                //    this.BorrowListDataGrid.Items[i].Cells[10].Text = cashInfo.EDate.ToString("yyyy-MM-dd");
+                //}
+                //else
+                //{
+                //    this.BorrowListDataGrid.Items[i].Cells[10].Text = string.Empty;
+                //}
+
+                //this.BorrowListDataGrid.Items[i].Cells[13].Text = StaticRescourse.DisplayIncomeDepositMode(cashInfo.DepositMode);
+            //}
         }
 
         protected void btnBorrowAdd_Click(object sender, EventArgs e)
@@ -40,6 +87,7 @@ namespace BillingSystem.Views
         {
             InitializeBorrowQuery();
             this.ClientScript.RegisterStartupScript(this.GetType(), "", "DisplayQueryBorrowdiv();", true);
+
         }
 
         protected void btnBorrowAddSubmit_Click(object sender, EventArgs e)
@@ -111,6 +159,24 @@ namespace BillingSystem.Views
                 borrowInfo.ReturnDate = HelperCommon.ConverToDateTime(string.Format("{0:d}", this.txtBorrowAddReturnDate.Text.Trim()));
             }
             borrowInfo.Content = this.txtBorrowAddContent.Text.Trim();
+
+            int iSuccess = BorrowedMethods.InsertOrUpdatetoBorrowed(borrowInfo);
+            this.ClientScript.RegisterStartupScript(this.GetType(), "", "DisplayAddBorrowdiv();", true);
+            if (iSuccess ==1)
+            {
+                Alert.Show(this, "新增一条收入成功！");
+            }
+            else if (iSuccess == 2)
+            {
+                Alert.Show(this, "修改成功！");
+            }
+            else
+            {
+                Alert.Show(this, "操作失败！");
+            }
+            InitializeBorrowAdd(new BorrowInfo());
+            queryList = new List<QueryElement>();
+            BindBorrowListDataGrid(queryList);
         }
 
         protected void btnBorrowAddCanel_Click(object sender, EventArgs e)
@@ -162,7 +228,9 @@ namespace BillingSystem.Views
                 query = new QueryElement { Queryname = "BorrowDate", QueryElementType = MySqlDbType.DateTime, Queryvalue = this.txtBorrowQueryEBorrowDate.Text.Trim(), QueryOperation = "<" };
                 queryList.Add(query);
             }
-
+            BindBorrowListDataGrid(queryList);
+            this.ClientScript.RegisterStartupScript(this.GetType(), "", "DisplayQueryBorrowdiv();", true);
+            InitializeBorrowQuery();
         }
 
         protected void btnBorrowQueryCanel_Click(object sender, EventArgs e)
@@ -178,23 +246,23 @@ namespace BillingSystem.Views
                 int selectindex = e.Item.ItemIndex;
                 id = this.BorrowListDataGrid.Items[selectindex].Cells[0].Text;
             }
-            //if (!string.IsNullOrEmpty(id))
-            //{
-            //    int iSuccess = CashIncomeMethods.DeleteCashIncome(Convert.ToInt32(id));
-            //    if (iSuccess > 0)
-            //    {
-            //        Alert.Show(this, "删除成功！");
-            //    }
-            //    else
-            //    {
-            //        Alert.Show(this, "删除失败！");
-            //    }
-            //    if (queryList == null)
-            //    {
-            //        queryList = new List<QueryElement>();
-            //    }
-            //    BindIncomeListDataGrid(queryList);
-            //}
+            if (!string.IsNullOrEmpty(id))
+            {
+                int iSuccess = BorrowedMethods.DeleteBorrowedById(Convert.ToInt32(id));
+                if (iSuccess > 0)
+                {
+                    Alert.Show(this, "删除成功！");
+                }
+                else
+                {
+                    Alert.Show(this, "删除失败！");
+                }
+                if (queryList == null)
+                {
+                    queryList = new List<QueryElement>();
+                }
+                //BindBorrowListDataGrid(queryList);
+            }
         }
 
         private void InitializeBorrowQuery()
@@ -259,6 +327,16 @@ namespace BillingSystem.Views
             {
                 this.divBorrow.Visible = false;
             }
+        }
+
+        public void GetBorrowEdit(int id)
+        {
+            BorrowInfo borrowInfo = BorrowedMethods.GetBorrowById(id);
+         
+            //string str=borrowInfo.Id.ToString()+","+borrowInfo.BorrowType.ToString()+","+borrowInfo.BorrowedAccount+","+borrowInfo.Borrower+
+            //           borrowInfo.LoanType.ToString()+","+borrowInfo.LoanAccount+","+borrowInfo.Lender+","+borrowInfo.BorrowAmount.ToString()+","
+            //           +borrowInfo.BorrowDate.ToString("yyyy-MM-dd")+","+borrowInfo.ReturnDate.ToString("yyyy-MM-dd")+","+borrowInfo.Content;
+            //return str;            var s = '<%=GetBorrowEdit("'+id+'")%>'
         }
     }
 }

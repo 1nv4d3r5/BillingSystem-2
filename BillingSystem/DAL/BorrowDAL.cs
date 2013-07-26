@@ -100,7 +100,7 @@ namespace BillingSystem.DAL
             }
             else
             {
-                sb.Append(" insert into card (BorrowType,BorrowedAccount,Borrower,LoanType,LoanAccount,Lender,BorrowAmount,BorrowDate,ReturnDate,Content) ");
+                sb.Append(" insert into borrowed (BorrowType,BorrowedAccount,Borrower,LoanType,LoanAccount,Lender,BorrowAmount,BorrowDate,ReturnDate,Content) ");
                 sb.Append(" Values (@BorrowType,@BorrowedAccount,@Borrower,@LoanType,@LoanAccount,@Lender,@BorrowAmount,@BorrowDate,@ReturnDate,@Content) ");
             }
             MySqlParameter[] pars = new MySqlParameter[] 

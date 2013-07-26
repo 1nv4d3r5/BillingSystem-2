@@ -134,6 +134,11 @@ namespace BillingSystem.DAL
                 sb.AppendFormat(" {0} ", "update card set Amount=@Amount,ExpenditureAmount=@ExpenditureAmount where Id=@Id");
                 pars[2] = new MySqlParameter("@ExpenditureAmount", MySqlDbType.Float);
             }
+            else if (type == 3)
+            {
+                sb.AppendFormat(" {0} ", "update card set Amount=@Amount,BorrowAmount=@BorrowAmount where Id=@Id");
+                pars[2] = new MySqlParameter("@BorrowAmount", MySqlDbType.Float);
+            }
             pars[0].Value = id;
             pars[1].Value = amount;
             pars[2].Value = updateAmount;

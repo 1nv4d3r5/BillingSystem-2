@@ -131,6 +131,7 @@
     <Compile Include="Proxy\CashIncomeProxy.cs" />
     <Compile Include="Proxy\ExpensesProxy.cs" />
     <Compile Include="Proxy\UserProxy.cs" />
+    <Compile Include="Services\BorrowedMethods.cs" />
     <Compile Include="Services\CardMethods.cs" />
     <Compile Include="Services\CashIncomeMethods.cs" />
     <Compile Include="Services\ExpensesMethods.cs" />

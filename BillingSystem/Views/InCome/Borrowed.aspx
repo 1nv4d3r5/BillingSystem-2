@@ -10,7 +10,11 @@
     <script type="text/javascript" src="../../Scripts/jquery-2.0.3.min.js"></script>
     <script lang="ja" type="text/javascript">
         function openBorrowEditWin(id) {
-            location.replace(" Borrowed.aspx?BorrowedId=" + id);
+            //location.replace(" Borrowed.aspx?BorrowedId=" + id);         
+            DisplayEditBorrowdiv();
+           
+
+           
         }
 
         function DisplaySysdiv() {
@@ -40,6 +44,24 @@
             document.getElementById("divSet").style.display = 'none';
             document.getElementById("divBorrowTitle").innerText = "借入管理--查询";
         }
+
+        $(document).ready(function () {
+            $("td:eq(0)", $("#BorrowListDataGrid tr")).hide();
+        });
+
+        $(function () {
+            $("#BorrowListDataGrid tr").first().nextAll().bind('click', function () {
+                $("#BorrowListDataGrid tr.highlight").removeClass('highlight');
+                $(this).toggleClass("highlight");
+                $("#txtBorrowAddBorrower").val($("tr.highlight").children("td")[1].innerText);
+                if ($("tr.highlight").children("td")[2].innerText == '2') {
+                    $("input[name='RadioBorrowAddBorrowType'][checked]").val(true);
+                }
+                else {
+                    $("input[name='RadioBorrowAddBorrowType'][checked]").val(true);
+                }
+            });
+        });
     </script>
 </head>
 <body>
@@ -142,10 +164,12 @@
                 <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                     <ContentTemplate>
                         <asp:DataGrid runat="server" AutoGenerateColumns="false" ID="BorrowListDataGrid" Width="100%" BorderColor="Black" BorderStyle="None" BorderWidth="5px" CellPadding="2" CellSpacing="2" GridLines="Both" Font-Size="Small"
-                            HeaderStyle-HorizontalAlign="Center" HeaderStyle-VerticalAlign="Middle" ItemStyle-VerticalAlign="Middle" ItemStyle-Font-Size="Small" SelectedItemStyle-BorderColor="Red" OnItemCommand="BorrowListDataGrid_ItemCommand">
+                            HeaderStyle-HorizontalAlign="Center" HeaderStyle-VerticalAlign="Middle" ItemStyle-VerticalAlign="Middle" ItemStyle-Font-Size="Small" SelectedItemStyle-BorderColor="Red"
+                             OnItemCommand="BorrowListDataGrid_ItemCommand" >
                             <Columns>
-                                <asp:BoundColumn ReadOnly="true" DataField="Id" HeaderText="Id" ItemStyle-Width="5%" Visible="false" />
-                                <asp:HyperLinkColumn HeaderText="借款人" DataTextField="Borrower" DataNavigateUrlField="Id" DataNavigateUrlFormatString="javascript:openBorrowEditWin('{0}')" ItemStyle-Width="5%" />
+                                <asp:BoundColumn ReadOnly="true" DataField="Id" HeaderText="Id" ItemStyle-Width="5%" />
+                                <asp:HyperLinkColumn HeaderText="借款人" DataTextField="Borrower" DataNavigateUrlField="Id" DataNavigateUrlFormatString="javascript:openBorrowEditWin('{0}')" ItemStyle-Width="5%" >
+                                </asp:HyperLinkColumn>
                                 <asp:BoundColumn ReadOnly="true" DataField="BorrowType" HeaderText="借入方式" ItemStyle-Width="5%" />
                                 <asp:BoundColumn ReadOnly="true" DataField="BorrowedAccount" HeaderText="借入账户" ItemStyle-Width="10%" />
                                 <asp:BoundColumn ReadOnly="true" DataField="Lender" HeaderText="出借方" ItemStyle-Width="5%" />
