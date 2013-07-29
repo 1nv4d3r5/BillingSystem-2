@@ -19,14 +19,14 @@ namespace BillingSystem.Views
         {
             if (!IsPostBack)
             {
-                if (!string.IsNullOrEmpty(Request.QueryString["BorrowedId"]))
-                {
-                    this.ClientScript.RegisterStartupScript(this.GetType(), "", "DisplayEditBorrowdiv();", true);
-                }
-                else
-                {
+                //if (!string.IsNullOrEmpty(Request.QueryString["BorrowedId"]))
+                //{
+                //    this.ClientScript.RegisterStartupScript(this.GetType(), "", "DisplayEditBorrowdiv();", true);
+                //}
+                //else
+                //{
                     this.ClientScript.RegisterStartupScript(this.GetType(), "", "DisplaySysdiv();", true);
-                }
+                //}
                 queryList = new List<QueryElement>();
                 BindBorrowListDataGrid(queryList);
             }
@@ -112,9 +112,11 @@ namespace BillingSystem.Views
             #endregion
 
             BorrowInfo borrowInfo = new BorrowInfo();
-            if (!string.IsNullOrEmpty(Request.QueryString["BorrowedId"]))
+            //if (!string.IsNullOrEmpty(Request.QueryString["BorrowedId"]))
+            if (!string.IsNullOrEmpty(this.HiddenField1.Value.Trim()))
             {
-                borrowInfo.Id = Convert.ToInt32(Request.QueryString["BorrowedId"]);
+                //borrowInfo.Id = Convert.ToInt32(Request.QueryString["BorrowedId"]);
+                borrowInfo.Id = Convert.ToInt32(this.HiddenField1.Value.Trim());
             }
             else
             {
@@ -268,11 +270,11 @@ namespace BillingSystem.Views
             {
                 this.txtBorrowAddBorrower.Enabled = true;
                 this.RadioBorrowAddBorrowType.SelectedValue = "1";
-                this.divBorrow.Visible = false;
+                // this.divBorrow.Visible = true;
                 this.txtBorrowAddBorrower.Text = string.Empty;
                 this.txtBorrowAddLender.Text = string.Empty;
                 this.RadioBorrowAddLoanType.SelectedValue = "1";
-                this.divLoan.Visible = false;
+                // this.divLoan.Visible = false;
                 this.txtBorrowAddBorrowAmount.Text = string.Empty;
                 this.txtBorrowAddBorrowDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
                 this.txtBorrowAddReturnDate.Text = string.Empty;
