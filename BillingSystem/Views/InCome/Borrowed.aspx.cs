@@ -37,44 +37,19 @@ namespace BillingSystem.Views
             BorrowCollection coll = BorrowedMethods.GetBorrowList(list);
             this.BorrowListDataGrid.DataSource = coll;
             this.BorrowListDataGrid.DataBind();
-            //for (int i = 0; i < coll.Count; i++)
-            //{
-            //    BorrowInfo borrowInfo = coll[i];
-            //    UserInfo userInfo = UserMethods.GetUserByName(borrowInfo.Borrower);
-            //    CardInfo cardInfo = CardMethods.GetCardByCardNumber(borrowInfo.BorrowedAccount,userInfo.Id);
-                //string bank = StaticRescourse.DisplayBank(cardInfo.BankId);
-                //this.BorrowListDataGrid.Items[i].Cells[1].Text = StaticRescourse.DisplayIncomeStatus(cashInfo.Status);
-                //this.BorrowListDataGrid.Items[i].Cells[4].Text = StaticRescourse.DisplayIncomeType(cashInfo.IncomeType);
-                //this.BorrowListDataGrid.Items[i].Cells[6].Text = StaticRescourse.DisplayMode(cashInfo.Mode);
-                //this.BorrowListDataGrid.Items[i].Cells[7].Text = StaticRescourse.DisplayRate(cashInfo.Rate);
-                //this.BorrowListDataGrid.Items[i].Cells[8].Text = cashInfo.DepositDate.ToString("yyyy-MM-dd");
-                //if (cashInfo.AutoSave == 1)
-                //{
-                //    this.BorrowListDataGrid.Items[i].Cells[12].Text = "是";
-                //}
-                //else
-                //{
-                //    this.BorrowListDataGrid.Items[i].Cells[12].Text = "否";
-                //}
-                //if (HelperCommon.CompareAccordToRequired(cashInfo.BDate))
-                //{
-                //    this.BorrowListDataGrid.Items[i].Cells[9].Text = cashInfo.BDate.ToString("yyyy-MM-dd");
-                //}
-                //else
-                //{
-                //    this.BorrowListDataGrid.Items[i].Cells[9].Text = string.Empty;
-                //}
-                //if (HelperCommon.CompareAccordToRequired(cashInfo.EDate))
-                //{
-                //    this.BorrowListDataGrid.Items[i].Cells[10].Text = cashInfo.EDate.ToString("yyyy-MM-dd");
-                //}
-                //else
-                //{
-                //    this.BorrowListDataGrid.Items[i].Cells[10].Text = string.Empty;
-                //}
-
-                //this.BorrowListDataGrid.Items[i].Cells[13].Text = StaticRescourse.DisplayIncomeDepositMode(cashInfo.DepositMode);
-            //}
+            for (int i = 0; i < coll.Count; i++)
+            {
+                this.BorrowListDataGrid.Items[i].Cells[8].Text = coll[i].BorrowDate.ToString("yyyy-MM-dd");
+                bool dateFlag=HelperCommon.CompareAccordToRequired(coll[i].ReturnDate);
+                if (dateFlag)
+                {
+                    this.BorrowListDataGrid.Items[i].Cells[9].Text = coll[i].ReturnDate.ToString("yyyy-MM-dd");
+                }
+                else
+                {
+                    this.BorrowListDataGrid.Items[i].Cells[9].Text = string.Empty;
+                }
+            }
         }
 
         protected void btnBorrowAdd_Click(object sender, EventArgs e)

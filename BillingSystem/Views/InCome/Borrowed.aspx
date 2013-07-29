@@ -12,9 +12,7 @@
         function openBorrowEditWin(id) {
             //location.replace(" Borrowed.aspx?BorrowedId=" + id);         
             DisplayEditBorrowdiv();
-           
 
-           
         }
 
         function DisplaySysdiv() {
@@ -45,21 +43,61 @@
             document.getElementById("divBorrowTitle").innerText = "借入管理--查询";
         }
 
+        function ClearForm() {
+            var t = document.getElementsByTagName("input");
+            for (var i = 0; i < t.length; i++) {
+                if (t[i].type == 'text') {
+                    t[i].value = "";
+                }
+            }
+        }
+
         $(document).ready(function () {
             $("td:eq(0)", $("#BorrowListDataGrid tr")).hide();
         });
 
         $(function () {
             $("#BorrowListDataGrid tr").first().nextAll().bind('click', function () {
+                //行单击事件时，取消所有行样式
                 $("#BorrowListDataGrid tr.highlight").removeClass('highlight');
+
+                //设置当前行样式
                 $(this).toggleClass("highlight");
-                $("#txtBorrowAddBorrower").val($("tr.highlight").children("td")[1].innerText);
-                if ($("tr.highlight").children("td")[2].innerText == '2') {
-                    $("input[name='RadioBorrowAddBorrowType'][checked]").val(true);
+
+                //清空编辑div
+                ClearForm();
+
+               //给借入方式赋值
+                if ($("tr.highlight").children("td")[2].innerText == "2") {
+                    $('input:radio').eq(1).attr('checked', 'true');
+                    $("#divBorrow").show();
+                    $("#txtBorrowAddBorrowAccount").val($("tr.highlight").children("td")[3].innerText);
                 }
                 else {
-                    $("input[name='RadioBorrowAddBorrowType'][checked]").val(true);
+                    $('input:radio').eq(0).attr('checked', 'true');
+                    $("#divBorrow").hide();
+                    
                 }
+                $("#txtBorrowAddBorrower").val($("tr.highlight").children("td")[1].innerText);
+
+                //给出借方式赋值
+                if ($("tr.highlight").children("td")[5].innerText == "2") {
+                    $('input:radio').eq(3).attr('checked', 'true');
+                    $("#txtBorrowAddLoanAccount").val($("tr.highlight").children("td")[6].innerText);
+                    $("#divLoan").show();
+                }
+                else {
+                    $('input:radio').eq(2).attr('checked', 'true');
+                    $("#divLoan").hide();
+                }
+
+                $("#txtBorrowAddLender").val($("tr.highlight").children("td")[4].innerText);
+                $("#txtBorrowAddBorrowAmount").val($("tr.highlight").children("td")[7].innerText);
+                $("#txtBorrowAddBorrowDate").val($("tr.highlight").children("td")[8].innerText);
+                if ($("tr.highlight").children("td")[9].innerText > "2000-01-01") {
+                    $("#txtBorrowAddReturnDate").val($("tr.highlight").children("td")[9].innerText);
+                }
+                $("#txtBorrowAddContent").val($("tr.highlight").children("td")[10].innerText);
             });
         });
     </script>
