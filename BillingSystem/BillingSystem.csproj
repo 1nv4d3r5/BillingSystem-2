@@ -79,11 +79,12 @@
     <Content Include="Images\delete\XBOX 360.png" />
     <Content Include="Scripts\jquery-2.0.3.min.js" />
     <Content Include="Views\BillingSystemMainPage.aspx" />
+    <Content Include="Views\Borrowing\Loan.aspx" />
     <Content Include="Views\Default.aspx" />
     <Content Include="Views\Expenses\Expenses.aspx" />
     <Content Include="Views\Image\default_logo.gif" />
     <Content Include="Views\InCome\Bonus.aspx" />
-    <Content Include="Views\InCome\Borrowed.aspx" />
+    <Content Include="Views\Borrowing\Borrowed.aspx" />
     <Content Include="Views\Navigate.aspx" />
     <Content Include="Views\InCome\InCome.aspx" />
     <Content Include="Views\Install.aspx" />
@@ -100,6 +101,7 @@
     <Compile Include="Aid\Aid.cs" />
     <Compile Include="Common\Helper.cs" />
     <Compile Include="DAL\BorrowDAL.cs" />
+    <Compile Include="DAL\LoanDAL.cs" />
     <Compile Include="DAL\ExpensesDAL.cs" />
     <Compile Include="Helper\CardHelper.cs" />
     <Compile Include="Helper\HelperCommon.cs" />
@@ -129,11 +131,13 @@
     <Compile Include="Proxy\BorrowProxy.cs" />
     <Compile Include="Proxy\CardProxy.cs" />
     <Compile Include="Proxy\CashIncomeProxy.cs" />
+    <Compile Include="Proxy\LoanProxy.cs" />
     <Compile Include="Proxy\ExpensesProxy.cs" />
     <Compile Include="Proxy\UserProxy.cs" />
     <Compile Include="Services\BorrowedMethods.cs" />
     <Compile Include="Services\CardMethods.cs" />
     <Compile Include="Services\CashIncomeMethods.cs" />
+    <Compile Include="Services\LoanMethods.cs" />
     <Compile Include="Services\ExpensesMethods.cs" />
     <Compile Include="Services\UserMethods.cs" />
     <Compile Include="Views\BillingSystemMainPage.aspx.cs">
@@ -142,6 +146,13 @@
     </Compile>
     <Compile Include="Views\BillingSystemMainPage.aspx.designer.cs">
       <DependentUpon>BillingSystemMainPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Borrowing\Loan.aspx.cs">
+      <DependentUpon>Loan.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Borrowing\Loan.aspx.designer.cs">
+      <DependentUpon>Loan.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -164,11 +175,11 @@
     <Compile Include="Views\InCome\Bonus.aspx.designer.cs">
       <DependentUpon>Bonus.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Views\InCome\Borrowed.aspx.cs">
+    <Compile Include="Views\Borrowing\Borrowed.aspx.cs">
       <DependentUpon>Borrowed.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Views\InCome\Borrowed.aspx.designer.cs">
+    <Compile Include="Views\Borrowing\Borrowed.aspx.designer.cs">
       <DependentUpon>Borrowed.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Navigate.aspx.cs">

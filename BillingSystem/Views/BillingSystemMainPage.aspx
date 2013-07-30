@@ -58,8 +58,8 @@
                                 <asp:TreeNode Text ="支出管理" Value="支出管理" NavigateUrl="~/Views/Expenses/Expenses.aspx" Target ="content" />
                             </asp:TreeNode>
                             <asp:TreeNode Text="借贷管理" Value="BorrowORLoan" Target="content">
-                                <asp:TreeNode Text ="借入管理" Value="借入管理" NavigateUrl ="~/Views/InCome/Borrowed.aspx" Target="content" />
-                                <%--<asp:TreeNode Text ="借出管理" Value="借入管理" NavigateUrl ="~/Views/InCome/Borrowed.aspx" Target="content" />--%>
+                                <asp:TreeNode Text ="借入管理" Value="借入管理" NavigateUrl ="~/Views/Borrowing/Borrowed.aspx" Target="content" />
+                                <asp:TreeNode Text ="借出管理" Value="借出管理" NavigateUrl ="~/Views/Borrowing/Loan.aspx" Target="content" />
                             </asp:TreeNode>
                             <asp:TreeNode Text="资产管理" Value="asset_management" Target="content"></asp:TreeNode>
                         </Nodes>

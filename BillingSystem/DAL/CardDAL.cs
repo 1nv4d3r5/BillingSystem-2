@@ -139,6 +139,11 @@ namespace BillingSystem.DAL
                 sb.AppendFormat(" {0} ", "update card set Amount=@Amount,BorrowAmount=@BorrowAmount where Id=@Id");
                 pars[2] = new MySqlParameter("@BorrowAmount", MySqlDbType.Float);
             }
+            else if (type == 4)
+            {
+                sb.AppendFormat(" {0} ", "update card set Amount=@Amount,LoanAmount=@LoanAmount where Id=@Id");
+                pars[2] = new MySqlParameter("@BorrowAmount", MySqlDbType.Float);
+            }
             pars[0].Value = id;
             pars[1].Value = amount;
             pars[2].Value = updateAmount;
@@ -160,7 +165,7 @@ namespace BillingSystem.DAL
             if (cardInfo.Id > 0)
             {
                 sb.Append(" update card set BankId = @BankId,CardNumber = @CardNumber,AccountType = @AccountType,Amount=@Amount,");
-                sb.Append("ExpenditureAmount = @ExpenditureAmount,BorrowAmount = @BorrowAmount,IncomeAmount = @IncomeAmount,");
+                sb.Append("ExpenditureAmount = @ExpenditureAmount,BorrowAmount = @BorrowAmount,LoanAmount = @LoanAmount,IncomeAmount = @IncomeAmount,");
                 sb.Append("OwnerId = @OwnerId,OwnerCode = @OwnerCode,UserId = @UserId,UserCode = @UserCode,BankName = @BankName,OpenDate = @OpenDate,Content=@Content ");
                 sb.Append(" where Id = @Id");
                 info.Id = cardInfo.Id;
@@ -171,8 +176,8 @@ namespace BillingSystem.DAL
             }
             else
             {
-                sb.Append(" insert into card (BankId,CardNumber,AccountType,Amount,ExpenditureAmount,BorrowAmount,IncomeAmount,OwnerId,OwnerCode,UserId,UserCode,BankName,OpenDate,Content) ");
-                sb.Append(" Values (@BankId,@CardNumber,@AccountType,@Amount,@ExpenditureAmount,@BorrowAmount,@IncomeAmount,@OwnerId,@OwnerCode,@UserId,@UserCode,@BankName,@OpenDate,@Content)");
+                sb.Append(" insert into card (BankId,CardNumber,AccountType,Amount,ExpenditureAmount,BorrowAmount,LoanAmount,IncomeAmount,OwnerId,OwnerCode,UserId,UserCode,BankName,OpenDate,Content) ");
+                sb.Append(" Values (@BankId,@CardNumber,@AccountType,@Amount,@ExpenditureAmount,@BorrowAmount,@LoanAmount,@IncomeAmount,@OwnerId,@OwnerCode,@UserId,@UserCode,@BankName,@OpenDate,@Content)");
             }
             MySqlParameter[] pars = new MySqlParameter[] 
             {
@@ -183,6 +188,7 @@ namespace BillingSystem.DAL
                 new MySqlParameter("@Amount",MySqlDbType.Float),
                 new MySqlParameter("@ExpenditureAmount",MySqlDbType.Float),
                 new MySqlParameter("@BorrowAmount",MySqlDbType.Float),
+                new MySqlParameter("@LoanAmount",MySqlDbType.Float),
                 new MySqlParameter("@IncomeAmount",MySqlDbType.Float),
                 new MySqlParameter("@OwnerId",MySqlDbType.Int32),
                 new MySqlParameter("@OwnerCode",MySqlDbType.String),
@@ -200,14 +206,15 @@ namespace BillingSystem.DAL
             pars[4].Value = info.Amount;
             pars[5].Value = info.ExpenditureAmount;
             pars[6].Value = info.BorrowAmount;
-            pars[7].Value = info.IncomeAmount;
-            pars[8].Value = info.OwnerId;
-            pars[9].Value = info.OwnerCode;
-            pars[10].Value = info.UserId;
-            pars[11].Value = info.UserCode;
-            pars[12].Value = info.BankName;
-            pars[13].Value = info.OpenDate;
-            pars[14].Value = info.Content;
+            pars[7].Value = info.LoanAmount;
+            pars[8].Value = info.IncomeAmount;
+            pars[9].Value = info.OwnerId;
+            pars[10].Value = info.OwnerCode;
+            pars[11].Value = info.UserId;
+            pars[12].Value = info.UserCode;
+            pars[13].Value = info.BankName;
+            pars[14].Value = info.OpenDate;
+            pars[15].Value = info.Content;
             iSuccess = MySqlDBHelper.ExecuteCommand(mySqlTransaction, sb.ToString(), pars);
             if (cardInfo.Id > 0)
             {

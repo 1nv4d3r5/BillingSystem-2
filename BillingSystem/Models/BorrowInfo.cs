@@ -15,6 +15,7 @@ namespace BillingSystem.Models
     {
         #region 成员变量、构造函数
         private int id;
+        private int borrowORLoan;
         private int borrowType;
         private string borrowedAccount;
         private string borrower;
@@ -32,6 +33,7 @@ namespace BillingSystem.Models
         public BorrowInfo()
         {
             this.id = 0;
+            this.borrowORLoan = 0;
             this.borrowType = 0;
             this.borrowedAccount = string.Empty;
             this.borrower = string.Empty;
@@ -47,6 +49,7 @@ namespace BillingSystem.Models
         public BorrowInfo(BorrowInfo borrowInfo)
         {
             this.id = borrowInfo.Id;
+            this.borrowORLoan = borrowInfo.BorrowORLoan;
             this.borrowType = borrowInfo.BorrowType;
             this.borrowedAccount = borrowInfo.BorrowedAccount;
             this.borrower = borrowInfo.Borrower;
@@ -63,6 +66,7 @@ namespace BillingSystem.Models
         {
             FieldLoader loader = new FieldLoader(record);
             loader.LoadInt32("Id", ref this.id);
+            loader.LoadInt32("BorrowORLoan", ref this.borrowORLoan);
             loader.LoadInt32("BorrowType", ref this.borrowType);
             loader.LoadString("BorrowedAccount", ref this.borrowedAccount);
             loader.LoadString("Borrower", ref this.borrower);
@@ -91,6 +95,23 @@ namespace BillingSystem.Models
             set
             {
                 id = value;
+            }
+        }
+
+        /// <summary>
+        /// 1:借入；2：借出
+        /// </summary>
+        [Browsable(true)]
+        [ReadOnly(false)]
+        public int BorrowORLoan
+        {
+            get
+            {
+                return borrowORLoan;
+            }
+            set
+            {
+                borrowORLoan = value;
             }
         }
 
@@ -271,6 +292,7 @@ namespace BillingSystem.Models
             StringBuilder sb = new StringBuilder();
             sb.Append("<BorrowInfo>");
             sb.AppendFormat("<Id>{0}</Id>", this.Id);
+            sb.AppendFormat("<BorrowORLoan>{0}</BorrowORLoan>", this.BorrowORLoan);
             sb.AppendFormat("<BorrowType>{0}</BorrowType>", this.BorrowType);
             sb.AppendFormat("<BorrowedAccount>{0}</BorrowedAccount>", this.BorrowedAccount);
             sb.AppendFormat("<Borrower>{0}</Borrower>", this.Borrower);
@@ -295,6 +317,10 @@ namespace BillingSystem.Models
 
             jsonStringBuilder.Append("Id:");
             FbjJsonHelper.WriteValue(jsonStringBuilder, this.id);
+            jsonStringBuilder.Append(",");
+
+            jsonStringBuilder.Append("BorrowORLoan:");
+            FbjJsonHelper.WriteValue(jsonStringBuilder, this.borrowORLoan);
             jsonStringBuilder.Append(",");
 
             jsonStringBuilder.Append("BorrowType:");
@@ -403,6 +429,7 @@ namespace BillingSystem.Models
             DataTable table = new DataTable(tableName);
 
             table.Columns.Add("Id", typeof(int));
+            table.Columns.Add("BorrowORLoan", typeof(int));
             table.Columns.Add("BorrowType", typeof(int));
             table.Columns.Add("BorrowedAccount", typeof(string));
             table.Columns.Add("Borrower", typeof(string));
@@ -421,6 +448,7 @@ namespace BillingSystem.Models
             System.Data.DataRow dr = table.NewRow();
 
             dr["Id"] = borrowInfo.id;
+            dr["BorrowORLoan"] = borrowInfo.borrowORLoan;
             dr["BorrowType"] = borrowInfo.borrowType;
             dr["BorrowedAccount"] = borrowInfo.borrowedAccount;
             dr["Borrower"] = borrowInfo.borrower;

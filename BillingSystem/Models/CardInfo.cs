@@ -21,6 +21,7 @@ namespace BillingSystem.Models
         private float amount;
         private float expenditureAmount;
         private float borrowAmount;
+        private float loanAmount;
         private float incomeAmount;
         private int ownerId;
         private string ownerCode;
@@ -44,6 +45,7 @@ namespace BillingSystem.Models
             this.amount = 0;
             this.expenditureAmount = 0;
             this.borrowAmount = 0;
+            this.loanAmount = 0;
             this.incomeAmount = 0;
             this.ownerId = 0;
             this.ownerCode = string.Empty;
@@ -65,6 +67,7 @@ namespace BillingSystem.Models
             this.amount = cardInfo.Amount;
             this.expenditureAmount = cardInfo.ExpenditureAmount;
             this.borrowAmount = cardInfo.BorrowAmount;
+            this.loanAmount = cardInfo.LoanAmount;
             this.incomeAmount = cardInfo.IncomeAmount;
             this.ownerId = cardInfo.OwnerId;
             this.ownerCode = cardInfo.OwnerCode;
@@ -87,6 +90,7 @@ namespace BillingSystem.Models
             loader.LoadFloat("Amount", ref this.amount);
             loader.LoadFloat("ExpenditureAmount", ref this.expenditureAmount);
             loader.LoadFloat("BorrowAmount", ref this.borrowAmount);
+            loader.LoadFloat("LoanAmount", ref this.loanAmount);
             loader.LoadFloat("IncomeAmount", ref this.incomeAmount);
             loader.LoadInt32("OwnerId", ref this.ownerId);
             loader.LoadString("UserCode", ref this.ownerCode);
@@ -220,6 +224,23 @@ namespace BillingSystem.Models
             set
             {
                 borrowAmount = value;
+            }
+        }
+
+        /// <summary>
+        /// 借出金额
+        /// </summary>
+        [Browsable(true)]
+        [ReadOnly(false)]
+        public float LoanAmount
+        {
+            get
+            {
+                return loanAmount;
+            }
+            set
+            {
+                loanAmount = value;
             }
         }
 
@@ -406,6 +427,7 @@ namespace BillingSystem.Models
             sb.AppendFormat("<Amount>{0}</Amount>", this.Amount);
             sb.AppendFormat("<ExpenditureAmount>{0}</ExpenditureAmount>", this.ExpenditureAmount);
             sb.AppendFormat("<BorrowAmount>{0}</BorrowAmount>", this.BorrowAmount);
+            sb.AppendFormat("<LoanAmount>{0}</LoanAmount>", this.LoanAmount);
             sb.AppendFormat("<IncomeAmount>{0}</IncomeAmount>", this.IncomeAmount);
             sb.AppendFormat("<OwnerId>{0}</OwnerId>", this.OwnerId);
             sb.AppendFormat("<OwnerCode>{0}</OwnerCode>", this.OwnerCode);
@@ -454,6 +476,10 @@ namespace BillingSystem.Models
 
             jsonStringBuilder.Append("BorrowAmount:");
             FbjJsonHelper.WriteValue(jsonStringBuilder, this.borrowAmount);
+            jsonStringBuilder.Append(",");
+
+            jsonStringBuilder.Append("LoanAmount:");
+            FbjJsonHelper.WriteValue(jsonStringBuilder, this.loanAmount);
             jsonStringBuilder.Append(",");
 
             jsonStringBuilder.Append("IncomeAmount:");
@@ -568,6 +594,7 @@ namespace BillingSystem.Models
             table.Columns.Add("Amount", typeof(float));
             table.Columns.Add("ExpenditureAmount", typeof(float));
             table.Columns.Add("BorrowAmount", typeof(float));
+            table.Columns.Add("LoanAmount", typeof(float));
             table.Columns.Add("IncomeAmount", typeof(float)); 
             table.Columns.Add("OwnerId", typeof(int));
             table.Columns.Add("OwnerCode", typeof(string));
@@ -592,6 +619,7 @@ namespace BillingSystem.Models
             dr["Amount"] = cardInfo.amount;
             dr["ExpenditureAmount"] = cardInfo.expenditureAmount;
             dr["BorrowAmount"] = cardInfo.borrowAmount;
+            dr["LoanAmount"] = cardInfo.loanAmount;
             dr["IncomeAmount"] = cardInfo.incomeAmount;
             dr["OwnerId"] = cardInfo.ownerId;
             dr["OwnerCode"] = cardInfo.ownerCode;
