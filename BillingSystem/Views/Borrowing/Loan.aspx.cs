@@ -54,7 +54,6 @@ namespace BillingSystem.Views
             if (!string.IsNullOrEmpty(id))
             {
                 int iSuccess = LoanMethods.DeleteLoanById(Convert.ToInt32(id));
-                this.ClientScript.RegisterStartupScript(this.GetType(), "", "HideORShowColumn();", true);
                 if (iSuccess > 0)
                 {
                     Alert.Show(this, "删除成功！");
@@ -67,8 +66,8 @@ namespace BillingSystem.Views
                 {
                     queryList = new List<QueryElement>();
                 }
-                this.ClientScript.RegisterStartupScript(this.GetType(), "", "HideORShowColumn();", true);
                 BindLoanListDataGrid(queryList);
+                this.ClientScript.RegisterStartupScript(this.GetType(), "", "HideORShowColumn();", true);
             }
         }
 

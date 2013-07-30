@@ -7,11 +7,13 @@
     <title></title>
     <link rel="stylesheet" type="text/css" href="../../Css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="../../Css/css.css" />
+    <link href="../../Css/jquery-ui-1.10.3.custom.min.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript" src="../../Scripts/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript" src="../../Scripts/jquery-ui-1.10.3.custom.min.js"></script>
     <script lang="ja" type="text/javascript">
         function openLoanEditWin(id) {
             DisplayEditLoandiv();
-            EditLoan();
+            EditLoan(id);
         }
 
         //隐藏编辑、查询的div
@@ -20,7 +22,7 @@
             document.getElementById("LoanQuery").style.display = 'none';
             document.getElementById("divSet").style.display = '';
             document.getElementById("divLoanTitle").innerText = "借出管理";
-            $("HiddenField1").val("");
+            $("#HiddenField1").val("");
         }
 
         //显示新增的div
@@ -54,17 +56,10 @@
 
         //编辑div的值
         function InitializeEditDivForm() {
-            var t = document.getElementsByTagName("input");
-            for (var i = 0; i < t.length; i++) {
-                if (t[i].type == 'text') {
-                    t[i].value = "";
-                }
-            }
-            //var hd = document.getElementById("HiddenField1");
-            //hd.textContent = "";
+            $('input[type="text"]').val('');
+            $('#HiddenField1').val('');
 
-            var ta = document.getElementById("txtLoanAddContent");
-            ta.textContent = "";
+            $("txtLoanAddContent").val('');
 
             $('input:radio').eq(0).attr('checked', 'true');
             $('input:radio').eq(2).attr('checked', 'true');
@@ -80,17 +75,17 @@
         }
 
         //点击借款人修改一条记录
-        function EditLoan() {
+        function EditLoan(id) {
 
             //清空编辑div
             InitializeEditDivForm();
 
             
             //给出借方式赋值
-            if ($("tr.highlight").children("td")[2].innerText == "2") {
+            if ($("tr.highlight").children("td")[1].innerText == "2") {
                 $('input:radio').eq(1).attr('checked', 'true');
                 $("#divLoan").show();
-                $("#txtLoanAddLoanAccount").val($("tr.highlight").children("td")[3].innerText);
+                $("#txtLoanAddLoanAccount").val($("tr.highlight").children("td")[2].innerText);
             }
             else {
                 $('input:radio').eq(0).attr('checked', 'true');
@@ -99,29 +94,30 @@
             }
 
             //给借款方式赋值
-            if ($("tr.highlight").children("td")[5].innerText == "2") {
+            if ($("tr.highlight").children("td")[4].innerText == "2") {
                 $('input:radio').eq(3).attr('checked', 'true');
-                $("#txtLoanAddLoanAccount").val($("tr.highlight").children("td")[3].innerText);
+                $("#txtLoanAddLoanAccount").val($("tr.highlight").children("td")[2].innerText);
                 $("#divBorrow").show();
             }
             else {
                 $('input:radio').eq(2).attr('checked', 'true');
-                $("#divBorrow   ").hide();
+                $("#divBorrow").hide();
             }
 
-            $("#HiddenField1").val($("tr.highlight").children("td")[0].innerText);
-            $("#txtLoanAddLender").val($("tr.highlight").children("td")[1].innerText);
-            $("#txtLoanAddBorrower").val($("tr.highlight").children("td")[4].innerText);
-            $("#txtLoanAddLoanAmount").val($("tr.highlight").children("td")[7].innerText);
-            $("#txtLoanAddLoanDate").val($("tr.highlight").children("td")[8].innerText);
-            $("#txtLoanAddReturnDate").val($("tr.highlight").children("td")[9].innerText);
-            $("#txtLoanAddContent").val($("tr.highlight").children("td")[10].innerText);
+            $("#HiddenField1").val(id);
+            $("#txtLoanAddLender").val($("tr.highlight").children("td")[0].innerText);
+            $("#txtLoanAddBorrower").val($("tr.highlight").children("td")[3].innerText);
+            $("#txtLoanAddLoanAmount").val($("tr.highlight").children("td")[6].innerText);
+            $("#txtLoanAddLoanDate").val($("tr.highlight").children("td")[7].innerText);
+            $("#txtLoanAddReturnDate").val($("tr.highlight").children("td")[8].innerText);
+            $("#txtLoanAddContent").val($("tr.highlight").children("td")[9].innerText);
         }
 
         //默认加载，隐藏DataGrid的Id这一列
         $(document).ready(function () {
             //DisplaySysdiv();
-            HideORShowColumn();
+            // HideORShowColumn();
+            $('#txtLoanAddLoanDate').datepicker({ dateFormat: "yy-mm-dd" });
         });
 
         function HideORShowColumn() {
@@ -264,7 +260,7 @@
                             HeaderStyle-HorizontalAlign="Center" HeaderStyle-VerticalAlign="Middle" ItemStyle-VerticalAlign="Middle" ItemStyle-Font-Size="Small" SelectedItemStyle-BorderColor="Red"
                             OnItemCommand="LoanListDataGrid_ItemCommand">
                             <Columns>
-                                <asp:BoundColumn ReadOnly="true" DataField="Id" HeaderText="Id" ItemStyle-Width="5%" />
+                                <asp:BoundColumn ReadOnly="true" DataField="Id" HeaderText="Id" ItemStyle-Width="5%" Visible="false"/>
                                 <asp:HyperLinkColumn HeaderText="出借人" DataTextField="Lender" DataNavigateUrlField="Id" DataNavigateUrlFormatString="javascript:openLoanEditWin('{0}')" ItemStyle-Width="5%"></asp:HyperLinkColumn>
                                 <asp:BoundColumn ReadOnly="true" DataField="LoanType" HeaderText="出借方式" ItemStyle-Width="5%" />
                                 <asp:BoundColumn ReadOnly="true" DataField="LoanAccount" HeaderText="出借账户" ItemStyle-Width="10%" />
