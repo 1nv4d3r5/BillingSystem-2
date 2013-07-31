@@ -23,8 +23,7 @@
             document.getElementById("divSet").style.display = '';
             document.getElementById("divLoanTitle").innerText = "借出管理";
             $('#HiddenField1').val('');
-            //$("input[@type=radio][@checked]").val('');
-            $('input:radio').removeAttr('checked', 'true');
+            $('input[type="radio"]').removeAttr('checked');
         }
 
         //显示新增的div
@@ -32,6 +31,8 @@
             $("#divLoan").hide();
             $("#divBorrow").hide();
             InitializeEditDivForm();
+            $('input[name="RadioLoanAddLoanType"]').val(['1']);
+            $('input[name="RadioLoanAddBorrowType"]').val(['1']);
             document.getElementById("LoanEdit").style.display = '';
             document.getElementById("LoanQuery").style.display = 'none';
             document.getElementById("divSet").style.display = 'none';
@@ -60,8 +61,6 @@
             $('input[type="text"]').val('');
             $('#HiddenField1').val('');
             $("#txtLoanAddContent").val('');
-            $('input:radio').eq(0).attr('checked', 'true');
-            $('input:radio').eq(2).attr('checked', 'true');
         }
 
         function InitializeQueryDivForm() {
@@ -79,45 +78,43 @@
             //清空编辑div
             InitializeEditDivForm();
 
+            var selectedRow = $("tr.highlight").children("td");
+
             //给出借方式赋值
-            if ($("tr.highlight").children("td")[1].innerText == "2") {
-                $('input:radio').eq(1).attr('checked', 'true');
+            var loanType = selectedRow[1].innerText;
+            $('input[name="RadioLoanAddLoanType"]').val([loanType]);
+            if (loanType == "2") {
                 $("#divLoan").show();
-                $("#txtLoanAddLoanAccount").val($("tr.highlight").children("td")[2].innerText);
+                $("#txtLoanAddLoanAccount").val(selectedRow[2].innerText);
             }
             else {
-                $('input:radio').eq(0).attr('checked', 'true');
                 $("#divLoan").hide();
             }
 
             //给借款方式赋值
-            if ($("tr.highlight").children("td")[4].innerText == "2") {
-                $('input:radio').eq(3).attr('checked', 'true');
-                $("#txtLoanAddLoanAccount").val($("tr.highlight").children("td")[2].innerText);
+            var borrowType = selectedRow[4].innerText;
+            $('input[name="RadioLoanAddBorrowType"]').val([borrowType]);
+            if (borrowType == "2") {
                 $("#divBorrow").show();
+                $("#txtLoanAddBorrowAccount").val(selectedRow[5].innerText);
             }
             else {
-                $('input:radio').eq(2).attr('checked', 'true');
                 $("#divBorrow").hide();
             }
 
             $("#HiddenField1").val(id);
-            $("#txtLoanAddLender").val($("tr.highlight").children("td")[0].innerText);
-            $("#txtLoanAddBorrower").val($("tr.highlight").children("td")[3].innerText);
-            $("#txtLoanAddLoanAmount").val($("tr.highlight").children("td")[6].innerText);
-            $("#txtLoanAddLoanDate").val($("tr.highlight").children("td")[7].innerText);
-            $("#txtLoanAddReturnDate").val($("tr.highlight").children("td")[8].innerText);
-            $("#txtLoanAddContent").val($("tr.highlight").children("td")[9].innerText);
+            $("#txtLoanAddLender").val(selectedRow[0].innerText);
+            $("#txtLoanAddBorrower").val(selectedRow[3].innerText);
+            $("#txtLoanAddLoanAmount").val(selectedRow[6].innerText);
+            $("#txtLoanAddLoanDate").val(selectedRow[7].innerText);
+            $("#txtLoanAddReturnDate").val(selectedRow[8].innerText);
+            $("#txtLoanAddContent").val(selectedRow[9].innerText);
         }
 
         //默认加载，隐藏DataGrid的Id这一列
         $(document).ready(function () {
             $('#txtLoanAddLoanDate').datepicker({ dateFormat: "yy-mm-dd" });
         });
-
-        function HideORShowColumn() {
-            $("td:eq(0)", $("#LoanListDataGrid tr")).hide();
-        }
 
         //DataGrid行选择的click事件，添加行样式
         $(function () {
@@ -131,7 +128,7 @@
 
         //出借方式选择，当选择现金，会隐藏和清空账户
         $(function () {
-            $("#RadioLoanAddLoanType").change(function () {
+            $("#RadioLoanAddLoanType").click(function () {
                 //$("#txtLoanAddLoanAccount").val($("#RadioLoanAddLoanType").find("input[@checked]").val());
                 var s = $("input[name='RadioLoanAddLoanType']:checked").val();
                 if (s == 2) {
@@ -181,9 +178,7 @@
                         出借方式：
                     </div>
                     <div class="controls controls-row">
-                        <asp:UpdatePanel runat="server">
-                            <ContentTemplate>
-                                <asp:RadioButtonList ID="RadioLoanAddLoanType" runat="server" AutoPostBack="true" RepeatDirection="Horizontal" CssClass="span2">
+                                <asp:RadioButtonList ID="RadioLoanAddLoanType" runat="server" RepeatDirection="Horizontal" CssClass="span2">
                                     <asp:ListItem Value="1">现金</asp:ListItem>
                                     <asp:ListItem Value="2">刷卡</asp:ListItem>
                                 </asp:RadioButtonList>
@@ -194,8 +189,6 @@
                                     <asp:Label ID="Label2" runat="server" Text="出借账户:" CssClass="span1" />
                                     <asp:TextBox runat="server" ID="txtLoanAddLoanAccount" CssClass="span2" />
                                 </div>
-                            </ContentTemplate>
-                        </asp:UpdatePanel>
                         <asp:HiddenField ID="HiddenField1" runat="server" />
                     </div>
                     <div class="controls controls-row">
