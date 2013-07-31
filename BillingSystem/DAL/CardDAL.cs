@@ -142,7 +142,7 @@ namespace BillingSystem.DAL
             else if (type == 4)
             {
                 sb.AppendFormat(" {0} ", "update card set Amount=@Amount,LoanAmount=@LoanAmount where Id=@Id");
-                pars[2] = new MySqlParameter("@BorrowAmount", MySqlDbType.Float);
+                pars[2] = new MySqlParameter("@LoanAmount", MySqlDbType.Float);
             }
             pars[0].Value = id;
             pars[1].Value = amount;

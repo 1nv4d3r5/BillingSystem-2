@@ -7,7 +7,7 @@
     <title></title>
     <link rel="stylesheet" type="text/css" href="../../Css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="../../Css/css.css" />
-    <link href="../../Css/jquery-ui-1.10.3.custom.min.css" rel="stylesheet" type="text/css"/>
+    <link href="../../Css/jquery-ui-1.10.3.custom.min.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="../../Scripts/jquery-2.0.3.min.js"></script>
     <script type="text/javascript" src="../../Scripts/jquery-ui-1.10.3.custom.min.js"></script>
     <script lang="ja" type="text/javascript">
@@ -22,7 +22,9 @@
             document.getElementById("LoanQuery").style.display = 'none';
             document.getElementById("divSet").style.display = '';
             document.getElementById("divLoanTitle").innerText = "借出管理";
-            $("#HiddenField1").val("");
+            $('#HiddenField1').val('');
+            //$("input[@type=radio][@checked]").val('');
+            $('input:radio').removeAttr('checked', 'true');
         }
 
         //显示新增的div
@@ -34,7 +36,6 @@
             document.getElementById("LoanQuery").style.display = 'none';
             document.getElementById("divSet").style.display = 'none';
             document.getElementById("divLoanTitle").innerText = "借出管理--新增";
-
         }
 
         //显示编辑的div
@@ -58,9 +59,7 @@
         function InitializeEditDivForm() {
             $('input[type="text"]').val('');
             $('#HiddenField1').val('');
-
-            $("txtLoanAddContent").val('');
-
+            $("#txtLoanAddContent").val('');
             $('input:radio').eq(0).attr('checked', 'true');
             $('input:radio').eq(2).attr('checked', 'true');
         }
@@ -80,7 +79,6 @@
             //清空编辑div
             InitializeEditDivForm();
 
-            
             //给出借方式赋值
             if ($("tr.highlight").children("td")[1].innerText == "2") {
                 $('input:radio').eq(1).attr('checked', 'true');
@@ -90,7 +88,6 @@
             else {
                 $('input:radio').eq(0).attr('checked', 'true');
                 $("#divLoan").hide();
-
             }
 
             //给借款方式赋值
@@ -115,8 +112,6 @@
 
         //默认加载，隐藏DataGrid的Id这一列
         $(document).ready(function () {
-            //DisplaySysdiv();
-            // HideORShowColumn();
             $('#txtLoanAddLoanDate').datepicker({ dateFormat: "yy-mm-dd" });
         });
 
@@ -136,7 +131,8 @@
 
         //出借方式选择，当选择现金，会隐藏和清空账户
         $(function () {
-            $("#RadioLoanAddLoanType").click(function () {
+            $("#RadioLoanAddLoanType").change(function () {
+                //$("#txtLoanAddLoanAccount").val($("#RadioLoanAddLoanType").find("input[@checked]").val());
                 var s = $("input[name='RadioLoanAddLoanType']:checked").val();
                 if (s == 2) {
                     $("#divLoan").show();
@@ -175,8 +171,8 @@
                 <div id="divSet">
                     <div class="controls controls-row">
                         <div class="span3">
-                            <input type="button" value="新增" id="btnLoanAdd" class="btn btn-primary"  onclick="DisplayAddLoandiv()" />
-                            <input  type="button" value="高级查询" id="btnLoanQuery" class="btn btn-primary" onclick="DisplayQueryLoandiv()" />
+                            <input type="button" value="新增" id="btnLoanAdd" class="btn btn-primary" onclick="DisplayAddLoandiv()" />
+                            <input type="button" value="高级查询" id="btnLoanQuery" class="btn btn-primary" onclick="DisplayQueryLoandiv()" />
                         </div>
                     </div>
                 </div>
@@ -185,17 +181,21 @@
                         出借方式：
                     </div>
                     <div class="controls controls-row">
-                        <asp:RadioButtonList ID="RadioLoanAddLoanType" runat="server" RepeatDirection="Horizontal" CssClass="span2">
-                            <asp:ListItem Value="1">现金</asp:ListItem>
-                            <asp:ListItem Value="2">刷卡</asp:ListItem>
-                        </asp:RadioButtonList>
-                        <label class="span1">&nbsp;</label>
-                        <asp:Label ID="Label1" runat="server" Text="出借人:" CssClass="span1" />
-                        <asp:TextBox runat="server" ID="txtLoanAddLender" CssClass="span2" />
-                        <div runat="server" id="divLoan">
-                            <asp:Label ID="Label2" runat="server" Text="出借账户:" CssClass="span1" />
-                            <asp:TextBox runat="server" ID="txtLoanAddLoanAccount" CssClass="span2" />
-                        </div>
+                        <asp:UpdatePanel runat="server">
+                            <ContentTemplate>
+                                <asp:RadioButtonList ID="RadioLoanAddLoanType" runat="server" AutoPostBack="true" RepeatDirection="Horizontal" CssClass="span2">
+                                    <asp:ListItem Value="1">现金</asp:ListItem>
+                                    <asp:ListItem Value="2">刷卡</asp:ListItem>
+                                </asp:RadioButtonList>
+                                <label class="span1">&nbsp;</label>
+                                <asp:Label ID="Label1" runat="server" Text="出借人:" CssClass="span1" />
+                                <asp:TextBox runat="server" ID="txtLoanAddLender" CssClass="span2" />
+                                <div runat="server" id="divLoan">
+                                    <asp:Label ID="Label2" runat="server" Text="出借账户:" CssClass="span1" />
+                                    <asp:TextBox runat="server" ID="txtLoanAddLoanAccount" CssClass="span2" />
+                                </div>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
                         <asp:HiddenField ID="HiddenField1" runat="server" />
                     </div>
                     <div class="controls controls-row">
@@ -230,7 +230,7 @@
                         <label class="span7">&nbsp;</label>
                         <div class="span2" style="text-align: right">
                             <asp:Button runat="server" ID="btnLoanAddSubmit" CssClass="btn btn-primary" Text="提交" OnClick="btnLoanAddSubmit_Click" />
-                            <input type="button" id ="btnLoanAddCanel" class="btn btn-primary" value="返回" onclick="DisplaySysdiv()" />
+                            <input type="button" id="btnLoanAddCanel" class="btn btn-primary" value="返回" onclick="DisplaySysdiv()" />
                         </div>
                     </div>
                 </div>
@@ -246,8 +246,8 @@
                         <label class="span1">&nbsp;</label>
                         <div class="span2">
                             <asp:Button runat="server" ID="btnLoanQuerySubmit" Text="查询" CssClass="btn btn-primary" OnClick="btnLoanQuerySubmit_Click" />
-                            <input type="button" id ="btnLoanQueryCanel" value="返回" class="btn btn-primary" onclick="DisplaySysdiv()" />
-<%--                            <asp:Button runat="server" ID="btnLoanQueryCanel" Text="后退" CssClass="btn btn-primary" />--%>
+                            <input type="button" id="btnLoanQueryCanel" value="返回" class="btn btn-primary" onclick="DisplaySysdiv()" />
+                            <%--                            <asp:Button runat="server" ID="btnLoanQueryCanel" Text="后退" CssClass="btn btn-primary" />--%>
                         </div>
                     </div>
                 </div>
@@ -260,7 +260,7 @@
                             HeaderStyle-HorizontalAlign="Center" HeaderStyle-VerticalAlign="Middle" ItemStyle-VerticalAlign="Middle" ItemStyle-Font-Size="Small" SelectedItemStyle-BorderColor="Red"
                             OnItemCommand="LoanListDataGrid_ItemCommand">
                             <Columns>
-                                <asp:BoundColumn ReadOnly="true" DataField="Id" HeaderText="Id" ItemStyle-Width="5%" Visible="false"/>
+                                <asp:BoundColumn ReadOnly="true" DataField="Id" HeaderText="Id" ItemStyle-Width="5%" Visible="false" />
                                 <asp:HyperLinkColumn HeaderText="出借人" DataTextField="Lender" DataNavigateUrlField="Id" DataNavigateUrlFormatString="javascript:openLoanEditWin('{0}')" ItemStyle-Width="5%"></asp:HyperLinkColumn>
                                 <asp:BoundColumn ReadOnly="true" DataField="LoanType" HeaderText="出借方式" ItemStyle-Width="5%" />
                                 <asp:BoundColumn ReadOnly="true" DataField="LoanAccount" HeaderText="出借账户" ItemStyle-Width="10%" />
