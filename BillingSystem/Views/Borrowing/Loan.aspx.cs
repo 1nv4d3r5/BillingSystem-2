@@ -51,6 +51,9 @@ namespace BillingSystem.Views
                 int selectindex = e.Item.ItemIndex;
                 id = this.LoanListDataGrid.Items[selectindex].Cells[0].Text;
             }
+            
+
+
             if (!string.IsNullOrEmpty(id))
             {
                 int iSuccess = LoanMethods.DeleteLoanById(Convert.ToInt32(id));
@@ -155,7 +158,6 @@ namespace BillingSystem.Views
             {
                 Alert.Show(this, "操作失败！");
             }
-            //InitializeBorrowAdd();
             queryList = new List<QueryElement>();
             BindLoanListDataGrid(queryList);
 
@@ -207,7 +209,6 @@ namespace BillingSystem.Views
             }
             BindLoanListDataGrid(queryList);
             this.ClientScript.RegisterStartupScript(this.GetType(), "", "DisplayQueryLoandiv();", true);
-           // this.ClientScript.RegisterStartupScript(this.GetType(), "", "InitializeQueryDivForm();", true);
         }
     }
 }
