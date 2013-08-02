@@ -23,7 +23,7 @@ namespace BillingSystem.Views
         {
             if (!IsPostBack)  //IsPostBack第一次打开时为false
             {
-                //XmlDocument doc = new XmlDocument();
+                XmlDocument doc = new XmlDocument();
                 //doc.Load("E:\\BillingSystem\\BillingSystem\\InportXmls\\CreateDataBase.xml");
                 //XmlNode node = doc.SelectSingleNode("Signs/created/sign");
                 //string str = node.InnerText;
@@ -31,6 +31,7 @@ namespace BillingSystem.Views
                 //{
 
                 //}
+               
             }
             this.txtUserName.Focus();
         }

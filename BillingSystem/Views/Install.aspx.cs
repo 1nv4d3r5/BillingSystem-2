@@ -18,7 +18,7 @@ namespace BillingSystem.Views
 
         protected void BtnCreate_Click(object sender, EventArgs e)
         {
-            //DbUtility dbu = new DbUtility();
+
         }
     }
 }
