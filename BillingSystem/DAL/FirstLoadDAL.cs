@@ -6,6 +6,7 @@ using MySql.Data;
 using MySql.Data.MySqlClient;
 using System.Text;
 using System.IO;
+using FBJHelper;
 
 namespace BillingSystem.DAL
 {
@@ -13,9 +14,22 @@ namespace BillingSystem.DAL
     {
         public static void CreateTable()
         {
-            StringBuilder sb = new StringBuilder();
-            sb.AppendFormat(" {0} ","create table tb1(");
-            sb.AppendFormat(" {0} ", "id int(10) not null auto_increment,");
+
+            string sqlFile = AppDomain.CurrentDomain.BaseDirectory + @"/DAL/ds1.sql";
+            StreamReader reader = new StreamReader(sqlFile);
+            StringBuilder sql = new StringBuilder();
+            while (!reader.EndOfStream)
+            {
+                string line = reader.ReadLine(); //读取每行数据
+                if (line.StartsWith("--"))
+                    continue;
+                Console.WriteLine(line);
+                sql.Append(line);
+            }
+            reader.Close();
+
+            MySqlDBHelper.ExecuteCommand(sql.ToString());
         }
+
     }
 }

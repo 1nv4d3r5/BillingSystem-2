@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using BillingSystem.Views;
 using FBJHelper;
+using BillingSystem.DAL;
 
 namespace BillingSystem.Views
 {
@@ -18,7 +19,7 @@ namespace BillingSystem.Views
 
         protected void BtnCreate_Click(object sender, EventArgs e)
         {
-
+            FirstLoadDAL.CreateTable();
         }
     }
 }
