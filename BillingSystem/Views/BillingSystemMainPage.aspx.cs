@@ -14,20 +14,38 @@ namespace BillingSystem.Views
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //if (!IsPostBack)
-            //{
-            //    if (Session["UserCode"] == null || Session["UserCode"].ToString() == "")
-            //    {
-            //        Response.Redirect("Login.aspx");
-            //    }
-            //}
+            if (!IsPostBack)
+            {
+                if (Session["UserCode"] == null || Session["UserCode"].ToString() == "")
+                {
+                    Response.Redirect("Login.aspx");
+                }
+                else
+                {
+                    UserInfo info= UserMethods.GetUserByCode(Session["UserCode"].ToString());
+                    Application["user"] = info.Code;
+                    this.labWel.Text = "欢迎您，"+info.Name;
+                }
+            }
 
-            //labWel.Text = "Welcome to login, " + Session["UserCode"];
+            labWel.Text = "Welcome to login, " + Session["UserCode"];
         }
 
         protected void btn_exit_Click(object sender, EventArgs e)
         {
             Response.Redirect("Login.aspx");
+        }
+
+        public string GetUser()
+        {
+            if (Session["UserCode"] != null)
+            {
+                return Session["UserCode"].ToString();
+            }
+            else
+            {
+                return string.Empty;
+            }
         }
 
     }

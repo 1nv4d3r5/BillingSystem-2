@@ -21,21 +21,29 @@ namespace BillingSystem.Views
         {
             if (!IsPostBack)
             {
-                if (!string.IsNullOrEmpty(Request.QueryString["ExpensesId"]))
+                if (Application["user"] != null)
                 {
-                    this.ClientScript.RegisterStartupScript(this.GetType(), "", "DisplayExpensesEditdiv();", true);
-                    ExpensesInfo expensesInfo = ExpensesMethods.GetExpensesById(Convert.ToInt32(Request.QueryString["ExpensesId"]));
-                    InitializeExpensesAdd(expensesInfo);
-                    Session["expensensEditFlag"] = "true";
-                    //flag = true;
+                    if (!string.IsNullOrEmpty(Request.QueryString["ExpensesId"]))
+                    {
+                        this.ClientScript.RegisterStartupScript(this.GetType(), "", "DisplayExpensesEditdiv();", true);
+                        ExpensesInfo expensesInfo = ExpensesMethods.GetExpensesById(Convert.ToInt32(Request.QueryString["ExpensesId"]));
+                        InitializeExpensesAdd(expensesInfo);
+                        Session["expensensEditFlag"] = "true";
+                        //flag = true;
+                    }
+                    else
+                    {
+                        this.ClientScript.RegisterStartupScript(this.GetType(), "", "DisplaySysdiv();", true);
+                        InitializeExpensesAdd(new ExpensesInfo());
+                    }
+                    queryList = new List<QueryElement>();
+                    BindExpensesListDataGrid(queryList);
                 }
                 else
                 {
-                    this.ClientScript.RegisterStartupScript(this.GetType(), "", "DisplaySysdiv();", true);
-                    InitializeExpensesAdd(new ExpensesInfo());
+                    Response.Redirect("~/Views/Login.aspx");
+                    Alert.Show(this, "请先登录！");
                 }
-                queryList = new List<QueryElement>();
-                BindExpensesListDataGrid(queryList);
             }
         }
 

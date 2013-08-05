@@ -7,6 +7,8 @@
     <title></title>
     <link rel="stylesheet" type="text/css" href="../../Css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="../../Css/css.css" />
+    <link rel="stylesheet" type="text/css" href="../../Css/jquery-ui-1.10.3.custom.min.css" />
+    <script src="../../Scripts/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
     <script src="../../Scripts/jquery-2.0.3.min.js" type="text/javascript"></script>
     <script type="text/javascript" lang="ja">
         function openUserEditWin(code) {
@@ -48,12 +50,6 @@
             UserQuery.style.display = 'none';
             this.divUserTitle = "用户信息维护";
         }
-
-        //$(function () {
-        //    $("#UserListDataGrid tr").first().nextAll().bind('click', function () {
-        //        $(this).css('background-color', '#dff');
-        //    });
-        //});
         $(function () {
             $("#UserListDataGrid tr").first().nextAll().bind('click', function () {
                 $("#UserListDataGrid tr.highlight").removeClass('highlight');

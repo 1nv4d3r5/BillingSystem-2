@@ -21,19 +21,10 @@ namespace BillingSystem.Views
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)  //IsPostBack第一次打开时为false
+            if (!IsPostBack) 
             {
-                XmlDocument doc = new XmlDocument();
-                //doc.Load("E:\\BillingSystem\\BillingSystem\\InportXmls\\CreateDataBase.xml");
-                //XmlNode node = doc.SelectSingleNode("Signs/created/sign");
-                //string str = node.InnerText;
-                //if (str.Equals("1"))
-                //{
-
-                //}
-               
+                this.txtUserName.Focus();
             }
-            this.txtUserName.Focus();
         }
 
         protected void btnCancel_Click(object sender, EventArgs e)
@@ -59,13 +50,13 @@ namespace BillingSystem.Views
                 this.txtPassword.Focus();
                 return;
             }
-            userInfo = UserMethods.CheckUser(this.txtUserName.Text.Trim());
+            userInfo = UserMethods.GetUserByCode(this.txtUserName.Text.Trim());
             if (userInfo.Id > 0)
             {
-                string str = Encryption.MD5Encoding(this.txtPassword.Text.Trim());
+                string str = Encryption.DESEncrypt(this.txtPassword.Text.Trim(),"19850627");
                 if (userInfo.Password.Equals(str))
                 {
-                    Session["User_Code"] = userInfo.Code;
+                    Session["UserCode"] = userInfo.Code;
                     Server.Transfer("~/Views/BillingSystemMainPage.aspx");
                 }
                 else

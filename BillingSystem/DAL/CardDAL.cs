@@ -41,6 +41,23 @@ namespace BillingSystem.DAL
             return cardInfo;
         }
 
+        public static CardCollection GetCardByUserId(int userId)
+        {
+            CardCollection coll = new CardCollection();
+            StringBuilder sb = new StringBuilder();
+            sb.Append(" select card.*,a.name as ownerName,b.name as userName from card left join user a on card.ownerId=a.id left join user b on card.userId = b.id where UserId=@UserId ");
+            MySqlParameter par = new MySqlParameter("@UserId", MySqlDbType.Int32);
+            par.Value = userId;
+            using (MySqlDataReader reader = MySqlDBHelper.GetReader(sb.ToString(), par))
+            {
+                while (reader.Read())
+                {
+                    coll .Add(new CardInfo(reader));
+                }
+            }
+            return coll;
+        }
+
         public static CardInfo GetCardById(int id)
         {
             CardInfo cardInfo = new CardInfo();

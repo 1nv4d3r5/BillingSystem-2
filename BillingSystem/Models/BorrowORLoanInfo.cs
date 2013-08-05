@@ -11,70 +11,70 @@ using System.Xml.Serialization;
 namespace BillingSystem.Models
 {
     [Serializable]
-    public sealed class BorrowInfo
+    public sealed class BorrowORLoanInfo
     {
         #region 成员变量、构造函数
         private int id;
         private int borrowORLoan;
-        private int borrowType;
+        private int borrowORLoanType;
         private string borrowedAccount;
         private string borrower;
-        private int loanType;
+        //private int loanType;
         private string loanAccount;
         private string lender;
-        private float borrowAmount;
-        private DateTime borrowDate;
+        private float amount;
+        private DateTime happenedDate;
         private DateTime returnDate;
         private string content;
 
         /// <summary>
         /// 初始化类 DefaultEntity 的新实例。
         /// </summary>
-        public BorrowInfo()
+        public BorrowORLoanInfo()
         {
             this.id = 0;
             this.borrowORLoan = 0;
-            this.borrowType = 0;
+            this.borrowORLoanType = 0;
             this.borrowedAccount = string.Empty;
             this.borrower = string.Empty;
-            this.loanType = 0;
+            //this.loanType = 0;
             this.loanAccount = string.Empty;
             this.lender = string.Empty;
-            this.borrowAmount = 0;
-            this.borrowDate = DateTime.MinValue;
+            this.amount = 0;
+            this.happenedDate = DateTime.MinValue;
             this.returnDate = DateTime.MinValue;
             this.content = string.Empty;
         }
 
-        public BorrowInfo(BorrowInfo borrowInfo)
+        public BorrowORLoanInfo(BorrowORLoanInfo borrowInfo)
         {
             this.id = borrowInfo.Id;
             this.borrowORLoan = borrowInfo.BorrowORLoan;
-            this.borrowType = borrowInfo.BorrowType;
+            this.borrowORLoanType = borrowInfo.BorrowORLoanType;
             this.borrowedAccount = borrowInfo.BorrowedAccount;
             this.borrower = borrowInfo.Borrower;
-            this.loanType = borrowInfo.LoanType;
+            //this.loanType = borrowInfo.LoanType;
             this.loanAccount = borrowInfo.LoanAccount;
             this.lender = borrowInfo.Lender;
-            this.borrowAmount = borrowInfo.BorrowAmount;
-            this.borrowDate = borrowInfo.BorrowDate;
+            this.amount = borrowInfo.Amount;
+            this.happenedDate = borrowInfo.HappenedDate;
             this.returnDate = borrowInfo.ReturnDate;
             this.content = borrowInfo.Content;
         }
 
-        public BorrowInfo(IDataRecord record)
+        public BorrowORLoanInfo(IDataRecord record)
         {
             FieldLoader loader = new FieldLoader(record);
             loader.LoadInt32("Id", ref this.id);
             loader.LoadInt32("BorrowORLoan", ref this.borrowORLoan);
-            loader.LoadInt32("BorrowType", ref this.borrowType);
+            loader.LoadInt32("BorrowORLoanType", ref this.borrowORLoanType);
             loader.LoadString("BorrowedAccount", ref this.borrowedAccount);
             loader.LoadString("Borrower", ref this.borrower);
-            loader.LoadInt32("LoanType",ref this.loanType);
+            //loader.LoadInt32("LoanType",ref this.loanType);
             loader.LoadString("LoanAccount", ref this.loanAccount);
             loader.LoadString("Lender", ref this.lender);
-            loader.LoadFloat("BorrowAmount", ref this.borrowAmount);
-            loader.LoadDateTime("BorrowDate", ref this.borrowDate);
+            loader.LoadFloat("Amount", ref this.amount);
+            loader.LoadDateTime("HappenedDate", ref this.happenedDate);
             loader.LoadDateTime("ReturnDate", ref this.returnDate);
             loader.LoadString("Content", ref this.content);
         }
@@ -120,15 +120,15 @@ namespace BillingSystem.Models
         /// </summary>
         [Browsable(true)]
         [ReadOnly(false)]
-        public int BorrowType
+        public int BorrowORLoanType
         {
             get
             {
-                return borrowType;
+                return borrowORLoanType;
             }
             set
             {
-                borrowType = value;
+                borrowORLoanType = value;
             }
         }
 
@@ -166,22 +166,22 @@ namespace BillingSystem.Models
             }
         }
 
-        /// <summary>
-        /// 借出方式：1，现金；2，转账
-        /// </summary>
-        [Browsable(true)]
-        [ReadOnly(false)]
-        public int LoanType
-        {
-            get
-            {
-                return loanType;
-            }
-            set
-            {
-                loanType = value;
-            }
-        }
+        ///// <summary>
+        ///// 借出方式：1，现金；2，转账
+        ///// </summary>
+        //[Browsable(true)]
+        //[ReadOnly(false)]
+        //public int LoanType
+        //{
+        //    get
+        //    {
+        //        return loanType;
+        //    }
+        //    set
+        //    {
+        //        loanType = value;
+        //    }
+        //}
 
         /// <summary>
         /// 借出账户
@@ -222,15 +222,15 @@ namespace BillingSystem.Models
        /// </summary>
         [Browsable(true)]
         [ReadOnly(false)]
-        public float BorrowAmount
+        public float Amount
         {
             get
             {
-                return borrowAmount;
+                return amount;
             }
             set
             {
-                borrowAmount = value;
+                amount = value;
             }
         }
 
@@ -239,15 +239,15 @@ namespace BillingSystem.Models
         /// </summary>
         [Browsable(true)]
         [ReadOnly(false)]
-        public DateTime BorrowDate
+        public DateTime HappenedDate
         {
             get
             {
-                return borrowDate;
+                return happenedDate;
             }
             set
             {
-                borrowDate = value;
+                happenedDate = value;
             }
         }
 
@@ -293,14 +293,14 @@ namespace BillingSystem.Models
             sb.Append("<BorrowInfo>");
             sb.AppendFormat("<Id>{0}</Id>", this.Id);
             sb.AppendFormat("<BorrowORLoan>{0}</BorrowORLoan>", this.BorrowORLoan);
-            sb.AppendFormat("<BorrowType>{0}</BorrowType>", this.BorrowType);
+            sb.AppendFormat("<BorrowORLoanType>{0}</BorrowORLoanType>", this.BorrowORLoanType);
             sb.AppendFormat("<BorrowedAccount>{0}</BorrowedAccount>", this.BorrowedAccount);
             sb.AppendFormat("<Borrower>{0}</Borrower>", this.Borrower);
-            sb.AppendFormat("<LoanType>{0}</LoanType>", this.LoanType);
+            //sb.AppendFormat("<LoanType>{0}</LoanType>", this.LoanType);
             sb.AppendFormat("<LoanAccount>{0}</LoanAccount>", this.LoanAccount);
             sb.AppendFormat("<Lender>{0}</Lender>", this.Lender);
-            sb.AppendFormat("<BorrowAmount>{0}</BorrowAmount>", this.BorrowAmount);
-            sb.AppendFormat("<BorrowDate>{0}</BorrowDate>", this.BorrowDate.ToString("yyyy-MM-dd"));
+            sb.AppendFormat("<Amount>{0}</Amount>", this.Amount);
+            sb.AppendFormat("<HappenedDate>{0}</HappenedDate>", this.HappenedDate.ToString("yyyy-MM-dd"));
             sb.AppendFormat("<ReturnDate>{0}</ReturnDate>", this.ReturnDate.ToString("yyyy-MM-dd"));
             sb.AppendFormat("<Content>{0}</Content>", this.Content);
             //sb.AppendFormat("<EnterTime>{0}</EnterTime>", this.EnterTime.ToString("yyyy-MM-ddTHH:mm:ss"));
@@ -323,8 +323,8 @@ namespace BillingSystem.Models
             FbjJsonHelper.WriteValue(jsonStringBuilder, this.borrowORLoan);
             jsonStringBuilder.Append(",");
 
-            jsonStringBuilder.Append("BorrowType:");
-            FbjJsonHelper.WriteValue(jsonStringBuilder, this.borrowType);
+            jsonStringBuilder.Append("BorrowORLoanType:");
+            FbjJsonHelper.WriteValue(jsonStringBuilder, this.borrowORLoanType);
             jsonStringBuilder.Append(",");
 
             jsonStringBuilder.Append("BorrowedAccount:");
@@ -335,9 +335,9 @@ namespace BillingSystem.Models
             FbjJsonHelper.WriteValue(jsonStringBuilder, this.borrower);
             jsonStringBuilder.Append(",");
 
-            jsonStringBuilder.Append("LoanType:");
-            FbjJsonHelper.WriteValue(jsonStringBuilder, this.loanType);
-            jsonStringBuilder.Append(",");
+            //jsonStringBuilder.Append("LoanType:");
+            //FbjJsonHelper.WriteValue(jsonStringBuilder, this.loanType);
+            //jsonStringBuilder.Append(",");
 
             jsonStringBuilder.Append("LoanAccount:");
             FbjJsonHelper.WriteValue(jsonStringBuilder, this.loanAccount);
@@ -347,12 +347,12 @@ namespace BillingSystem.Models
             FbjJsonHelper.WriteValue(jsonStringBuilder, this.lender);
             jsonStringBuilder.Append(",");
 
-            jsonStringBuilder.Append("BorrowAmount:");
-            FbjJsonHelper.WriteValue(jsonStringBuilder, this.borrowAmount);
+            jsonStringBuilder.Append("Amount:");
+            FbjJsonHelper.WriteValue(jsonStringBuilder, this.amount);
             jsonStringBuilder.Append(",");
 
-            jsonStringBuilder.Append("BorrowDate:");
-            FbjJsonHelper.WriteValue(jsonStringBuilder, this.borrowDate);
+            jsonStringBuilder.Append("HappenedDate:");
+            FbjJsonHelper.WriteValue(jsonStringBuilder, this.happenedDate);
             jsonStringBuilder.Append(",");
 
             jsonStringBuilder.Append("ReturnDate:");
@@ -368,20 +368,20 @@ namespace BillingSystem.Models
 
         public string Serialize()
         {
-            XmlSerializer s = new XmlSerializer(typeof(BorrowInfo));
+            XmlSerializer s = new XmlSerializer(typeof(BorrowORLoanInfo));
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
             System.IO.StringWriter stringWriter = new System.IO.StringWriter(sb);
             s.Serialize(stringWriter, this);
             return sb.ToString();
         }
 
-        public static BorrowInfo DeSerialize(string xmlObject)
+        public static BorrowORLoanInfo DeSerialize(string xmlObject)
         {
-            XmlSerializer s = new XmlSerializer(typeof(BorrowInfo));
+            XmlSerializer s = new XmlSerializer(typeof(BorrowORLoanInfo));
             try
             {
                 System.IO.StringReader stringReader = new System.IO.StringReader(xmlObject);
-                return s.Deserialize(stringReader) as BorrowInfo;
+                return s.Deserialize(stringReader) as BorrowORLoanInfo;
             }
             catch (System.Exception e)
             {
@@ -392,7 +392,7 @@ namespace BillingSystem.Models
 
         public object Clone()
         {
-            return new BorrowInfo(this);
+            return new BorrowORLoanInfo(this);
         }
 
         public override int GetHashCode()
@@ -409,17 +409,17 @@ namespace BillingSystem.Models
             if (this.GetType() != obj.GetType())
                 return false;
 
-            BorrowInfo borrowInfo = obj as BorrowInfo;
+            BorrowORLoanInfo borrowInfo = obj as BorrowORLoanInfo;
 
             return (this.id.Equals(borrowInfo.Id));
         }
 
-        public static bool operator ==(BorrowInfo sourceObject, BorrowInfo targetObject)
+        public static bool operator ==(BorrowORLoanInfo sourceObject, BorrowORLoanInfo targetObject)
         {
             return object.Equals(sourceObject, targetObject);
         }
 
-        public static bool operator !=(BorrowInfo sourceObject, BorrowInfo targetObject)
+        public static bool operator !=(BorrowORLoanInfo sourceObject, BorrowORLoanInfo targetObject)
         {
             return !(sourceObject == targetObject);
         }
@@ -430,33 +430,33 @@ namespace BillingSystem.Models
 
             table.Columns.Add("Id", typeof(int));
             table.Columns.Add("BorrowORLoan", typeof(int));
-            table.Columns.Add("BorrowType", typeof(int));
+            table.Columns.Add("BorrowORLoanType", typeof(int));
             table.Columns.Add("BorrowedAccount", typeof(string));
             table.Columns.Add("Borrower", typeof(string));
-            table.Columns.Add("LoanType", typeof(int));
+            //table.Columns.Add("LoanType", typeof(int));
             table.Columns.Add("LoanAccount", typeof(string));
             table.Columns.Add("Lender", typeof(string));
-            table.Columns.Add("BorrowAmount", typeof(float));
-            table.Columns.Add("BorrowDate", typeof(DateTime));
+            table.Columns.Add("Amount", typeof(float));
+            table.Columns.Add("HappenedDate", typeof(DateTime));
             table.Columns.Add("ReturnDate", typeof(DateTime));
             table.Columns.Add("Content", typeof(string));
             return table;
         }
 
-        public static void AddTableRow(DataTable table, BorrowInfo borrowInfo)
+        public static void AddTableRow(DataTable table, BorrowORLoanInfo borrowInfo)
         {
             System.Data.DataRow dr = table.NewRow();
 
             dr["Id"] = borrowInfo.id;
             dr["BorrowORLoan"] = borrowInfo.borrowORLoan;
-            dr["BorrowType"] = borrowInfo.borrowType;
+            dr["BorrowORLoanType"] = borrowInfo.borrowORLoanType;
             dr["BorrowedAccount"] = borrowInfo.borrowedAccount;
             dr["Borrower"] = borrowInfo.borrower;
-            dr["LoanType"] = borrowInfo.loanType;
+            //dr["LoanType"] = borrowInfo.loanType;
             dr["LoanAccount"] = borrowInfo.loanAccount;
             dr["Lender"] = borrowInfo.lender;
-            dr["BorrowAmount"] = borrowInfo.borrowAmount;
-            dr["BorrowDate"] = borrowInfo.borrowDate;
+            dr["Amount"] = borrowInfo.amount;
+            dr["HappenedDate"] = borrowInfo.happenedDate;
             dr["ReturnDate"] = borrowInfo.returnDate;
             dr["Content"] = borrowInfo.content;
             table.Rows.Add(dr);

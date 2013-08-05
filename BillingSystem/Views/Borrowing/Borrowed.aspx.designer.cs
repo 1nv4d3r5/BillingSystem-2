@@ -31,15 +31,6 @@ namespace BillingSystem.Views {
         protected global::System.Web.UI.ScriptManager ScriptManager1;
         
         /// <summary>
-        /// btnBorrowQuery control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnBorrowQuery;
-        
-        /// <summary>
         /// RadioBorrowAddBorrowType control.
         /// </summary>
         /// <remarks>
@@ -47,6 +38,24 @@ namespace BillingSystem.Views {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButtonList RadioBorrowAddBorrowType;
+        
+        /// <summary>
+        /// HiddenField1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField HiddenField1;
+        
+        /// <summary>
+        /// Label1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label1;
         
         /// <summary>
         /// txtBorrowAddBorrower control.
@@ -67,6 +76,15 @@ namespace BillingSystem.Views {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divBorrow;
         
         /// <summary>
+        /// Label2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label2;
+        
+        /// <summary>
         /// txtBorrowAddBorrowAccount control.
         /// </summary>
         /// <remarks>
@@ -74,24 +92,6 @@ namespace BillingSystem.Views {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtBorrowAddBorrowAccount;
-        
-        /// <summary>
-        /// HiddenField1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField HiddenField1;
-        
-        /// <summary>
-        /// RadioBorrowAddLoanType control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList RadioBorrowAddLoanType;
         
         /// <summary>
         /// txtBorrowAddLender control.
@@ -166,15 +166,6 @@ namespace BillingSystem.Views {
         protected global::System.Web.UI.WebControls.Button btnBorrowAddSubmit;
         
         /// <summary>
-        /// btnBorrowAddCanel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnBorrowAddCanel;
-        
-        /// <summary>
         /// txtBorrowQueryBorrower control.
         /// </summary>
         /// <remarks>
@@ -209,15 +200,6 @@ namespace BillingSystem.Views {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnBorrowQuerySubmit;
-        
-        /// <summary>
-        /// btnBorrowQueryCanel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnBorrowQueryCanel;
         
         /// <summary>
         /// UpdatePanel2 control.

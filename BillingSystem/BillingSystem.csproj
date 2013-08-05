@@ -83,6 +83,7 @@
     <Content Include="Css\bootstrap.css" />
     <Content Include="Css\css.css" />
     <Content Include="Css\datetimepicker.css" />
+<<<<<<< HEAD
     <Content Include="Css\images\animated-overlay.gif" />
     <Content Include="Css\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
     <Content Include="Css\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
@@ -115,13 +116,22 @@
     <Content Include="Css\images\ui-icons_ffffff_256x240.png" />
     <Content Include="Css\jquery-ui-1.10.3.custom.min.css" />
     <Content Include="Scripts\ds1.sql" />
+=======
+    <Content Include="Css\jquery-ui-1.10.3.custom.min.css" />
+>>>>>>> 9da9e9f07402aa1af2025af0d7aa2febaf8bb898
     <Content Include="Images\delete\1.jpg" />
     <Content Include="Images\delete\2.png" />
     <Content Include="Images\delete\3.png" />
     <Content Include="Images\delete\4.png" />
     <Content Include="Images\delete\XBOX 360.png" />
+    <Content Include="Scripts\borrow-jquery.js" />
     <Content Include="Scripts\jquery-2.0.3.min.js" />
     <Content Include="Scripts\jquery-ui-1.10.3.custom.min.js" />
+<<<<<<< HEAD
+=======
+    <Content Include="Scripts\Loan-Jquery.js" />
+    <Content Include="Sql\ds1.sql" />
+>>>>>>> 9da9e9f07402aa1af2025af0d7aa2febaf8bb898
     <Content Include="Views\BillingSystemMainPage.aspx" />
     <Content Include="Views\Borrowing\Loan.aspx" />
     <Content Include="Views\Default.aspx" />
@@ -138,8 +148,11 @@
     <Content Include="Views\SystemSetting\UserAdd.aspx" />
     <Content Include="Views\SystemSetting\UserQuery.aspx" />
     <Content Include="Views\SystemSetting\UserSetting.aspx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="InportXmls\CreateDataBase.xml" />
+    <Content Include="Xml\Load.xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Aid\Aid.cs" />
@@ -160,10 +173,10 @@
     <Compile Include="Helper\DropItem.cs" />
     <Compile Include="Helper\OpenNewWindow.cs" />
     <Compile Include="Helper\OpenNewWindowInterface.cs" />
-    <Compile Include="Models\BorrowInfo.cs" />
+    <Compile Include="Models\BorrowORLoanInfo.cs" />
     <Compile Include="Models\CardInfo.cs" />
     <Compile Include="Models\CashIncomeInfo.cs" />
-    <Compile Include="Models\Collection\BorrowCollection.cs" />
+    <Compile Include="Models\Collection\BorrowORLoanCollection.cs" />
     <Compile Include="Models\Collection\CardCollection.cs" />
     <Compile Include="Models\Collection\CashIncomeCollection.cs" />
     <Compile Include="Models\Collection\LoanCollection.cs" />
@@ -176,12 +189,14 @@
     <Compile Include="Proxy\BorrowProxy.cs" />
     <Compile Include="Proxy\CardProxy.cs" />
     <Compile Include="Proxy\CashIncomeProxy.cs" />
+    <Compile Include="Proxy\FirstLoadProxy.cs" />
     <Compile Include="Proxy\LoanProxy.cs" />
     <Compile Include="Proxy\ExpensesProxy.cs" />
     <Compile Include="Proxy\UserProxy.cs" />
     <Compile Include="Services\BorrowedMethods.cs" />
     <Compile Include="Services\CardMethods.cs" />
     <Compile Include="Services\CashIncomeMethods.cs" />
+    <Compile Include="Services\FirstLoadMethods.cs" />
     <Compile Include="Services\LoanMethods.cs" />
     <Compile Include="Services\ExpensesMethods.cs" />
     <Compile Include="Services\UserMethods.cs" />

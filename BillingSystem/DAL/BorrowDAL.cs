@@ -12,11 +12,11 @@ namespace BillingSystem.DAL
 {
     public static class BorrowDAL
     {
-        public static BorrowInfo GetBorrowById(int id)
+        public static BorrowORLoanInfo GetBorrowById(int id)
         {
-            BorrowInfo borrowInfo = new BorrowInfo();
+            BorrowORLoanInfo borrowInfo = new BorrowORLoanInfo();
             StringBuilder sb = new StringBuilder();
-            sb.Append(" select * from borrowed where id = @Id ");
+            sb.Append(" select * from borrowing where id = @Id ");
             MySqlParameter par = new MySqlParameter("@Id",MySqlDbType.Int32);
 
             par.Value = id;
@@ -24,18 +24,18 @@ namespace BillingSystem.DAL
             {
                 while (reader.Read())
                 {
-                    borrowInfo = new BorrowInfo(reader);
+                    borrowInfo = new BorrowORLoanInfo(reader);
                 }
             }
             return borrowInfo;
         }
 
-        public static BorrowCollection GetBorrowList(List<QueryElement> list)
+        public static BorrowORLoanCollection GetBorrowList(List<QueryElement> list)
         {
-            BorrowCollection coll = new BorrowCollection();
+            BorrowORLoanCollection coll = new BorrowORLoanCollection();
             StringBuilder sb = new StringBuilder();
 
-            sb.Append(" select * from borrowed where 1=1 ");
+            sb.Append(" select * from borrowing where BorrowORLoan=1");
             if (list.Count > 0)
             {
                 MySqlParameter[] pars = new MySqlParameter[list.Count];
@@ -66,7 +66,7 @@ namespace BillingSystem.DAL
                 {
                     while (reader.Read())
                     {
-                        coll.Add(new BorrowInfo(reader));
+                        coll.Add(new BorrowORLoanInfo(reader));
                     }
                 }
             }
@@ -76,7 +76,7 @@ namespace BillingSystem.DAL
                 {
                     while (reader.Read())
                     {
-                        coll.Add(new BorrowInfo(reader));
+                        coll.Add(new BorrowORLoanInfo(reader));
                     }
                 }
             }
@@ -89,44 +89,46 @@ namespace BillingSystem.DAL
         /// <param name="mySqlTransaction"></param>
         /// <param name="info"></param>
         /// <param name="iSuccess"></param>
-        public static void InsertOrUpdatetoBorrowed(BorrowInfo info, out int iSuccess)
+        public static void InsertOrUpdatetoBorrowed(BorrowORLoanInfo info, out int iSuccess)
         {
             StringBuilder sb = new StringBuilder();
             if (info.Id > 0)
             {
-                sb.Append(" update borrowed set BorrowType = @BorrowType,BorrowedAccount = @BorrowedAccount,LoanType = @LoanType,LoanAccount=@LoanAccount,");
-                sb.Append("Lender = @Lender,BorrowAmount = @BorrowAmount,BorrowDate = @BorrowDate,ReturnDate = @ReturnDate,Content = @Content ");
-                sb.Append(" where Id = @Id");
+                sb.Append(" update borrowing set BorrowORLoanType = @BorrowORLoanType,BorrowedAccount = @BorrowedAccount,LoanAccount=@LoanAccount,");
+                sb.Append("Lender = @Lender,Amount = @Amount,HappenedDate = @HappenedDate,ReturnDate = @ReturnDate,Content = @Content ");
+                sb.Append(" where Id = @Id ");
             }
             else
             {
-                sb.Append(" insert into borrowed (BorrowType,BorrowedAccount,Borrower,LoanType,LoanAccount,Lender,BorrowAmount,BorrowDate,ReturnDate,Content) ");
-                sb.Append(" Values (@BorrowType,@BorrowedAccount,@Borrower,@LoanType,@LoanAccount,@Lender,@BorrowAmount,@BorrowDate,@ReturnDate,@Content) ");
+                sb.Append(" insert into borrowing (borrowORLoan,BorrowORLoanType,BorrowedAccount,Borrower,LoanAccount,Lender,Amount,HappenedDate,ReturnDate,Content) ");
+                sb.Append(" Values (@borrowORLoan,@BorrowORLoanType,@BorrowedAccount,@Borrower,@LoanAccount,@Lender,@Amount,@HappenedDate,@ReturnDate,@Content) ");
             }
             MySqlParameter[] pars = new MySqlParameter[] 
             {
                 new MySqlParameter("@Id",MySqlDbType.Int32),
-                new MySqlParameter("@BorrowType",MySqlDbType.Int32),
+                new MySqlParameter("@borrowORLoan",MySqlDbType.Int32),
+                new MySqlParameter("@BorrowORLoanType",MySqlDbType.Int32),
                 new MySqlParameter("@BorrowedAccount",MySqlDbType.String),
                 new MySqlParameter("@Borrower",MySqlDbType.String),
-                new MySqlParameter("@LoanType",MySqlDbType.Int32),
+                //new MySqlParameter("@LoanType",MySqlDbType.Int32),
                 new MySqlParameter("@LoanAccount",MySqlDbType.String),
                 new MySqlParameter("@Lender",MySqlDbType.String),
-                new MySqlParameter("@BorrowAmount",MySqlDbType.Float),
-                new MySqlParameter("@BorrowDate",MySqlDbType.DateTime),
+                new MySqlParameter("@Amount",MySqlDbType.Float),
+                new MySqlParameter("@HappenedDate",MySqlDbType.DateTime),
                 new MySqlParameter("@ReturnDate",MySqlDbType.DateTime),
                 new MySqlParameter("@Content",MySqlDbType.String)
 
             };
             pars[0].Value = info.Id;
-            pars[1].Value = info.BorrowType;
-            pars[2].Value = info.BorrowedAccount;
-            pars[3].Value = info.Borrower;
-            pars[4].Value = info.LoanType;
+            pars[1].Value = 1;
+            pars[2].Value = info.BorrowORLoanType;
+            pars[3].Value = info.BorrowedAccount;
+            pars[4].Value = info.Borrower;
+            //pars[4].Value = info.LoanType;
             pars[5].Value = info.LoanAccount;
             pars[6].Value = info.Lender;
-            pars[7].Value = info.BorrowAmount;
-            pars[8].Value = info.BorrowDate;
+            pars[7].Value = info.Amount;
+            pars[8].Value = info.HappenedDate;
             pars[9].Value = info.ReturnDate;
             pars[10].Value = info.Content;
             iSuccess = MySqlDBHelper.ExecuteCommand(sb.ToString(), pars);
@@ -135,7 +137,7 @@ namespace BillingSystem.DAL
         public static void DeleteBorrowed(int id, out int iSuccess)
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append(" delete from borrowed where Id = @Id ");
+            sb.Append(" delete from borrowing where Id = @Id ");
             MySqlParameter par = new MySqlParameter("@Id", MySqlDbType.Int32);
             par.Value = id;
             iSuccess = MySqlDBHelper.ExecuteCommand(sb.ToString(), par);

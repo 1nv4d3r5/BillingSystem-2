@@ -12,23 +12,37 @@ namespace BillingSystem.DAL
 {
     public static class FirstLoadDAL
     {
-        public static void CreateTable()
+        public static int CreateTable()
         {
+            try
+            {
+                string sqlFile = AppDomain.CurrentDomain.BaseDirectory + @"/Sql/ds1.sql";
+                StreamReader reader = new StreamReader(sqlFile);
+                StringBuilder sql = new StringBuilder();
+                while (!reader.EndOfStream)
+                {
+                    string line = reader.ReadLine(); //读取每行数据
+                    if (line.StartsWith("--"))
+                        continue;
+                    Console.WriteLine(line);
+                    sql.Append(line);
+                }
+                reader.Close();
 
+<<<<<<< HEAD
             string sqlFile = AppDomain.CurrentDomain.BaseDirectory + @"/Scripts/ds1.sql";
             StreamReader reader = new StreamReader(sqlFile);
             StringBuilder sql = new StringBuilder();
             while (!reader.EndOfStream)
-            {
-                string line = reader.ReadLine(); //读取每行数据
-                if (line.StartsWith("--"))
-                    continue;
-                Console.WriteLine(line);
-                sql.Append(line);
+=======
+                MySqlDBHelper.ExecuteCommand(sql.ToString());
+                return 1;
             }
-            reader.Close();
-
-            MySqlDBHelper.ExecuteCommand(sql.ToString());
+            catch
+>>>>>>> 9da9e9f07402aa1af2025af0d7aa2febaf8bb898
+            {
+                return -1;
+            }
         }
 
     }

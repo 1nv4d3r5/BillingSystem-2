@@ -20,7 +20,6 @@ function DisplayAddLoandiv() {
     $("#divBorrow").hide();
     InitializeEditDivForm();
     $('input[name="RadioLoanAddLoanType"]').val(['1']);
-    $('input[name="RadioLoanAddBorrowType"]').val(['1']);
     document.getElementById("LoanEdit").style.display = '';
     document.getElementById("LoanQuery").style.display = 'none';
     document.getElementById("divSet").style.display = 'none';
@@ -69,30 +68,22 @@ function EditLoan(id) {
     $('input[name="RadioLoanAddLoanType"]').val([loanType]);
     if (loanType == "2") {
         $("#divLoan").show();
-        $("#txtLoanAddLoanAccount").val(selectedRow[2].innerText);
-    }
-    else {
-        $("#divLoan").hide();
-    }
-
-    //给借款方式赋值
-    var borrowType = selectedRow[4].innerText;
-    $('input[name="RadioLoanAddBorrowType"]').val([borrowType]);
-    if (borrowType == "2") {
         $("#divBorrow").show();
-        $("#txtLoanAddBorrowAccount").val(selectedRow[5].innerText);
+        $("#txtLoanAddLoanAccount").val(selectedRow[2].innerText);
+        $("#txtLoanAddBorrowAccount").val(selectedRow[4].innerText);
     }
     else {
         $("#divBorrow").hide();
+        $("#divLoan").hide();
     }
 
     $("#HiddenField1").val(id);
     $("#txtLoanAddLender").val(selectedRow[0].innerText);
     $("#txtLoanAddBorrower").val(selectedRow[3].innerText);
-    $("#txtLoanAddLoanAmount").val(selectedRow[6].innerText);
-    $("#txtLoanAddLoanDate").val(selectedRow[7].innerText);
-    $("#txtLoanAddReturnDate").val(selectedRow[8].innerText);
-    $("#txtLoanAddContent").val(selectedRow[9].innerText);
+    $("#txtLoanAddLoanAmount").val(selectedRow[5].innerText);
+    $("#txtLoanAddLoanDate").val(selectedRow[6].innerText);
+    $("#txtLoanAddReturnDate").val(selectedRow[7].innerText);
+    $("#txtLoanAddContent").val(selectedRow[8].innerText);
 }
 
 //默认加载，隐藏DataGrid的Id这一列
@@ -119,29 +110,18 @@ $(function () {
 //出借方式选择，当选择现金，会隐藏和清空账户
 $(function () {
     $("#RadioLoanAddLoanType").click(function () {
-        //$("#txtLoanAddLoanAccount").val($("#RadioLoanAddLoanType").find("input[@checked]").val());
         var s = $("input[name='RadioLoanAddLoanType']:checked").val();
         if (s == 2) {
             $("#divLoan").show();
+            $("#divBorrow").show();
         }
         else {
             $("#divLoan").hide();
+            $("#divBorrow").hide();
             $("#txtLoanAddLoanAccount").val("");
+            $("#txtLoanAddBorrowAccount").val("");
         }
     });
 });
 
-//借款方式选择，当选择现金，会隐藏和清空账户
-$(function () {
-    $("#RadioLoanAddBorrowType").click(function () {
-        var s = $("input[name='RadioLoanAddBorrowType']:checked").val();
-        if (s == 2) {
-            $("#divBorrow").show();
-        }
-        else {
-            $("#divBorrow").hide();
-            $("#txtLoanAddLoanAccount").val("");
-        }
-    });
-});
 

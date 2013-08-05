@@ -6,7 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using BillingSystem.Views;
 using FBJHelper;
-using BillingSystem.DAL;
+using BillingSystem.Services;
 
 namespace BillingSystem.Views
 {
@@ -19,7 +19,15 @@ namespace BillingSystem.Views
 
         protected void BtnCreate_Click(object sender, EventArgs e)
         {
-            FirstLoadDAL.CreateTable();
+           int iSuccess= FirstLoadMethods.CreateTable();
+           if (iSuccess > 0)
+           {
+               Alert.Show(this, "初始化表成功！");
+           }
+           else
+           {
+               Alert.Show(this,"初始化失败！");
+           }
         }
     }
 }

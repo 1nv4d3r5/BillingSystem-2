@@ -21,7 +21,7 @@ namespace BillingSystem.DAL
         /// </summary>
         /// <param name="code"></param>
         /// <returns></returns>
-        public static UserInfo CheckUser(string code)
+        public static UserInfo GetUserByCode(string code)
         {
             UserInfo userInfo = new UserInfo();
             StringBuilder sb = new StringBuilder();
@@ -191,7 +191,7 @@ namespace BillingSystem.DAL
         public static void InsertOrUpdatetoUser(MySqlTransaction mySqlTransaction, UserInfo info, out int iSuccess)
         {
             StringBuilder sb = new StringBuilder();
-            UserInfo userInfo = CheckUser(info.Code);
+            UserInfo userInfo = GetUserByCode(info.Code);
             if (userInfo.Id > 0)
             {
                 sb.Append(" update user set Code = @Code,Name = @Name,Password=@Password,Role = @Role,Content = @Content where id = @id ");

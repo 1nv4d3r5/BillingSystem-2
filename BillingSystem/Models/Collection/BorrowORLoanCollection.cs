@@ -10,7 +10,7 @@ using System.Xml.Serialization;
 namespace BillingSystem.Models
 {
     [Serializable]
-    public sealed class BorrowCollection : CollectionBase
+    public sealed class BorrowORLoanCollection : CollectionBase
     {
         #region Private Fields
 
@@ -25,13 +25,13 @@ namespace BillingSystem.Models
         /// <summary>
         /// Default constructor.
         /// </summary>
-        public BorrowCollection() { }
+        public BorrowORLoanCollection() { }
 
         /// <summary>
         /// Constructor using CcZlCzBillInfo array.
         /// </summary>
         /// <param name="value" />
-        public BorrowCollection(BorrowInfo[] value)
+        public BorrowORLoanCollection(BorrowORLoanInfo[] value)
         {
             this.AddRange(value);
         }
@@ -96,20 +96,20 @@ namespace BillingSystem.Models
 
         public string Serialize()
         {
-            XmlSerializer s = new XmlSerializer(typeof(BorrowCollection));
+            XmlSerializer s = new XmlSerializer(typeof(BorrowORLoanCollection));
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
             System.IO.StringWriter stringWriter = new System.IO.StringWriter(sb);
             s.Serialize(stringWriter, this);
             return sb.ToString();
         }
 
-        public static BorrowCollection DeSerialize(string xmlObject)
+        public static BorrowORLoanCollection DeSerialize(string xmlObject)
         {
-            XmlSerializer s = new XmlSerializer(typeof(BorrowCollection));
+            XmlSerializer s = new XmlSerializer(typeof(BorrowORLoanCollection));
             try
             {
                 System.IO.StringReader stringReader = new System.IO.StringReader(xmlObject);
-                return s.Deserialize(stringReader) as BorrowCollection;
+                return s.Deserialize(stringReader) as BorrowORLoanCollection;
             }
             catch (System.Exception e)
             {
@@ -118,20 +118,20 @@ namespace BillingSystem.Models
             return null;
         }
 
-        public BorrowInfo this[int index]
+        public BorrowORLoanInfo this[int index]
         {
             get
             {
-                return (BorrowInfo)this.List[index];
+                return (BorrowORLoanInfo)this.List[index];
             }
         }
 
-        public int Add(BorrowInfo value)
+        public int Add(BorrowORLoanInfo value)
         {
             return this.List.Add(value);
         }
 
-        public void AddRange(BorrowInfo[] value)
+        public void AddRange(BorrowORLoanInfo[] value)
         {
             for (int i = 0; (i < value.Length); i++)
             {
@@ -139,15 +139,15 @@ namespace BillingSystem.Models
             }
         }
 
-        public void AddRange(BorrowCollection value)
+        public void AddRange(BorrowORLoanCollection value)
         {
             for (int i = 0; (i < value.Count); i++)
             {
-                this.Add(value.List[i] as BorrowInfo);
+                this.Add(value.List[i] as BorrowORLoanInfo);
             }
         }
 
-        public bool Contains(BorrowInfo value)
+        public bool Contains(BorrowORLoanInfo value)
         {
             if (IndexOf(value) > -1)
                 return true;
@@ -155,37 +155,37 @@ namespace BillingSystem.Models
             return false;
         }
 
-        public void CopyTo(BorrowInfo[] array, int index)
+        public void CopyTo(BorrowORLoanInfo[] array, int index)
         {
             this.List.CopyTo(array, index);
         }
 
-        public int IndexOf(BorrowInfo value)
+        public int IndexOf(BorrowORLoanInfo value)
         {
             for (int i = 0, count = this.List.Count; i < count; i++)
             {
-                if (value.Equals(this.List[i] as BorrowInfo))
+                if (value.Equals(this.List[i] as BorrowORLoanInfo))
                     return i;
             }
 
             return -1;
         }
 
-        public void Insert(int index, BorrowInfo value)
+        public void Insert(int index, BorrowORLoanInfo value)
         {
             List.Insert(index, value);
 
             innerListChanged = true;
         }
 
-        public void Remove(BorrowInfo value)
+        public void Remove(BorrowORLoanInfo value)
         {
             List.Remove(value);
 
             innerListChanged = true;
         }
 
-        public BorrowInfo Get(long id)
+        public BorrowORLoanInfo Get(long id)
         {
             if (indexerForPrimaryKeys == null || innerListChanged)
             {
@@ -195,7 +195,7 @@ namespace BillingSystem.Models
 
                 for (int i = 0, count = this.List.Count; i < count; i++)
                 {
-                    BorrowInfo borrowInfo = this.List[i] as BorrowInfo;
+                    BorrowORLoanInfo borrowInfo = this.List[i] as BorrowORLoanInfo;
 
                     indexerForPrimaryKeys.Add(string.Concat(borrowInfo.Id.ToString()), i);
                 }
@@ -205,7 +205,7 @@ namespace BillingSystem.Models
 
             if (indexerForPrimaryKeys.TryGetValue(string.Concat(id.ToString()), out index))
             {
-                return this.List[index] as BorrowInfo;
+                return this.List[index] as BorrowORLoanInfo;
             }
             else
             {
@@ -228,7 +228,7 @@ namespace BillingSystem.Models
             return totalPagesAvailable;
         }
 
-        public BorrowCollection Pagination(int pageIndex, int pageSize)
+        public BorrowORLoanCollection Pagination(int pageIndex, int pageSize)
         {
             if (InnerList.Count == 0)
                 return null;
@@ -239,11 +239,11 @@ namespace BillingSystem.Models
             if (end > InnerList.Count - 1)
                 end = InnerList.Count - 1;
 
-            BorrowCollection pages = new BorrowCollection();
+            BorrowORLoanCollection pages = new BorrowORLoanCollection();
 
             for (int i = start; i <= end; i++)
             {
-                pages.Add(InnerList[i] as BorrowInfo);
+                pages.Add(InnerList[i] as BorrowORLoanInfo);
             }
 
             return pages;
@@ -251,17 +251,17 @@ namespace BillingSystem.Models
 
         public void Sort()
         {
-            this.InnerList.Sort(new BorrowCollectionComparer());
+            this.InnerList.Sort(new BorrowORLoanCollectionComparer());
         }
 
         public void Sort(int sortBy)
         {
-            this.InnerList.Sort(new BorrowCollectionComparer(sortBy));
+            this.InnerList.Sort(new BorrowORLoanCollectionComparer(sortBy));
         }
 
         public void Sort(BorrowSortBy sortBy)
         {
-            this.InnerList.Sort(new BorrowCollectionComparer(sortBy));
+            this.InnerList.Sort(new BorrowORLoanCollectionComparer(sortBy));
         }
 
         #endregion
@@ -276,20 +276,20 @@ namespace BillingSystem.Models
 
         #endregion
 
-        #region Class BorrowCollectionComparer
+        #region Class BorrowORLoanCollectionComparer
 
-        private sealed class BorrowCollectionComparer : IComparer
+        private sealed class BorrowORLoanCollectionComparer : IComparer
         {
             private BorrowSortBy sortBy;
 
-            public BorrowCollectionComparer() { }
+            public BorrowORLoanCollectionComparer() { }
 
-            public BorrowCollectionComparer(BorrowSortBy sortBy)
+            public BorrowORLoanCollectionComparer(BorrowSortBy sortBy)
             {
                 this.sortBy = sortBy;
             }
 
-            public BorrowCollectionComparer(int sortBy)
+            public BorrowORLoanCollectionComparer(int sortBy)
             {
                 this.sortBy = (BorrowSortBy)sortBy;
             }
@@ -299,11 +299,11 @@ namespace BillingSystem.Models
                 switch (sortBy)
                 {
                     case BorrowSortBy.IdOrderByAsc:
-                        return (x as BorrowInfo).Id.CompareTo((y as BorrowInfo).Id);
+                        return (x as BorrowORLoanInfo).Id.CompareTo((y as BorrowORLoanInfo).Id);
                     case BorrowSortBy.IdOrderByDesc:
-                        return (y as BorrowInfo).Id.CompareTo((x as BorrowInfo).Id);
+                        return (y as BorrowORLoanInfo).Id.CompareTo((x as BorrowORLoanInfo).Id);
                     default:
-                        return ((BorrowInfo)x).Id.CompareTo(((BorrowInfo)y).Id);
+                        return ((BorrowORLoanInfo)x).Id.CompareTo(((BorrowORLoanInfo)y).Id);
                 }
             }
         }
@@ -312,25 +312,25 @@ namespace BillingSystem.Models
 
         #region Class CcZlCzBillCollectionEnumerator
 
-        public new BorrowCollectionEnumerator GetEnumerator()
+        public new BorrowORLoanCollectionEnumerator GetEnumerator()
         {
-            return new BorrowCollectionEnumerator(this);
+            return new BorrowORLoanCollectionEnumerator(this);
         }
 
-        public class BorrowCollectionEnumerator : IEnumerator
+        public class BorrowORLoanCollectionEnumerator : IEnumerator
         {
             private IEnumerator enumerator;
 
-            public BorrowCollectionEnumerator(BorrowCollection mappings)
+            public BorrowORLoanCollectionEnumerator(BorrowORLoanCollection mappings)
             {
                 enumerator = ((IEnumerable)mappings).GetEnumerator();
             }
 
-            public BorrowInfo Current
+            public BorrowORLoanInfo Current
             {
                 get
                 {
-                    return (BorrowInfo)enumerator.Current;
+                    return (BorrowORLoanInfo)enumerator.Current;
                 }
             }
 

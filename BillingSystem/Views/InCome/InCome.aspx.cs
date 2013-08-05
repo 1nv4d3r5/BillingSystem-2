@@ -20,20 +20,28 @@ namespace BillingSystem.Views
         {
             if (!IsPostBack)
             {
-                if (!string.IsNullOrEmpty(Request.QueryString["IncomeId"])) //带参数访问为编辑状态
+                if (Application["user"] != null)
                 {
-                    Session["editFlag"] = "true";
-                    this.ClientScript.RegisterStartupScript(this.GetType(), "", "DisplayEditIncomediv();", true);
-                    CashIncomeInfo cashInfo = CashIncomeMethods.GetCashIncomeById(Convert.ToInt32(Request.QueryString["IncomeId"]));
-                    InitializeIncomeAdd(cashInfo);
+                    if (!string.IsNullOrEmpty(Request.QueryString["IncomeId"])) //带参数访问为编辑状态
+                    {
+                        Session["editFlag"] = "true";
+                        this.ClientScript.RegisterStartupScript(this.GetType(), "", "DisplayEditIncomediv();", true);
+                        CashIncomeInfo cashInfo = CashIncomeMethods.GetCashIncomeById(Convert.ToInt32(Request.QueryString["IncomeId"]));
+                        InitializeIncomeAdd(cashInfo);
+                    }
+                    else
+                    {
+                        this.ClientScript.RegisterStartupScript(this.GetType(), "", "DisplaySysdiv();", true);
+                    }
+
+                    queryList = new List<QueryElement>();
+                    BindIncomeListDataGrid(queryList);
                 }
                 else
                 {
-                    this.ClientScript.RegisterStartupScript(this.GetType(), "", "DisplaySysdiv();", true);
+                    Response.Redirect("~/Views/Login.aspx");
+                    Alert.Show(this, "请先登录！");
                 }
-
-                queryList = new List<QueryElement>();
-                BindIncomeListDataGrid(queryList);
 
             }
         }

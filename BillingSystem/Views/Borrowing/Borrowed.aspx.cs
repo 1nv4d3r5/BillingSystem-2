@@ -19,50 +19,39 @@ namespace BillingSystem.Views
         {
             if (!IsPostBack)
             {
-                //if (!string.IsNullOrEmpty(Request.QueryString["BorrowedId"]))
-                //{
-                //    this.ClientScript.RegisterStartupScript(this.GetType(), "", "DisplayEditBorrowdiv();", true);
-                //}
-                //else
-                //{
-                this.ClientScript.RegisterStartupScript(this.GetType(), "", "DisplaySysdiv();", true);
-                //}
-                queryList = new List<QueryElement>();
-                BindBorrowListDataGrid(queryList);
+                if (Application["user"] != null)
+                {
+                    this.ClientScript.RegisterStartupScript(this.GetType(), "", "DisplaySysdiv();", true);
+                    queryList = new List<QueryElement>();
+                    BindBorrowListDataGrid(queryList);
+                }
+                else
+                {
+                    Response.Redirect("~/Views/Login.aspx");
+                    Alert.Show(this, "请先登录！");
+                }
             }
         }
 
         private void BindBorrowListDataGrid(List<QueryElement> list)
         {
-            BorrowCollection coll = BorrowedMethods.GetBorrowList(list);
+            BorrowORLoanCollection coll = BorrowedMethods.GetBorrowList(list);
             this.BorrowListDataGrid.DataSource = coll;
             this.BorrowListDataGrid.DataBind();
             for (int i = 0; i < coll.Count; i++)
             {
-                this.BorrowListDataGrid.Items[i].Cells[8].Text = coll[i].BorrowDate.ToString("yyyy-MM-dd");
+                this.BorrowListDataGrid.Items[i].Cells[7].Text = coll[i].HappenedDate.ToString("yyyy-MM-dd");
+                this.BorrowListDataGrid.Items[i].Cells[2].Text = StaticRescourse.DisplayBorrowORLoanType(coll[i].BorrowORLoanType);
                 bool dateFlag=HelperCommon.CompareAccordToRequired(coll[i].ReturnDate);
                 if (dateFlag)
                 {
-                    this.BorrowListDataGrid.Items[i].Cells[9].Text = coll[i].ReturnDate.ToString("yyyy-MM-dd");
+                    this.BorrowListDataGrid.Items[i].Cells[8].Text = coll[i].ReturnDate.ToString("yyyy-MM-dd");
                 }
                 else
                 {
-                    this.BorrowListDataGrid.Items[i].Cells[9].Text = string.Empty;
+                    this.BorrowListDataGrid.Items[i].Cells[8].Text = string.Empty;
                 }
             }
-        }
-
-        //protected void btnBorrowAdd_Click(object sender, EventArgs e)
-        //{
-        //    InitializeBorrowAdd();
-        //    this.ClientScript.RegisterStartupScript(this.GetType(), "", "DisplayAddBorrowdiv();", true);
-        //}
-
-        protected void btnBorrowQuery_Click(object sender, EventArgs e)
-        {
-            InitializeBorrowQuery();
-            this.ClientScript.RegisterStartupScript(this.GetType(), "", "DisplayQueryBorrowdiv();", true);
-
         }
 
         protected void btnBorrowAddSubmit_Click(object sender, EventArgs e)
@@ -75,11 +64,22 @@ namespace BillingSystem.Views
                 return;
             }
 
-            if (RadioBorrowAddBorrowType.SelectedValue == "2" && string.IsNullOrEmpty(this.txtBorrowAddBorrowAccount.Text.Trim()))
+            if (RadioBorrowAddBorrowType.SelectedValue == "2" )
             {
-                Alert.Show(this, "请输入借款账户！");
-                this.txtBorrowAddBorrowAccount.Focus();
-                return;
+
+                if (string.IsNullOrEmpty(this.txtBorrowAddBorrowAccount.Text.Trim()))
+                {
+                    Alert.Show(this, "请输入借款账户！");
+                    this.txtBorrowAddBorrowAccount.Focus();
+                    return;
+                }
+
+                if (string.IsNullOrEmpty(this.txtBorrowAddLoanAccount.Text.Trim()))
+                {
+                    Alert.Show(this, "请输入出借账户！");
+                    this.txtBorrowAddLoanAccount.Focus();
+                    return;
+                }
             }
 
             if (string.IsNullOrEmpty(this.txtBorrowAddLender.Text.Trim()))
@@ -89,12 +89,6 @@ namespace BillingSystem.Views
                 return;
             }
 
-            if (this.RadioBorrowAddLoanType.SelectedValue == "2" && string.IsNullOrEmpty(this.txtBorrowAddLoanAccount.Text.Trim()))
-            {
-                Alert.Show(this, "请输入出借账户！");
-                this.txtBorrowAddLoanAccount.Focus();
-                return;
-            }
 
             if (string.IsNullOrEmpty(this.txtBorrowAddBorrowAmount.Text.Trim()))
             {
@@ -111,11 +105,9 @@ namespace BillingSystem.Views
             }
             #endregion
 
-            BorrowInfo borrowInfo = new BorrowInfo();
-            //if (!string.IsNullOrEmpty(Request.QueryString["BorrowedId"]))
+            BorrowORLoanInfo borrowInfo = new BorrowORLoanInfo();
             if (!string.IsNullOrEmpty(this.HiddenField1.Value.Trim()))
             {
-                //borrowInfo.Id = Convert.ToInt32(Request.QueryString["BorrowedId"]);
                 borrowInfo.Id = Convert.ToInt32(this.HiddenField1.Value.Trim());
             }
             else
@@ -123,14 +115,13 @@ namespace BillingSystem.Views
                 borrowInfo.Id = 0;
             }
 
-            borrowInfo.BorrowType = Convert.ToInt32(this.RadioBorrowAddBorrowType.SelectedValue);
+            borrowInfo.BorrowORLoanType = Convert.ToInt32(this.RadioBorrowAddBorrowType.SelectedValue);
             borrowInfo.Borrower = this.txtBorrowAddBorrower.Text.Trim();
             borrowInfo.BorrowedAccount = this.txtBorrowAddBorrowAccount.Text.Trim();
             borrowInfo.Lender = this.txtBorrowAddLender.Text.Trim();
             borrowInfo.LoanAccount = this.txtBorrowAddLoanAccount.Text.Trim();
-            borrowInfo.LoanType = Convert.ToInt32(this.RadioBorrowAddLoanType.SelectedValue);
-            borrowInfo.BorrowAmount = Convert.ToSingle(this.txtBorrowAddBorrowAmount.Text.Trim());
-            borrowInfo.BorrowDate = HelperCommon.ConverToDateTime(string.Format("{0:d}", this.txtBorrowAddBorrowDate.Text.Trim()));
+            borrowInfo.Amount = Convert.ToSingle(this.txtBorrowAddBorrowAmount.Text.Trim());
+            borrowInfo.HappenedDate = HelperCommon.ConverToDateTime(string.Format("{0:d}", this.txtBorrowAddBorrowDate.Text.Trim()));
             if (!string.IsNullOrEmpty(this.txtBorrowAddReturnDate.Text.Trim()))
             {
                 borrowInfo.ReturnDate = HelperCommon.ConverToDateTime(string.Format("{0:d}", this.txtBorrowAddReturnDate.Text.Trim()));
@@ -156,11 +147,11 @@ namespace BillingSystem.Views
             BindBorrowListDataGrid(queryList);
         }
 
-        protected void btnBorrowAddCanel_Click(object sender, EventArgs e)
-        {
-            this.HiddenField1.Value = string.Empty;
-            this.ClientScript.RegisterStartupScript(this.GetType(), "", "DisplaySysdiv();", true);
-        }
+        //protected void btnBorrowAddCanel_Click(object sender, EventArgs e)
+        //{
+        //    this.HiddenField1.Value = string.Empty;
+        //    this.ClientScript.RegisterStartupScript(this.GetType(), "", "DisplaySysdiv();", true);
+        //}
 
         protected void btnBorrowQuerySubmit_Click(object sender, EventArgs e)
         {
@@ -201,9 +192,9 @@ namespace BillingSystem.Views
 
             if (!string.IsNullOrEmpty(this.txtBorrowQueryBBorrowDate.Text.Trim()) && !string.IsNullOrEmpty(this.txtBorrowQueryEBorrowDate.Text.Trim()))
             {
-                QueryElement query = new QueryElement { Queryname = "BorrowDate", QueryElementType = MySqlDbType.DateTime, Queryvalue = this.txtBorrowQueryBBorrowDate.Text.Trim(), QueryOperation = ">=" };
+                QueryElement query = new QueryElement { Queryname = "HappenedDate", QueryElementType = MySqlDbType.DateTime, Queryvalue = this.txtBorrowQueryBBorrowDate.Text.Trim(), QueryOperation = ">=" };
                 queryList.Add(query);
-                query = new QueryElement { Queryname = "BorrowDate", QueryElementType = MySqlDbType.DateTime, Queryvalue = this.txtBorrowQueryEBorrowDate.Text.Trim(), QueryOperation = "<" };
+                query = new QueryElement { Queryname = "HappenedDate", QueryElementType = MySqlDbType.DateTime, Queryvalue = this.txtBorrowQueryEBorrowDate.Text.Trim(), QueryOperation = "<" };
                 queryList.Add(query);
             }
             BindBorrowListDataGrid(queryList);
@@ -211,10 +202,10 @@ namespace BillingSystem.Views
             InitializeBorrowQuery();
         }
 
-        protected void btnBorrowQueryCanel_Click(object sender, EventArgs e)
-        {
-            this.ClientScript.RegisterStartupScript(this.GetType(), "", "DisplaySysdiv();", true);
-        }
+        //protected void btnBorrowQueryCanel_Click(object sender, EventArgs e)
+        //{
+        //    this.ClientScript.RegisterStartupScript(this.GetType(), "", "DisplaySysdiv();", true);
+        //}
 
         protected void BorrowListDataGrid_ItemCommand(object source, DataGridCommandEventArgs e)
         {
@@ -252,35 +243,14 @@ namespace BillingSystem.Views
 
         private void InitializeBorrowAdd()
         {
-            //if (borrowInfo.Id > 0)
-            //{
-            //    DateTime date = new DateTime(2000, 1, 1);
-            //    this.txtBorrowAddBorrower.Enabled = false;
-            //    this.RadioBorrowAddBorrowType.SelectedValue = borrowInfo.BorrowType.ToString();
-            //    this.divBorrow.Visible = StaticRescourse.VisOrCollsDiv(borrowInfo.BorrowType);
-            //    this.txtBorrowAddBorrowAccount.Text = !string.IsNullOrEmpty(borrowInfo.BorrowedAccount) ? borrowInfo.BorrowedAccount : string.Empty;
-            //    this.RadioBorrowAddLoanType.SelectedValue = borrowInfo.LoanType.ToString();
-            //    this.txtBorrowAddLoanAccount.Text = !string.IsNullOrEmpty(borrowInfo.LoanAccount) ? borrowInfo.LoanAccount : string.Empty;
-            //    this.divLoan.Visible = StaticRescourse.VisOrCollsDiv(borrowInfo.LoanType);
-            //    this.txtBorrowAddBorrowAmount.Text = borrowInfo.BorrowAmount.ToString();
-            //    this.txtBorrowAddBorrowDate.Text = borrowInfo.BorrowDate.ToString("yyyy-MM-dd");
-            //    this.txtBorrowAddReturnDate.Text = borrowInfo.ReturnDate > date ? borrowInfo.ReturnDate.ToString("yyyy-MM-dd") : string.Empty;
-            //    this.txtBorrowAddContent.Text = !string.IsNullOrEmpty(borrowInfo.Content) ? borrowInfo.Content : string.Empty;             
-            //}
-            //else
-            //{
             this.txtBorrowAddBorrower.Enabled = true;
             this.RadioBorrowAddBorrowType.SelectedValue = "1";
-            // this.divBorrow.Visible = true;
             this.txtBorrowAddBorrower.Text = string.Empty;
             this.txtBorrowAddLender.Text = string.Empty;
-            this.RadioBorrowAddLoanType.SelectedValue = "1";
-            // this.divLoan.Visible = false;
             this.txtBorrowAddBorrowAmount.Text = string.Empty;
             this.txtBorrowAddBorrowDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
             this.txtBorrowAddReturnDate.Text = string.Empty;
             this.txtBorrowAddContent.Text = string.Empty;
-            //}
         }
     }
 }
