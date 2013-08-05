@@ -9,17 +9,17 @@ namespace BillingSystem.Services
 {
     public static class BorrowedMethods
     {
-        public static BorrowInfo GetBorrowById(int id)
+        public static BorrowORLoanInfo GetBorrowById(int id)
         {
             return BorrowProxy.GetBorrowById(id);
         }
 
-        public static BorrowCollection GetBorrowList(List<QueryElement> list)
+        public static BorrowORLoanCollection GetBorrowList(List<QueryElement> list)
         {
             return BorrowProxy.GetBorrowList(list);
         }
 
-        public static int InsertOrUpdatetoBorrowed(BorrowInfo info)
+        public static int InsertOrUpdatetoBorrowed(BorrowORLoanInfo info)
         {
             return BorrowProxy.InsertOrUpdatetoBorrowed(info);
         }

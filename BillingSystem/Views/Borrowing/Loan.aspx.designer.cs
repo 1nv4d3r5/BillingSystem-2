@@ -40,6 +40,24 @@ namespace BillingSystem.Views {
         protected global::System.Web.UI.WebControls.RadioButtonList RadioLoanAddLoanType;
         
         /// <summary>
+        /// HiddenField1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField HiddenField1;
+        
+        /// <summary>
+        /// HidderField2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField HidderField2;
+        
+        /// <summary>
         /// Label1 control.
         /// </summary>
         /// <remarks>
@@ -76,31 +94,13 @@ namespace BillingSystem.Views {
         protected global::System.Web.UI.WebControls.Label Label2;
         
         /// <summary>
-        /// txtLoanAddLoanAccount control.
+        /// dropLoanAddLoanAccount control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtLoanAddLoanAccount;
-        
-        /// <summary>
-        /// HiddenField1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField HiddenField1;
-        
-        /// <summary>
-        /// RadioLoanAddBorrowType control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList RadioLoanAddBorrowType;
+        protected global::System.Web.UI.WebControls.DropDownList dropLoanAddLoanAccount;
         
         /// <summary>
         /// Label3 control.

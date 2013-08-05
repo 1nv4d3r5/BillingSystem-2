@@ -26,17 +26,25 @@ namespace BillingSystem.Views
         {
             if (!IsPostBack)
             {
-                if (!string.IsNullOrEmpty(Request.QueryString["Id"]))
+                if (Application["user"] != null)
                 {
-                    this.ClientScript.RegisterStartupScript(this.GetType(), "", "DisplayCardEditdiv();", true);
-                    CardInfo info = CardMethods.GetCardById(Convert.ToInt32(Request.QueryString["Id"]));
-                    Initialize(info);
+                    if (!string.IsNullOrEmpty(Request.QueryString["Id"]))
+                    {
+                        this.ClientScript.RegisterStartupScript(this.GetType(), "", "DisplayCardEditdiv();", true);
+                        CardInfo info = CardMethods.GetCardById(Convert.ToInt32(Request.QueryString["Id"]));
+                        Initialize(info);
+                    }
+                    else
+                    {
+                        this.ClientScript.RegisterStartupScript(this.GetType(), "", "DisplaySysdiv();", true);
+                    }
+                    BindDataGrid(queryList);
                 }
                 else
                 {
-                    this.ClientScript.RegisterStartupScript(this.GetType(), "", "DisplaySysdiv();", true);
+                    Response.Redirect("~/Views/Login.aspx");
+                    Alert.Show(this, "请先登录！");
                 }
-                BindDataGrid(queryList);
             }
         }
 
@@ -251,7 +259,7 @@ namespace BillingSystem.Views
 
             if (Session["UserCode"] != null)
             {
-                loginInfo = UserMethods.CheckUser(Session["UserCode"].ToString());
+                loginInfo = UserMethods.GetUserByCode(Session["UserCode"].ToString());
             }
 
             userColl = UserMethods.GetUser(new List<QueryElement>());

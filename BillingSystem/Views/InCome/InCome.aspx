@@ -7,7 +7,9 @@
     <title></title>
     <link rel="stylesheet" type="text/css" href="../../Css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="../../Css/css.css" />
+    <link rel="stylesheet" type="text/css" href="../../Css/jquery-ui-1.10.3.custom.min.css" />
     <script src="../../Scripts/jquery-2.0.3.min.js" type="text/javascript"></script>
+    <script src="../../Scripts/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
     <script lang="ja" type="text/javascript">
         function openIncomEditWin(id) {
             location.replace(" InCome.aspx?IncomeId=" + id);
@@ -57,6 +59,14 @@
                 $("#IncomeListDataGrid tr.highlight").removeClass('highlight');
                 $(this).toggleClass("highlight");
             });
+        });
+        $(document).ready(function () {
+            $('#txtIncomeAddDepositDate').datepicker({ dateFormat: "yy-mm-dd" });
+            $('#txtIncomeAddBDate').datepicker({ dateFormat: "yy-mm-dd" });
+            $('#txtIncomeAddEDate').datepicker({ dateFormat: "yy-mm-dd" });
+
+            $('#txtIncomeQueryBDepositDate').datepicker({ dateFormat: "yy-mm-dd" });
+            $('#txtIncomeQueryEDepositDate').datepicker({ dateFormat: "yy-mm-dd" });
         });
     </script>
 </head>

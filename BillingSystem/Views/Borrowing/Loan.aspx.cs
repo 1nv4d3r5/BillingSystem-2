@@ -17,28 +17,37 @@ namespace BillingSystem.Views
         {
             if (!IsPostBack)
             {
-                this.ClientScript.RegisterStartupScript(this.GetType(), "", "DisplaySysdiv();", true);
-                queryList = new List<QueryElement>();
-                BindLoanListDataGrid(queryList);
+                //if (Application["user"] != null)
+                //{
+                    this.ClientScript.RegisterStartupScript(this.GetType(), "", "DisplaySysdiv();", true);
+                    queryList = new List<QueryElement>();
+                    BindLoanListDataGrid(queryList);
+                //}
+                //else
+                //{
+                //    //Alert.Show(this, "请先登录！");
+                //    Response.Redirect("~/Views/Login.aspx");
+                //}
             }
         }
 
         private void BindLoanListDataGrid(List<QueryElement> list)
         {
-            LoanCollection coll = LoanMethods.GetLoanList(list);
+            BorrowORLoanCollection coll = LoanMethods.GetLoanList(list);
             this.LoanListDataGrid.DataSource = coll;
             this.LoanListDataGrid.DataBind();
             for (int i = 0; i < coll.Count; i++)
             {
-                this.LoanListDataGrid.Items[i].Cells[8].Text = coll[i].LoanDate.ToString("yyyy-MM-dd");
+                this.LoanListDataGrid.Items[i].Cells[2].Text = StaticRescourse.DisplayBorrowORLoanType(coll[i].BorrowORLoanType);
+                this.LoanListDataGrid.Items[i].Cells[7].Text = coll[i].HappenedDate.ToString("yyyy-MM-dd");
                 bool dateFlag = HelperCommon.CompareAccordToRequired(coll[i].ReturnDate);
                 if (dateFlag)
                 {
-                    this.LoanListDataGrid.Items[i].Cells[9].Text = coll[i].ReturnDate.ToString("yyyy-MM-dd");
+                    this.LoanListDataGrid.Items[i].Cells[8].Text = coll[i].ReturnDate.ToString("yyyy-MM-dd");
                 }
                 else
                 {
-                    this.LoanListDataGrid.Items[i].Cells[9].Text = string.Empty;
+                    this.LoanListDataGrid.Items[i].Cells[8].Text = string.Empty;
                 }
             }
         }
@@ -51,26 +60,28 @@ namespace BillingSystem.Views
                 int selectindex = e.Item.ItemIndex;
                 id = this.LoanListDataGrid.Items[selectindex].Cells[0].Text;
             }
-            
+           // Response.Write("<script> if(confirm('是否删除')) document.getElementById('HidderField2').value='1';</script>");
 
-
-            if (!string.IsNullOrEmpty(id))
+            if (this.HidderField2.Value == "1")
             {
-                int iSuccess = LoanMethods.DeleteLoanById(Convert.ToInt32(id));
-                if (iSuccess > 0)
+                if (!string.IsNullOrEmpty(id))
                 {
-                    Alert.Show(this, "删除成功！");
+                    int iSuccess = LoanMethods.DeleteLoanById(Convert.ToInt32(id));
+                    if (iSuccess > 0)
+                    {
+                        Alert.Show(this, "删除成功！");
+                    }
+                    else
+                    {
+                        Alert.Show(this, "删除失败！");
+                    }
+                    if (queryList == null)
+                    {
+                        queryList = new List<QueryElement>();
+                    }
+                    BindLoanListDataGrid(queryList);
+                    this.ClientScript.RegisterStartupScript(this.GetType(), "", "HideORShowColumn();", true);
                 }
-                else
-                {
-                    Alert.Show(this, "删除失败！");
-                }
-                if (queryList == null)
-                {
-                    queryList = new List<QueryElement>();
-                }
-                BindLoanListDataGrid(queryList);
-                this.ClientScript.RegisterStartupScript(this.GetType(), "", "HideORShowColumn();", true);
             }
         }
 
@@ -86,9 +97,19 @@ namespace BillingSystem.Views
 
             if (this.RadioLoanAddLoanType.SelectedValue == "2" && string.IsNullOrEmpty(this.txtLoanAddLoanAccount.Text.Trim()))
             {
-                Alert.Show(this, "请输入借款账户！");
-                this.txtLoanAddLoanAccount.Focus();
-                return;
+                if (string.IsNullOrEmpty(this.txtLoanAddLoanAccount.Text.Trim()))
+                {
+                    Alert.Show(this, "请输入出借账户！");
+                    this.txtLoanAddLoanAccount.Focus();
+                    return;
+                }
+
+                if (string.IsNullOrEmpty(this.txtLoanAddBorrowAccount.Text.Trim()))
+                {
+                    Alert.Show(this, "请输入借款账户！");
+                    this.txtLoanAddBorrowAccount.Focus();
+                    return;
+                }
             }
 
             if (string.IsNullOrEmpty(this.txtLoanAddBorrower.Text.Trim()))
@@ -98,12 +119,12 @@ namespace BillingSystem.Views
                 return;
             }
 
-            if (this.RadioLoanAddBorrowType.SelectedValue == "2" && string.IsNullOrEmpty(this.txtLoanAddBorrowAccount.Text.Trim()))
-            {
-                Alert.Show(this, "请输入出借账户！");
-                this.txtLoanAddBorrowAccount.Focus();
-                return;
-            }
+            //if (this.RadioLoanAddBorrowType.SelectedValue == "2" && string.IsNullOrEmpty(this.txtLoanAddBorrowAccount.Text.Trim()))
+            //{
+            //    Alert.Show(this, "请输入出借账户！");
+            //    this.txtLoanAddBorrowAccount.Focus();
+            //    return;
+            //}
 
             if (string.IsNullOrEmpty(this.txtLoanAddLoanAmount.Text.Trim()))
             {
@@ -120,7 +141,7 @@ namespace BillingSystem.Views
             }
             #endregion
 
-            LoanInfo loanInfo = new LoanInfo();
+            BorrowORLoanInfo loanInfo = new BorrowORLoanInfo();
             if (!string.IsNullOrEmpty(this.HiddenField1.Value.Trim()))
             {
                 loanInfo.Id = Convert.ToInt32(this.HiddenField1.Value.Trim());
@@ -130,14 +151,14 @@ namespace BillingSystem.Views
                 loanInfo.Id = 0;
             }
 
-            loanInfo.BorrowType = Convert.ToInt32(this.RadioLoanAddBorrowType.SelectedValue);
+            //loanInfo.BorrowType = Convert.ToInt32(this.RadioLoanAddBorrowType.SelectedValue);
             loanInfo.Borrower = this.txtLoanAddBorrower.Text.Trim();
             loanInfo.LoanAccount = this.txtLoanAddLoanAccount.Text.Trim();
             loanInfo.Lender = this.txtLoanAddLender.Text.Trim();
-            loanInfo.BorrowAccount = this.txtLoanAddBorrowAccount.Text.Trim();
-            loanInfo.LoanType = Convert.ToInt32(this.RadioLoanAddLoanType.SelectedValue);
-            loanInfo.LoanAmount = Convert.ToSingle(this.txtLoanAddLoanAmount.Text.Trim());
-            loanInfo.LoanDate = HelperCommon.ConverToDateTime(string.Format("{0:d}", this.txtLoanAddLoanDate.Text.Trim()));
+            loanInfo.BorrowedAccount = this.txtLoanAddBorrowAccount.Text.Trim();
+            loanInfo.BorrowORLoanType = Convert.ToInt32(this.RadioLoanAddLoanType.SelectedValue);
+            loanInfo.Amount = Convert.ToSingle(this.txtLoanAddLoanAmount.Text.Trim());
+            loanInfo.HappenedDate = HelperCommon.ConverToDateTime(string.Format("{0:d}", this.txtLoanAddLoanDate.Text.Trim()));
             if (!string.IsNullOrEmpty(this.txtLoanAddReturnDate.Text.Trim()))
             {
                 loanInfo.ReturnDate = HelperCommon.ConverToDateTime(string.Format("{0:d}", this.txtLoanAddReturnDate.Text.Trim()));
@@ -209,6 +230,25 @@ namespace BillingSystem.Views
             }
             BindLoanListDataGrid(queryList);
             this.ClientScript.RegisterStartupScript(this.GetType(), "", "DisplayQueryLoandiv();", true);
+        }
+
+        protected void txtLoanAddLender_TextChanged(object sender, EventArgs e)
+        {
+            if (this.RadioLoanAddLoanType.SelectedValue == "2" && !string.IsNullOrEmpty(this.txtLoanAddLender.Text.Trim()))
+            {
+                UserInfo userInfo = UserMethods.GetUserByName(this.txtLoanAddLender.Text.Trim());
+                if (userInfo.Id > 0)
+                {
+                    CardCollection coll = CardMethods.GetCardByUserId(userInfo.Id);
+                    List<DropItem> list = new List<DropItem>();
+                    list.Add(new DropItem { ValueField = "", DisplayField = " " });
+                    for (int i = 0; i < coll.Count; i++)
+                    {
+                        list.Add(new DropItem { ValueField = coll[i].Id.ToString(), DisplayField = coll[i].CardNumber });
+                    }
+                    this.dropLoanAddLoanAccount.DataSource = list;
+                }
+            }
         }
     }
 }

@@ -9,9 +9,9 @@ namespace BillingSystem.Services
 {
     public static class UserMethods
     {
-        public static UserInfo CheckUser(string code)
+        public static UserInfo GetUserByCode(string code)
         {
-            return UserProxy.CheckUser(code);
+            return UserProxy.GetUserByCode(code);
         }
 
         public static UserInfo GetUserByName(string name)

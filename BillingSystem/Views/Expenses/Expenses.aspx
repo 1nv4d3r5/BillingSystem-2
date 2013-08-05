@@ -6,7 +6,9 @@
 <head runat="server">
     <link rel="stylesheet" type="text/css" href="../../Css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="../../Css/css.css" />
+    <link rel="stylesheet" type="text/css" href="../../Css/jquery-ui-1.10.3.custom.min.css" />
     <script src="../../Scripts/jquery-2.0.3.min.js" type="text/javascript"></script>
+    <script src="../../Scripts/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
     <title></title>
     <script type="text/javascript" lang="ja">
         function openExpensesEditWin(id) {
@@ -41,20 +43,19 @@
             document.getElementById("ExpensesQuery").style.display = 'none';
             document.getElementById("divExpensesTitle").innerText = "支出管理--编辑";
         }
-
-        //$(function () {
-        //    $("#ExpensesListDataGrid tr").first().nextAll().bind('click', function () {
-        //        if ($(this).css("background-color") != $("#ExpensesListDataGrid").css("background-color"))
-        //            $(this).css('background-color', '#ffffff');
-        //        else
-        //            $(this).css('background-color', '#dff');
-        //    });
-        //});
         $(function () {
             $("#ExpensesListDataGrid tr").first().nextAll().bind('click', function () {
                 $("#ExpensesListDataGrid tr.highlight").removeClass('highlight');
                 $(this).toggleClass("highlight");
             });
+        });
+
+        $(document).ready(function () {
+            //新增、编辑div的日期
+            $('#txtExpensesAddSpendDate').datepicker({ dateFormat: "yy-mm-dd" });
+
+            $('#txtExpensesQueryBSpendDate').datepicker({ dateFormat: "yy-mm-dd" });
+            $('#txtExpensesQueryESpendDate').datepicker({ dateFormat: "yy-mm-dd" });
         });
     </script>
 

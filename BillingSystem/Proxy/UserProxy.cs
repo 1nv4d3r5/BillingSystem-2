@@ -31,9 +31,9 @@ namespace BillingSystem.Proxy
             }
         }
 
-        public static UserInfo CheckUser(string code)
+        public static UserInfo GetUserByCode(string code)
         {
-            return UserDAL.CheckUser(code);
+            return UserDAL.GetUserByCode(code);
         }
 
         public static UserInfo GetUserByName(string name)

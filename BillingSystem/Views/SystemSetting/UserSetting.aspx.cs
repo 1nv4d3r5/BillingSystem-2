@@ -25,19 +25,27 @@ namespace BillingSystem.Views
         {
             if (!IsPostBack)
             {
-                if (!string.IsNullOrEmpty(Request.QueryString["Code"]))
+                if (Application["user"] != null)
                 {
-                    this.ClientScript.RegisterStartupScript(this.GetType(), "", "displayUserEditdiv();", true);
-                    UserInfo info = UserMethods.CheckUser(Request.QueryString["Code"]);
-                    string desecpassword = FBJHelper.Encryption.DESEdcrypt(info.Password,"19850627");
-                    info.Password = desecpassword;
-                    Initialize(info);
+                    if (!string.IsNullOrEmpty(Request.QueryString["Code"]))
+                    {
+                        this.ClientScript.RegisterStartupScript(this.GetType(), "", "displayUserEditdiv();", true);
+                        UserInfo info = UserMethods.GetUserByCode(Request.QueryString["Code"]);
+                        string desecpassword = FBJHelper.Encryption.DESEdcrypt(info.Password, "19850627");
+                        info.Password = desecpassword;
+                        Initialize(info);
+                    }
+                    else
+                    {
+                        this.ClientScript.RegisterStartupScript(this.GetType(), "", "displayUserSet();", true);
+                    }
+                    BindDataGrid(queryList);
                 }
                 else
                 {
-                    this.ClientScript.RegisterStartupScript(this.GetType(), "", "displayUserSet();", true);
+                    Response.Redirect("~/Views/Login.aspx");
+                    Alert.Show(this, "请先登录！");
                 }
-                BindDataGrid(queryList);
             }
         }
 

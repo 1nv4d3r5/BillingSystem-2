@@ -35,5 +35,10 @@ namespace BillingSystem.Services
         {
             return CardProxy.DeleteCard(id);
         }
+
+        public static CardCollection GetCardByUserId(int userId)
+        {
+            return CardProxy.GetCardByUserId(userId);
+        }
     }
 }

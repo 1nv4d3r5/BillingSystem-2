@@ -59,5 +59,10 @@ namespace BillingSystem.Proxy
                 return 0;
             }
         }
+
+        public static CardCollection GetCardByUserId(int userId)
+        {
+            return CardDAL.GetCardByUserId(userId);
+        }
     }
 }

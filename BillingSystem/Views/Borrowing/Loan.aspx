@@ -34,28 +34,23 @@
                         出借方式：
                     </div>
                     <div class="controls controls-row">
-                                <asp:RadioButtonList ID="RadioLoanAddLoanType" runat="server" RepeatDirection="Horizontal" CssClass="span2">
-                                    <asp:ListItem Value="1">现金</asp:ListItem>
-                                    <asp:ListItem Value="2">刷卡</asp:ListItem>
-                                </asp:RadioButtonList>
-                                <label class="span1">&nbsp;</label>
-                                <asp:Label ID="Label1" runat="server" Text="出借人:" CssClass="span1" />
-                                <asp:TextBox runat="server" ID="txtLoanAddLender" CssClass="span2" />
-                                <div runat="server" id="divLoan">
-                                    <asp:Label ID="Label2" runat="server" Text="出借账户:" CssClass="span1" />
-                                    <asp:TextBox runat="server" ID="txtLoanAddLoanAccount" CssClass="span2" />
-                                </div>
-                        <asp:HiddenField ID="HiddenField1" runat="server" />
-                    </div>
-                    <div class="controls controls-row">
-                        借款方式：
-                    </div>
-                    <div class="controls controls-row">
-                        <asp:RadioButtonList runat="server" ID="RadioLoanAddBorrowType" RepeatDirection="Horizontal" CssClass="span2">
+                        <asp:RadioButtonList ID="RadioLoanAddLoanType" runat="server" RepeatDirection="Horizontal" CssClass="span2">
                             <asp:ListItem Value="1">现金</asp:ListItem>
-                            <asp:ListItem Value="2">转账</asp:ListItem>
+                            <asp:ListItem Value="2">刷卡</asp:ListItem>
                         </asp:RadioButtonList>
                         <label class="span1">&nbsp;</label>
+
+                        <asp:HiddenField ID="HiddenField1" runat="server" />
+                        <asp:HiddenField ID="HidderField2" runat="server" />
+                    </div>
+                    <div class="controls controls-row">
+                        <asp:Label ID="Label1" runat="server" Text="出借人:" CssClass="span1" />
+                        <asp:TextBox runat="server" ID="txtLoanAddLender" CssClass="span2" OnTextChanged="txtLoanAddLender_TextChanged" />
+                        <div runat="server" id="divLoan">
+                            <asp:Label ID="Label2" runat="server" Text="出借账户:" CssClass="span1" />
+                            <asp:DropDownList runat="server" ID="dropLoanAddLoanAccount" CssClass="span2" Enabled="false" />
+                            <%--<asp:TextBox runat="server" ID="txtLoanAddLoanAccount" CssClass="span2" />--%>
+                        </div>
                         <asp:Label ID="Label3" runat="server" Text="借款人:" CssClass="span1" />
                         <asp:TextBox runat="server" ID="txtLoanAddBorrower" CssClass="span2" />
                         <div runat="server" id="divBorrow">
@@ -96,7 +91,6 @@
                         <div class="span2">
                             <asp:Button runat="server" ID="btnLoanQuerySubmit" Text="查询" CssClass="btn btn-primary" OnClick="btnLoanQuerySubmit_Click" />
                             <input type="button" id="btnLoanQueryCanel" value="返回" class="btn btn-primary" onclick="DisplaySysdiv()" />
-                            <%--                            <asp:Button runat="server" ID="btnLoanQueryCanel" Text="后退" CssClass="btn btn-primary" />--%>
                         </div>
                     </div>
                 </div>
@@ -111,13 +105,12 @@
                             <Columns>
                                 <asp:BoundColumn ReadOnly="true" DataField="Id" HeaderText="Id" ItemStyle-Width="5%" Visible="false" />
                                 <asp:HyperLinkColumn HeaderText="出借人" DataTextField="Lender" DataNavigateUrlField="Id" DataNavigateUrlFormatString="javascript:openLoanEditWin('{0}')" ItemStyle-Width="5%"></asp:HyperLinkColumn>
-                                <asp:BoundColumn ReadOnly="true" DataField="LoanType" HeaderText="出借方式" ItemStyle-Width="5%" />
+                                <asp:BoundColumn ReadOnly="true" DataField="BorrowORLoanType" HeaderText="出借方式" ItemStyle-Width="5%" />
                                 <asp:BoundColumn ReadOnly="true" DataField="LoanAccount" HeaderText="出借账户" ItemStyle-Width="10%" />
                                 <asp:BoundColumn ReadOnly="true" DataField="Borrower" HeaderText="借款人" ItemStyle-Width="5%" />
-                                <asp:BoundColumn ReadOnly="true" DataField="BorrowType" HeaderText="借款方式" ItemStyle-Width="5%" />
-                                <asp:BoundColumn ReadOnly="true" DataField="BorrowAccount" HeaderText="借款账户" ItemStyle-Width="10%" />
-                                <asp:BoundColumn ReadOnly="true" DataField="LoanAmount" HeaderText="金额" ItemStyle-Width="7%" />
-                                <asp:BoundColumn ReadOnly="true" DataField="LoanDate" HeaderText="借款日期" ItemStyle-Width="7%" />
+                                <asp:BoundColumn ReadOnly="true" DataField="BorrowedAccount" HeaderText="借款账户" ItemStyle-Width="10%" />
+                                <asp:BoundColumn ReadOnly="true" DataField="Amount" HeaderText="金额" ItemStyle-Width="7%" />
+                                <asp:BoundColumn ReadOnly="true" DataField="HappenedDate" HeaderText="借款日期" ItemStyle-Width="7%" />
                                 <asp:BoundColumn ReadOnly="true" DataField="ReturnDate" HeaderText="归还日期" ItemStyle-Width="7%" />
                                 <asp:BoundColumn ReadOnly="true" DataField="Content" HeaderText="备注" ItemStyle-Width="15%" />
                                 <asp:TemplateColumn HeaderText="操作" HeaderStyle-HorizontalAlign="Center" FooterStyle-BorderStyle="None" ItemStyle-Width="3%">

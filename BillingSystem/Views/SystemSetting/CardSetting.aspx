@@ -8,7 +8,9 @@
     <!--<link rel="stylesheet" type="text/css" href="/Css/css.css"/>-->
     <link rel="stylesheet" type="text/css" href="/Css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="/Css/css.css" />
+    <link rel ="stylesheet" type="text/css" href="../../Css/jquery-ui-1.10.3.custom.min.css" />
     <script src="../../Scripts/jquery-2.0.3.min.js" type="text/javascript"></script>
+    <script src="../../Scripts/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
     <script type="text/javascript" lang="ja">
         function openCardEditWin(Id) {
             //showModalDialog("CardSetting.aspx?CardNumber=" + cardNumber, "CardSetting.aspx", 'dialogWidth:560px;dialogHeight:300px;center:yes;help:no;resizable:no;status:no');
@@ -62,6 +64,13 @@
                 $("#CardListDataGrid tr.highlight").removeClass('highlight');
                 $(this).toggleClass("highlight");
             });
+        });
+
+        $(document).ready(function () {
+            $('#txtAddCardOpenDate').datepicker({ dateFormate: "yy-mm-dd" });
+
+            $('#txtCardQueryBOpenDate').datepicker({ dateFormate: "yy-mm-dd" });
+            $('#txtCardQueryEOpenDate').datepicker({ dateFormate: "yy-mm-dd" });
         });
     </script>
 </head>
