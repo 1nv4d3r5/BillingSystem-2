@@ -83,7 +83,6 @@
     <Content Include="Css\bootstrap.css" />
     <Content Include="Css\css.css" />
     <Content Include="Css\datetimepicker.css" />
-<<<<<<< HEAD
     <Content Include="Css\images\animated-overlay.gif" />
     <Content Include="Css\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
     <Content Include="Css\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
@@ -115,10 +114,6 @@
     <Content Include="Css\images\ui-icons_ffd27a_256x240.png" />
     <Content Include="Css\images\ui-icons_ffffff_256x240.png" />
     <Content Include="Css\jquery-ui-1.10.3.custom.min.css" />
-    <Content Include="Scripts\ds1.sql" />
-=======
-    <Content Include="Css\jquery-ui-1.10.3.custom.min.css" />
->>>>>>> 9da9e9f07402aa1af2025af0d7aa2febaf8bb898
     <Content Include="Images\delete\1.jpg" />
     <Content Include="Images\delete\2.png" />
     <Content Include="Images\delete\3.png" />
@@ -127,11 +122,8 @@
     <Content Include="Scripts\borrow-jquery.js" />
     <Content Include="Scripts\jquery-2.0.3.min.js" />
     <Content Include="Scripts\jquery-ui-1.10.3.custom.min.js" />
-<<<<<<< HEAD
-=======
     <Content Include="Scripts\Loan-Jquery.js" />
     <Content Include="Sql\ds1.sql" />
->>>>>>> 9da9e9f07402aa1af2025af0d7aa2febaf8bb898
     <Content Include="Views\BillingSystemMainPage.aspx" />
     <Content Include="Views\Borrowing\Loan.aspx" />
     <Content Include="Views\Default.aspx" />
