@@ -15,7 +15,7 @@ namespace BillingSystem.DAL
         public static void CreateTable()
         {
 
-            string sqlFile = AppDomain.CurrentDomain.BaseDirectory + @"/DAL/ds1.sql";
+            string sqlFile = AppDomain.CurrentDomain.BaseDirectory + @"/Scripts/ds1.sql";
             StreamReader reader = new StreamReader(sqlFile);
             StringBuilder sql = new StringBuilder();
             while (!reader.EndOfStream)
