@@ -16,12 +16,13 @@ namespace BillingSystem.Views
     public partial class Income : System.Web.UI.Page
     {
         private List<QueryElement> queryList = null;
+        private bool deleteflag = false;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                if (Application["user"] != null)
-                {
+                //if (Application["user"] != null)
+                //{
                     if (!string.IsNullOrEmpty(Request.QueryString["IncomeId"])) //带参数访问为编辑状态
                     {
                         Session["editFlag"] = "true";
@@ -36,12 +37,12 @@ namespace BillingSystem.Views
 
                     queryList = new List<QueryElement>();
                     BindIncomeListDataGrid(queryList);
-                }
-                else
-                {
-                    Response.Redirect("~/Views/Login.aspx");
-                    Alert.Show(this, "请先登录！");
-                }
+                //}
+                //else
+                //{
+                //    Response.Redirect("~/Views/Login.aspx");
+                //    Alert.Show(this, "请先登录！");
+                //}
 
             }
         }
@@ -609,7 +610,7 @@ namespace BillingSystem.Views
                 int selectindex = e.Item.ItemIndex;
                 id = this.IncomeListDataGrid.Items[selectindex].Cells[0].Text;
             }
-            if (!string.IsNullOrEmpty(id))
+            if (!string.IsNullOrEmpty(id) && this.deleteflag==true)
             {
                 int iSuccess = CashIncomeMethods.DeleteCashIncome(Convert.ToInt32(id));
                 if (iSuccess > 0)
@@ -626,6 +627,11 @@ namespace BillingSystem.Views
                 }
                 BindIncomeListDataGrid(queryList);
             }
+        }
+
+        protected void btnIncomeDelete_Click(object sender, ImageClickEventArgs e)
+        {
+            this.deleteflag = true;
         }
     }
 }

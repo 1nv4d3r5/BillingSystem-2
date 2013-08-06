@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="../Css/bootstrap.css" />
     <script type="text/ecmascript" lang="ja">
         function displayWelcome() {
-            var a = "<%=GetUser()%>";
+
         }
     </script>
 </head>
@@ -17,7 +17,6 @@
         <div style="width: 100%; background-color: #cccfd2;">
             <div>
                 <iframe id="Iframe1" style="width: 100%; height: 90.5px;" frameborder="0" src="Default.aspx"></iframe>
-                <%--frameborder="0" --%>
             </div>
             <div style="width: 100%; background-color: #cccfd2; text-align: right; vertical-align: central; height: 30px;">
                 <div style="width: 90%; float: left; text-align: right; height: 30px;">
@@ -29,38 +28,40 @@
             </div>
         </div>
         <div class="container-fluid">
-            <div class="row-fluid" >
-                <div style="width:13%;float:left;">
+            <div class="row-fluid">
+                <div style="width: 13%; float: left;">
                     <div class="row">
                         <asp:Label runat="server" Text="导航" Font-Bold="true" />
                     </div>
-                    <div class="row" style="margin-left:5px;" >
+                    <div class="row" style="margin-left: 5px;">
                         <asp:TreeView ID="tree" runat="server" Height="700px" ImageSet="Arrows" Width="100%"
-                        EnableTheming="True" ForeColor="Blue" ShowCheckBoxes="Parent" >
-                        <Nodes>
-                            <asp:TreeNode Text="系统设置" Value="system" Target="content">
-                                <asp:TreeNode Text="卡信息维护" Value="卡信息维护" NavigateUrl="~/Views/SystemSetting/CardSetting.aspx" Target="content" />
-                                <asp:TreeNode Text="用户信息维护" Value="用户信息维护" NavigateUrl="~/Views/SystemSetting/UserSetting.aspx" Target="content" />
-                            </asp:TreeNode>
-                            <asp:TreeNode Text="收入管理" Value="InCome" Target="content">
-                                <asp:TreeNode Text ="收入管理" Value="收入管理" NavigateUrl ="~/views/InCome/InCome.aspx" Target="content" />                           
-                            </asp:TreeNode>
-                            <asp:TreeNode Text="支出管理" Value="Expenses" Target="content">
-                                <asp:TreeNode Text ="支出管理" Value="支出管理" NavigateUrl="~/Views/Expenses/Expenses.aspx" Target ="content" />
-                            </asp:TreeNode>
-                            <asp:TreeNode Text="借贷管理" Value="BorrowORLoan" Target="content">
-                                <asp:TreeNode Text ="借入管理" Value="借入管理" NavigateUrl ="~/Views/Borrowing/Borrowed.aspx" Target="content" />
-                                <asp:TreeNode Text ="借出管理" Value="借出管理" NavigateUrl ="~/Views/Borrowing/Loan.aspx" Target="content" />
-                            </asp:TreeNode>
-                            <asp:TreeNode Text="资产管理" Value="asset_management" Target="content"></asp:TreeNode>
-                        </Nodes>
-                        <HoverNodeStyle BackColor="#0099FF" />
-                        <SelectedNodeStyle BackColor="SkyBlue" />
-                    </asp:TreeView>
+                            EnableTheming="True" ForeColor="Blue" ShowCheckBoxes="Parent">
+                            <Nodes>
+                                <asp:TreeNode Text="系统设置" Value="system" Target="content">
+                                    <asp:TreeNode Text="卡信息维护" Value="卡信息维护" NavigateUrl="~/Views/SystemSetting/CardSetting.aspx" Target="content" />
+                                    <asp:TreeNode Text="用户信息维护" Value="用户信息维护" NavigateUrl="~/Views/SystemSetting/UserSetting.aspx" Target="content" />
+                                    <asp:TreeNode Text="修改密码" Value="修改密码" NavigateUrl="~/Views/SystemSetting/ModifyPassword.aspx" Target="content" />
+                                </asp:TreeNode>
+                                <asp:TreeNode Text="收入管理" Value="InCome" Target="content" >
+                                    <asp:TreeNode Text="收入管理" Value="收入管理" NavigateUrl="~/views/InCome/InCome.aspx" Target="content" />
+                                </asp:TreeNode>
+                                <asp:TreeNode Text="支出管理" Value="Expenses" Target="content" >
+                                    <asp:TreeNode Text="支出管理" Value="支出管理" NavigateUrl="~/Views/Expenses/Expenses.aspx" Target="content" />
+                                </asp:TreeNode>
+                                <asp:TreeNode Text="借贷管理" Value="BorrowORLoan" Target="content" >
+                                    <asp:TreeNode Text="借入管理" Value="借入管理" NavigateUrl="~/Views/Borrowing/Borrowed.aspx" Target="content" />
+                                    <asp:TreeNode Text="借出管理" Value="借出管理" NavigateUrl="~/Views/Borrowing/Loan.aspx" Target="content" />
+                                </asp:TreeNode>
+                                <asp:TreeNode Text="资产管理" Value="asset_management" Target="content"></asp:TreeNode>
+                            </Nodes>
+                            <HoverNodeStyle BackColor="#0099FF" />
+                            <SelectedNodeStyle BackColor="SkyBlue" />
+                        </asp:TreeView>
                     </div>
                 </div>
-                <div style="width:87%; float:left;height:794px;">
-                    <iframe id="content" style="width: 100%; height: 100%;border-left:1px;border-left-style:inset;border-top-style:none"  ></iframe><%--frameborder="0"--%>
+                <div style="width: 87%; float: left; height: 794px;">
+                    <%--                    <iframe id="content" style="width: 100%; height: 100%;border-left:1px;border-left-style:inset;border-top-style:none"  ></iframe>--%>
+                    <iframe id="content" style="width: 100%; height: 100%; border-left: 1px; border-left-style: inset; border-top-style: none"></iframe>
                 </div>
             </div>
         </div>

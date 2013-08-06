@@ -16,20 +16,19 @@ namespace BillingSystem.Views
     public partial class Expenses : System.Web.UI.Page
     {
         private List<QueryElement> queryList = null;
-        //private bool flag = false;
+        private bool deleteflag = false;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                if (Application["user"] != null)
-                {
+                //if (Application["user"] != null)
+                //{
                     if (!string.IsNullOrEmpty(Request.QueryString["ExpensesId"]))
                     {
                         this.ClientScript.RegisterStartupScript(this.GetType(), "", "DisplayExpensesEditdiv();", true);
                         ExpensesInfo expensesInfo = ExpensesMethods.GetExpensesById(Convert.ToInt32(Request.QueryString["ExpensesId"]));
                         InitializeExpensesAdd(expensesInfo);
                         Session["expensensEditFlag"] = "true";
-                        //flag = true;
                     }
                     else
                     {
@@ -38,12 +37,12 @@ namespace BillingSystem.Views
                     }
                     queryList = new List<QueryElement>();
                     BindExpensesListDataGrid(queryList);
-                }
-                else
-                {
-                    Response.Redirect("~/Views/Login.aspx");
-                    Alert.Show(this, "请先登录！");
-                }
+                //}
+                //else
+                //{
+                //    Response.Redirect("~/Views/Login.aspx");
+                //    Alert.Show(this, "请先登录！");
+                //}
             }
         }
 
@@ -434,7 +433,7 @@ namespace BillingSystem.Views
             if (e.CommandName == "ExpensesImageDelete")
             {
                 id = this.ExpensesListDataGrid.Items[selectindex].Cells[0].Text;
-                if (!string.IsNullOrEmpty(id))
+                if (!string.IsNullOrEmpty(id)&& this.deleteflag==true)
                 {
                     int iSuccess = ExpensesMethods.DeleteExpenses(Convert.ToInt32(id));
                     if (iSuccess > 0)
@@ -452,6 +451,11 @@ namespace BillingSystem.Views
                     BindExpensesListDataGrid(queryList);
                 }
             }
+        }
+
+        protected void btnExpensesDelete_Click(object sender, ImageClickEventArgs e)
+        {
+            this.deleteflag = true;
         }
     }
 }

@@ -39,9 +39,12 @@
     margin-top:5px;
 }
 .title {
-    margin-top:5px;
-    font-size:18px;
-    font-weight:800;
+    /*height: 30px;*/
+    margin-top: 5px;
+    font-size: 18px;
+    font-weight: 800;
+    text-align: left;
+    /*background-color: #c6c2c2;*/
 }
 .highlight {
     background:#dff;

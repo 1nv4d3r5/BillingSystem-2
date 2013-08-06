@@ -115,7 +115,7 @@
                                 <asp:BoundColumn ReadOnly="true" DataField="Content" HeaderText="备注" ItemStyle-Width="15%" />
                                 <asp:TemplateColumn HeaderText="操作" HeaderStyle-HorizontalAlign="Center" FooterStyle-BorderStyle="None" ItemStyle-Width="3%">
                                     <ItemTemplate>
-                                        <asp:ImageButton runat="server" ID="btnLoanDelete" ImageUrl="~/Images/delete/1.jpg" CommandName="LoanImageDelete" />
+                                        <asp:ImageButton runat="server" ID="btnLoanDelete" ImageUrl="~/Images/delete/1.jpg" CommandName="LoanImageDelete" OnClientClick="return confirm('确定删除？')" OnClick="btnLoanDelete_Click" />
                                     </ItemTemplate>
                                     <HeaderStyle HorizontalAlign="Center"></HeaderStyle>
                                 </asp:TemplateColumn>

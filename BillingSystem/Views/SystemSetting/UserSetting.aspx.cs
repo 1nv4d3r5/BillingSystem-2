@@ -20,13 +20,13 @@ namespace BillingSystem.Views
         private UserCollection userColl = new UserCollection();
         private Rectangle rect = System.Windows.Forms.SystemInformation.VirtualScreen;
         private List<QueryElement> queryList = new List<QueryElement>();
-
+        private bool deleteflag = false;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                if (Application["user"] != null)
-                {
+                //if (Application["user"] != null)
+                //{
                     if (!string.IsNullOrEmpty(Request.QueryString["Code"]))
                     {
                         this.ClientScript.RegisterStartupScript(this.GetType(), "", "displayUserEditdiv();", true);
@@ -40,12 +40,12 @@ namespace BillingSystem.Views
                         this.ClientScript.RegisterStartupScript(this.GetType(), "", "displayUserSet();", true);
                     }
                     BindDataGrid(queryList);
-                }
-                else
-                {
-                    Response.Redirect("~/Views/Login.aspx");
-                    Alert.Show(this, "请先登录！");
-                }
+                //}
+                //else
+                //{
+                //    Response.Redirect("~/Views/Login.aspx");
+                //    Alert.Show(this, "请先登录！");
+                //}
             }
         }
 
@@ -221,7 +221,7 @@ namespace BillingSystem.Views
                 int selectindex = e.Item.ItemIndex;
                 id = this.UserListDataGrid.Items[selectindex].Cells[0].Text;
             }
-            if (!string.IsNullOrEmpty(id))
+            if (!string.IsNullOrEmpty(id) && this.deleteflag==true)
             {
                 int iSuccess = UserMethods.DeleteUser(Convert.ToInt32(id));
                 if (iSuccess > 0)
@@ -238,6 +238,11 @@ namespace BillingSystem.Views
                 }
                 BindDataGrid(queryList);
             }
+        }
+
+        protected void btnCardDelete_Click(object sender, ImageClickEventArgs e)
+        {
+            this.deleteflag = true;
         }
     }
 }

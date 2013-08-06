@@ -16,16 +16,16 @@ namespace BillingSystem.Views
         {
             if (!IsPostBack)
             {
-                if (Session["UserCode"] == null || Session["UserCode"].ToString() == "")
-                {
-                    Response.Redirect("Login.aspx");
-                }
-                else
-                {
-                    UserInfo info= UserMethods.GetUserByCode(Session["UserCode"].ToString());
-                    Application["user"] = info.Code;
-                    this.labWel.Text = "欢迎您，"+info.Name;
-                }
+                //if (Session["UserCode"] == null || Session["UserCode"].ToString() == "")
+                //{
+                //    Response.Redirect("Login.aspx");
+                //}
+                //else
+                //{
+                //    UserInfo info= UserMethods.GetUserByCode(Session["UserCode"].ToString());
+                //    Application["user"] = info.Code;
+                //    this.labWel.Text = "欢迎您，"+info.Name;
+                //}
             }
 
             labWel.Text = "Welcome to login, " + Session["UserCode"];

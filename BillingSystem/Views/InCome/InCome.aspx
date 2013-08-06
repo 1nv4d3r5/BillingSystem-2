@@ -215,14 +215,10 @@
                                 <asp:BoundColumn ReadOnly="true" DataField="AutoSave" HeaderText="自动转存" ItemStyle-Width="5%" ItemStyle-HorizontalAlign="Left" />
                                 <asp:BoundColumn ReadOnly="true" DataField="DepositMode" HeaderText="存款方式" ItemStyle-Width="5%" ItemStyle-HorizontalAlign="Left" />
                                 <asp:BoundColumn ReadOnly="true" DataField="DepositorName" HeaderText="存款人" ItemStyle-Width="4%" ItemStyle-HorizontalAlign="Left" />
-                                <%-- <asp:ButtonColumn CommandName="Delete" HeaderText="操作" Text="删除" ItemStyle-HorizontalAlign="Center" />--%>
                                 <asp:TemplateColumn HeaderText="操作" HeaderStyle-HorizontalAlign="Center" FooterStyle-BorderStyle="None" ItemStyle-Width="3%">
                                     <ItemTemplate>
-                                        <asp:ImageButton runat="server" ID="btnIncomeDelete" ImageUrl="~/Images/delete/1.jpg" CommandName="IncomeImageDelete" />
+                                        <asp:ImageButton runat="server" ID="btnIncomeDelete" ImageUrl="~/Images/delete/1.jpg" CommandName="IncomeImageDelete" OnClientClick="return confirm('确定删除？')" OnClick="btnIncomeDelete_Click" />
                                     </ItemTemplate>
-                                    <%--<EditItemTemplate>
-                                <asp:ImageButton ID="btnCardDelete" runat="server" />
-                            </EditItemTemplate>--%>
                                     <HeaderStyle HorizontalAlign="Center"></HeaderStyle>
                                 </asp:TemplateColumn>
                             </Columns>

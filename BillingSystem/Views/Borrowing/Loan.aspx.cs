@@ -13,6 +13,7 @@ namespace BillingSystem.Views
     public partial class Loan : System.Web.UI.Page
     {
         private List<QueryElement> queryList = null;
+        private bool deleteflag = false;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -64,7 +65,7 @@ namespace BillingSystem.Views
 
             if (this.HidderField2.Value == "1")
             {
-                if (!string.IsNullOrEmpty(id))
+                if (!string.IsNullOrEmpty(id)&&this.deleteflag==true)
                 {
                     int iSuccess = LoanMethods.DeleteLoanById(Convert.ToInt32(id));
                     if (iSuccess > 0)
@@ -95,12 +96,12 @@ namespace BillingSystem.Views
                 return;
             }
 
-            if (this.RadioLoanAddLoanType.SelectedValue == "2" && string.IsNullOrEmpty(this.txtLoanAddLoanAccount.Text.Trim()))
+            if (this.RadioLoanAddLoanType.SelectedValue == "2")
             {
-                if (string.IsNullOrEmpty(this.txtLoanAddLoanAccount.Text.Trim()))
+                if (string.IsNullOrEmpty(this.dropLoanAddLoanAccount.SelectedValue))
                 {
                     Alert.Show(this, "请输入出借账户！");
-                    this.txtLoanAddLoanAccount.Focus();
+                    this.dropLoanAddLoanAccount.Focus();
                     return;
                 }
 
@@ -153,7 +154,10 @@ namespace BillingSystem.Views
 
             //loanInfo.BorrowType = Convert.ToInt32(this.RadioLoanAddBorrowType.SelectedValue);
             loanInfo.Borrower = this.txtLoanAddBorrower.Text.Trim();
-            loanInfo.LoanAccount = this.txtLoanAddLoanAccount.Text.Trim();
+            if (this.RadioLoanAddLoanType.SelectedValue == "2")
+            {
+                loanInfo.LoanAccount = this.dropLoanAddLoanAccount.SelectedValue;
+            }
             loanInfo.Lender = this.txtLoanAddLender.Text.Trim();
             loanInfo.BorrowedAccount = this.txtLoanAddBorrowAccount.Text.Trim();
             loanInfo.BorrowORLoanType = Convert.ToInt32(this.RadioLoanAddLoanType.SelectedValue);
@@ -249,6 +253,11 @@ namespace BillingSystem.Views
                     this.dropLoanAddLoanAccount.DataSource = list;
                 }
             }
+        }
+
+        protected void btnLoanDelete_Click(object sender, ImageClickEventArgs e)
+        {
+            this.deleteflag = true;
         }
     }
 }

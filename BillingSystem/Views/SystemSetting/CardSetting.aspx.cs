@@ -26,8 +26,8 @@ namespace BillingSystem.Views
         {
             if (!IsPostBack)
             {
-                if (Application["user"] != null)
-                {
+                //if (Application["user"] != null)
+                //{
                     if (!string.IsNullOrEmpty(Request.QueryString["Id"]))
                     {
                         this.ClientScript.RegisterStartupScript(this.GetType(), "", "DisplayCardEditdiv();", true);
@@ -39,12 +39,12 @@ namespace BillingSystem.Views
                         this.ClientScript.RegisterStartupScript(this.GetType(), "", "DisplaySysdiv();", true);
                     }
                     BindDataGrid(queryList);
-                }
-                else
-                {
-                    Response.Redirect("~/Views/Login.aspx");
-                    Alert.Show(this, "请先登录！");
-                }
+                //}
+                //else
+                //{
+                //    Response.Redirect("~/Views/Login.aspx");
+                //    Alert.Show(this, "请先登录！");
+                //}
             }
         }
 

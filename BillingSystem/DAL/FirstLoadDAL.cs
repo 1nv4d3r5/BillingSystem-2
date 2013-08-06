@@ -28,18 +28,9 @@ namespace BillingSystem.DAL
                     sql.Append(line);
                 }
                 reader.Close();
-
-<<<<<<< HEAD
-            string sqlFile = AppDomain.CurrentDomain.BaseDirectory + @"/Scripts/ds1.sql";
-            StreamReader reader = new StreamReader(sqlFile);
-            StringBuilder sql = new StringBuilder();
-            while (!reader.EndOfStream)
-=======
-                MySqlDBHelper.ExecuteCommand(sql.ToString());
                 return 1;
             }
             catch
->>>>>>> 9da9e9f07402aa1af2025af0d7aa2febaf8bb898
             {
                 return -1;
             }

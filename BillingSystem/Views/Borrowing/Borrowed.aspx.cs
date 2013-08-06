@@ -15,21 +15,22 @@ namespace BillingSystem.Views
     public partial class Borrowed : System.Web.UI.Page
     {
         private List<QueryElement> queryList = null;
+        private bool deleteflag = false;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                if (Application["user"] != null)
-                {
+                //if (Application["user"] != null)
+                //{
                     this.ClientScript.RegisterStartupScript(this.GetType(), "", "DisplaySysdiv();", true);
                     queryList = new List<QueryElement>();
                     BindBorrowListDataGrid(queryList);
-                }
-                else
-                {
-                    Response.Redirect("~/Views/Login.aspx");
-                    Alert.Show(this, "请先登录！");
-                }
+                //}
+                //else
+                //{
+                //    Response.Redirect("~/Views/Login.aspx");
+                //    Alert.Show(this, "请先登录！");
+                //}
             }
         }
 
@@ -215,7 +216,7 @@ namespace BillingSystem.Views
                 int selectindex = e.Item.ItemIndex;
                 id = this.BorrowListDataGrid.Items[selectindex].Cells[0].Text;
             }
-            if (!string.IsNullOrEmpty(id))
+            if (!string.IsNullOrEmpty(id) && this.deleteflag==true)
             {
                 int iSuccess = BorrowedMethods.DeleteBorrowedById(Convert.ToInt32(id));
                 if (iSuccess > 0)
@@ -251,6 +252,11 @@ namespace BillingSystem.Views
             this.txtBorrowAddBorrowDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
             this.txtBorrowAddReturnDate.Text = string.Empty;
             this.txtBorrowAddContent.Text = string.Empty;
+        }
+
+        protected void btnBorrowDelete_Click(object sender, ImageClickEventArgs e)
+        {
+            this.deleteflag = true;
         }
     }
 }

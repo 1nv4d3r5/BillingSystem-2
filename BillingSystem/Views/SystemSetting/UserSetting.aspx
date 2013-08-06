@@ -69,9 +69,13 @@
                 <br />
                 <div id="divUserSet">
                     <div class="controls controls-row">
-                        <div class="span4">
-                            <asp:Button runat="server" Text="新增" ID="btnUserAdd" CssClass="btn btn-primary" OnClick="btnUserAdd_Click" />
-                            <asp:Button runat="server" Text="高级查询" ID="btnUserQuery" CssClass="btn btn-primary" OnClick="btnUserSelect_Click" />
+                        <div class="span1">
+                            <asp:ImageButton runat="server" ID="btnUserAdd" OnClick="btnUserAdd_Click" ToolTip="新增" ImageUrl="~/Views/Image/add3.ico" Width="40px"/>
+                            </div>
+                        <div>
+                            <%--                            <asp:Button runat="server" Text="新增" ID="btnUserAdd" CssClass="btn btn-primary" OnClick="btnUserAdd_Click" />--%>
+<%--                            <asp:Button runat="server" Text="高级查询" ID="btnUserQuery" CssClass="btn btn-primary" OnClick="btnUserSelect_Click" />--%>
+                            <asp:ImageButton runat ="server" ID="btnUserQuery" OnClick="btnUserSelect_Click" ToolTip="高级查询" ImageUrl="~/Views/Image/query3.ico" Width="40px"/>
                         </div>
                     </div>
                 </div>
@@ -94,7 +98,8 @@
                         <asp:TextBox runat="server" ID="txtContent" TextMode="MultiLine" CssClass="span5" />
                         <label class="span1">&nbsp;</label>
                         <div class="span2">
-                            <asp:Button runat="server" ID="btnUserEditSave" Text="提交" OnClick="btnUserEditSave_Click" CssClass="btn btn-primary" />
+                            <asp:ImageButton runat="server" ID="btnUserEditSave" ToolTip="提交" OnClick="btnUserEditSave_Click" ImageUrl="~/Views/Image/submit1.ico" />
+<%--                            <asp:Button runat="server" ID="btnUserEditSave" Text="提交" OnClick="btnUserEditSave_Click" CssClass="btn btn-primary" />--%>
                             <asp:Button runat="server" Text="后退" ID="btnUserEditCanel" OnClick="btnUserEditCanel_Click" CssClass="btn btn-primary" />
                         </div>
                     </div>
@@ -129,7 +134,7 @@
                                 <asp:BoundColumn ReadOnly="true" DataField="Content" HeaderText="Content" ItemStyle-Width="10%" />
                                 <asp:TemplateColumn HeaderText="操作" HeaderStyle-HorizontalAlign="Center" FooterStyle-BorderStyle="None" ItemStyle-Width="1%">
                                     <ItemTemplate>
-                                        <asp:ImageButton runat="server" ID="btnCardDelete" ImageUrl="~/Images/delete/1.jpg" CommandName="ImageDelete" />
+                                        <asp:ImageButton runat="server" ID="btnCardDelete" ImageUrl="~/Images/delete/1.jpg" CommandName="ImageDelete" OnClientClick="return confirm('确定删除？')" OnClick="btnCardDelete_Click" />
                                     </ItemTemplate>
                                     <HeaderStyle HorizontalAlign="Center"></HeaderStyle>
                                 </asp:TemplateColumn>
