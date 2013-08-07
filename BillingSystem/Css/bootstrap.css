@@ -99,12 +99,12 @@ sub {
 }
 
 img {
-  width: auto\9;
-  height: auto;
-  max-width: 100%;
-  vertical-align: middle;
-  border: 0;
-  -ms-interpolation-mode: bicubic;
+  border-style: none;
+    border-color: inherit;
+    border-width: 0;
+    max-width: 100%;
+    vertical-align: middle;
+    -ms-interpolation-mode: bicubic;
 }
 
 #map_canvas img,
@@ -896,9 +896,15 @@ dd {
 
 hr {
   margin: 20px 0;
-  border: 0;
   border-top: 1px solid #eeeeee;
   border-bottom: 1px solid #ffffff;
+    width: 100%;
+    border-left-style: none;
+    border-left-color: inherit;
+    border-left-width: 0;
+    border-right-style: none;
+    border-right-color: inherit;
+    border-right-width: 0;
 }
 
 abbr[title],

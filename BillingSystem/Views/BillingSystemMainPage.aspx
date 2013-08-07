@@ -12,28 +12,20 @@
         }
     </script>
 </head>
-<body>
-    <form id="form1" style="width: 100%; height: 100%;" runat="server">
+<body style="width:100%">
+    <form id="form1" style="width: 100%;" runat="server">
         <div style="width: 100%; background-color: #cccfd2;">
-            <div>
-                <iframe id="Iframe1" style="width: 100%; height: 90.5px;" frameborder="0" src="Default.aspx"></iframe>
-            </div>
-            <div style="width: 100%; background-color: #cccfd2; text-align: right; vertical-align: central; height: 30px;">
-                <div style="width: 90%; float: left; text-align: right; height: 30px;">
-                    <asp:Label runat="server" ID="labWel" align="right" BackColor="#cccfd2" BorderStyle="None" Text="<%=GetUser()%>"></asp:Label>
-                </div>
-                <div style="width: 10%; height: 30px; float: left;">
-                    <asp:Button ID="btn_exit" runat="server" Text="Exit" Width="82px" BackColor="#cccfd2" BorderStyle="None" OnClick="btn_exit_Click" /><%--BorderColor="#000CCC"--%>
-                </div>
+            <div style="width:100%" >
+                <iframe id="Iframe1" style="width:100%; height: 90.5px;" frameborder="0" src="Default.aspx"></iframe>
             </div>
         </div>
-        <div class="container-fluid">
-            <div class="row-fluid">
-                <div style="width: 13%; float: left;">
-                    <div class="row">
-                        <asp:Label runat="server" Text="导航" Font-Bold="true" />
+        <div  style="width:100%">
+            <div style="width:100%">
+                <div style="width: 13%;float:left">
+                    <div style="background-color:#cccfd2;height:20px;">
+                        <asp:Label runat="server" Text="导航" Font-Bold="true" CssClass="span1" />
                     </div>
-                    <div class="row" style="margin-left: 5px;">
+                    <div style="margin-left: 5px; height: 771px;">
                         <asp:TreeView ID="tree" runat="server" Height="700px" ImageSet="Arrows" Width="100%"
                             EnableTheming="True" ForeColor="Blue" ShowCheckBoxes="Parent">
                             <Nodes>
@@ -61,7 +53,7 @@
                 </div>
                 <div style="width: 87%; float: left; height: 794px;">
                     <%--                    <iframe id="content" style="width: 100%; height: 100%;border-left:1px;border-left-style:inset;border-top-style:none"  ></iframe>--%>
-                    <iframe id="content" style="width: 100%; height: 100%; border-left: 1px; border-left-style: inset; border-top-style: none"></iframe>
+                    <iframe id="content" style="width: 100%; height: 100%; border-left-style: inset; border-top-style: none; border-left-color: inherit; border-left-width: 1px;"></iframe>
                 </div>
             </div>
         </div>
