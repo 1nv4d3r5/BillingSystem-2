@@ -27,28 +27,28 @@
             divUserSet.style.display = 'none';
             UserEdit.style.display = "";
             UserQuery.style.display = 'none';
-            this.divUserTitle = "用户信息维护--新增";
+            this.divUserTitle.innerText = "用户信息维护--新增";
         }
 
         function displayUserEditdiv() {
             divUserSet.style.display = 'none';
             UserEdit.style.display = '';
             UserQuery.style.display = 'none';
-            this.divUserTitle = "用户信息维护--编辑";
+            this.divUserTitle.innerText = "用户信息维护--编辑";
         }
 
         function displayUserQuery() {
             divUserSet.style.display = 'none';
             UserEdit.style.display = 'none';
             UserQuery.style.display = '';
-            this.divUserTitle = "用户信息维护--查询";
+            this.divUserTitle.innerText = "用户信息维护--查询";
         }
 
         function displayUserSet() {
             divUserSet.style.display = '';
             UserEdit.style.display = 'none';
             UserQuery.style.display = 'none';
-            this.divUserTitle = "用户信息维护";
+            this.divUserTitle.innerText = "用户信息维护";
         }
         $(function () {
             $("#UserListDataGrid tr").first().nextAll().bind('click', function () {
@@ -59,23 +59,22 @@
     </script>
 </head>
 <body>
-    <form id="form1" runat="server" style="width: 97%">
+    <form id="form1" runat="server" style="width: 100%; background-color: transparent">
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-        <div class="margin-left">
-            <div>
+        <div >
+            <div >
                 <div id="divUserTitle" class="title">
                     用户信息维护
                 </div>
-                <br />
-                <div id="divUserSet">
+                <div id="divUserSet" style="height: 30px;margin-top:5px;">
                     <div class="controls controls-row">
                         <div class="span1">
-                            <asp:ImageButton runat="server" ID="btnUserAdd" OnClick="btnUserAdd_Click" ToolTip="新增" ImageUrl="~/Views/Image/add3.ico" Width="40px"/>
-                            </div>
-                        <div>
-                            <%--                            <asp:Button runat="server" Text="新增" ID="btnUserAdd" CssClass="btn btn-primary" OnClick="btnUserAdd_Click" />--%>
-<%--                            <asp:Button runat="server" Text="高级查询" ID="btnUserQuery" CssClass="btn btn-primary" OnClick="btnUserSelect_Click" />--%>
-                            <asp:ImageButton runat ="server" ID="btnUserQuery" OnClick="btnUserSelect_Click" ToolTip="高级查询" ImageUrl="~/Views/Image/query3.ico" Width="40px"/>
+                            <asp:ImageButton runat="server" ID="btnUserAdd" ToolTip="新增" OnClick="btnUserAdd_Click" ImageUrl="~/Views/Image/add5.png" />
+                            <asp:Button runat="server" Text="新增" BorderStyle="None" OnClick="btnUserAdd_Click" />
+                        </div>
+                        <div class="span1">
+                            <asp:ImageButton runat="server" ID="btnUserQuery" ToolTip="高级查询" OnClick="btnUserSelect_Click" ImageUrl="~/Views/Image/query6.ico" />
+                            <asp:Button runat="server" Text="高级查询" BorderStyle="None" OnClick="btnUserSelect_Click" />
                         </div>
                     </div>
                 </div>
@@ -88,9 +87,8 @@
                         <asp:Label ID="Label3" runat="server" Text="密码:" CssClass="span1" />
                         <asp:TextBox runat="server" ID="txtPassword" TextMode="Password" CssClass="span2" />
                         <asp:Label ID="Label5" runat="server" Text="角色:" CssClass="span1" />
-                        <asp:DropDownList runat="server" ID="dropRole" CssClass="input-span2" />
+                        <asp:DropDownList runat="server" ID="dropRole" CssClass="span2" />
                     </div>
-
                     <div class="controls controls-row">
                         <asp:Label ID="Label4" runat="server" Text="邮箱:" CssClass="span1" />
                         <asp:TextBox runat="server" ID="txtEmail" CssClass="span2" />
@@ -98,13 +96,12 @@
                         <asp:TextBox runat="server" ID="txtContent" TextMode="MultiLine" CssClass="span5" />
                         <label class="span1">&nbsp;</label>
                         <div class="span2">
-                            <asp:ImageButton runat="server" ID="btnUserEditSave" ToolTip="提交" OnClick="btnUserEditSave_Click" ImageUrl="~/Views/Image/submit1.ico" />
-<%--                            <asp:Button runat="server" ID="btnUserEditSave" Text="提交" OnClick="btnUserEditSave_Click" CssClass="btn btn-primary" />--%>
+                            <asp:Button runat="server" ID="btnUserEditSave" Text="提交" OnClick="btnUserEditSave_Click" CssClass="btn btn-primary" />
                             <asp:Button runat="server" Text="后退" ID="btnUserEditCanel" OnClick="btnUserEditCanel_Click" CssClass="btn btn-primary" />
                         </div>
                     </div>
                 </div>
-                <div id="UserQuery">
+                <div id="UserQuery" class="margin-top">
                     <div class="controls controls-row">
                         <asp:Label ID="Label7" runat="server" Text="用户名称:" CssClass="span1" />
                         <asp:TextBox runat="server" ID="txtUserQueryUserName" CssClass="span2" />
@@ -118,11 +115,11 @@
                     </div>
                 </div>
             </div>
-            <hr />
+            <hr style="border-color: #cccfd2;" />
             <div class="margin-left">
                 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                     <ContentTemplate>
-                        <asp:DataGrid runat="server" AutoGenerateColumns="False" ID="UserListDataGrid" Width="100%" BorderColor="Black" BorderStyle="None" BorderWidth="5px" CellPadding="2" CellSpacing="2" GridLines="Both" Font-Size="Small"
+                        <asp:DataGrid runat="server" AutoGenerateColumns="False" ID="UserListDataGrid" Width="98%" BorderColor="Black" BorderStyle="None" BorderWidth="5px" CellPadding="2" CellSpacing="2" GridLines="Both" Font-Size="Small"
                             HeaderStyle-HorizontalAlign="Center" HeaderStyle-VerticalAlign="Middle" ItemStyle-VerticalAlign="Middle" ItemStyle-Font-Size="Small" OnItemCommand="UserListDataGrid_ItemCommand">
                             <AlternatingItemStyle BorderStyle="None" />
                             <Columns>
