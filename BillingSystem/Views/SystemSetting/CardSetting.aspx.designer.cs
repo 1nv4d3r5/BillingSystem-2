@@ -37,7 +37,7 @@ namespace BillingSystem.Views {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCardAdd;
+        protected global::System.Web.UI.WebControls.ImageButton btnCardAdd;
         
         /// <summary>
         /// btnCardQuery control.
@@ -46,7 +46,7 @@ namespace BillingSystem.Views {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCardQuery;
+        protected global::System.Web.UI.WebControls.ImageButton btnCardQuery;
         
         /// <summary>
         /// Label16 control.

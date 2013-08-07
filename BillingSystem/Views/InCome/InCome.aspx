@@ -71,19 +71,22 @@
     </script>
 </head>
 <body>
-    <form id="income" runat="server" style="width: 100%; height:100%">
+    <form id="income" runat="server" style="width: 100%; height: 100%">
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-        <div class="margin-left">
+        <div>
             <div>
                 <div id="divIncomeTitle" class="title">
                     收入管理
                 </div>
-                <br />
-                <div id="divSet">
+                <div id="divSet" style="height: 30px; margin-top: 5px;">
                     <div class="controls controls-row">
-                        <div class="span4">
-                            <asp:Button runat="server" Text="新增" ID="btnIncomeAdd" CssClass="btn btn-primary" OnClick="btnIncomeAdd_Click" />
-                            <asp:Button runat="server" Text="高级查询" ID="btnIncomeQuery" CssClass="btn btn-primary" OnClick="btnIncomeQuery_Click" />
+                        <div class="span1">
+                            <asp:ImageButton runat="server" ToolTip="新增" ID="btnIncomeAdd" OnClick="btnIncomeAdd_Click" ImageUrl="~/Views/Image/add5.png" />
+                            <asp:Button runat="server" Text="新增" BorderStyle="None" OnClick="btnIncomeAdd_Click" />
+                        </div>
+                        <div class="span1">
+                            <asp:ImageButton runat="server" ToolTip="高级查询" ID="btnIncomeQuery" OnClick="btnIncomeQuery_Click" ImageUrl="~/Views/Image/query6.ico" />
+                            <asp:Button runat="server" Text="高级查询" BorderStyle="None" OnClick="btnIncomeQuery_Click" />
                         </div>
                     </div>
                 </div>
@@ -151,7 +154,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="IncomeQuery">
+                <div id="IncomeQuery" class="margin-top">
                     <div class="controls controls-row">
                         <asp:Label ID="Label9" runat="server" Text="卡号:" CssClass="span1" />
                         <asp:TextBox runat="server" ID="txtIncomeQueryCardNumber" CssClass="span3" />
@@ -190,11 +193,11 @@
                     </div>
                 </div>
             </div>
-            <hr />
+            <hr style="border-color: #cccfd2;" />
             <div class="margin-left">
                 <asp:UpdatePanel ID="UpdatePanel4" runat="server">
                     <ContentTemplate>
-                        <asp:DataGrid runat="server" AutoGenerateColumns="false" ID="IncomeListDataGrid" Width="100%" BorderColor="Black" BorderStyle="None" BorderWidth="5px" CellPadding="2" CellSpacing="2" GridLines="Both" HeaderStyle-HorizontalAlign="Center"
+                        <asp:DataGrid runat="server" AutoGenerateColumns="false" ID="IncomeListDataGrid" Width="99%" BorderColor="Black" BorderStyle="None" BorderWidth="5px" CellPadding="2" CellSpacing="2" GridLines="Both" HeaderStyle-HorizontalAlign="Center"
                             HeaderStyle-VerticalAlign="Middle" ItemStyle-VerticalAlign="Middle" ItemStyle-Font-Size="Small" Font-Size="Small" OnDeleteCommand="IncomeListDataGrid_DeleteCommand"
                             OnItemCommand="IncomeListDataGrid_ItemCommand">
                             <SelectedItemStyle ForeColor="White" BackColor="Red" />

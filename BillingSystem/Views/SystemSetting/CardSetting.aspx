@@ -75,19 +75,22 @@
     </script>
 </head>
 <body>
-    <form id="form1" runat="server" style="width: 97%; height: auto;">
+    <form id="form1" runat="server" style="width: 100%; height: auto;">
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-        <div class="margin-left">
+        <div>
             <div>
                 <div id="divCardTitle" class="title">
                     卡信息管理
                 </div>
-                <br />
-                <div id="divSet">
+                <div id="divSet" style="margin-top:5px;height:30px;">
                     <div class="controls controls-row">
-                        <div class="span4">
-                            <asp:Button runat="server" Text="新增" ID="btnCardAdd" CssClass="btn btn-primary" OnClick="btnCardAdd_Click" />
-                            <asp:Button runat="server" Text="高级查询" ID="btnCardQuery" CssClass="btn btn-primary" OnClick="btnCardQuery_Click" />
+                        <div class="span1">
+                            <asp:ImageButton runat="server" ToolTip="新增" ID="btnCardAdd" OnClick="btnCardAdd_Click" ImageUrl="~/Views/Image/add5.png" />
+                            <asp:Button runat="server" Text="新增" BorderStyle="None" OnClick="btnCardAdd_Click" />
+                            </div>
+                        <div class="span1">
+                            <asp:ImageButton runat="server" ToolTip="高级查询" ID="btnCardQuery" OnClick="btnCardQuery_Click" ImageUrl="~/Views/Image/query6.ico" />
+                            <asp:Button runat="server" Text="高级查询" BorderStyle="None" OnClick="btnCardQuery_Click" />
                         </div>
                     </div>
                 </div>
@@ -113,7 +116,7 @@
                     </div>
                     <div class="controls controls-row">
                         <asp:Label ID="Label8" runat="server" Text="备注:" CssClass="span1" />
-                        <asp:TextBox runat="server" ID="txtCardAddContent" TextMode="MultiLine" CssClass="span8" /><%--"input-xxlarge" --%>
+                        <asp:TextBox runat="server" ID="txtCardAddContent" TextMode="MultiLine" CssClass="span8" />
                         <label class="span1">&nbsp;</label>
                         <div class="span2">
                             <asp:Button runat="server" Text="提交" ID="btnCardEditSave" OnClick="btnCardEditSave_Click" CssClass="btn btn-primary" />
@@ -147,11 +150,11 @@
                     </div>
                 </div>
             </div>
-            <hr />
+            <hr style="border-color:#cccfd2" />
             <div class="margin-left">
                 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                     <ContentTemplate>
-                        <asp:DataGrid runat="server" AutoGenerateColumns="false" ID="CardListDataGrid" Width="100%" BorderColor="Black" BorderStyle="None" BorderWidth="5px" CellPadding="2" CellSpacing="2" GridLines="Both" Font-Size="Small"
+                        <asp:DataGrid runat="server" AutoGenerateColumns="false" ID="CardListDataGrid" Width="98%" BorderColor="Black" BorderStyle="None" BorderWidth="5px" CellPadding="2" CellSpacing="2" GridLines="Both" Font-Size="Small"
                             HeaderStyle-HorizontalAlign="Center" HeaderStyle-VerticalAlign="Middle" ItemStyle-VerticalAlign="Middle" ItemStyle-Font-Size="Small" OnDeleteCommand="CardListDataGrid_DeleteCommand">
                             <AlternatingItemStyle BorderStyle="None" />
                             <Columns>
@@ -166,15 +169,6 @@
                                 <asp:BoundColumn ReadOnly="true" DataField="OwnerName" HeaderText="OwnerName" ItemStyle-Width="5%" />
                                 <asp:BoundColumn ReadOnly="true" DataField="UserName" HeaderText="UserName" ItemStyle-Width="5%" />
                                 <asp:ButtonColumn HeaderText="操作" Text="Delete" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="3%" CommandName="Delete" />
-                                <%--<asp:TemplateColumn HeaderText="操作" HeaderStyle-HorizontalAlign="Center" FooterStyle-BorderStyle="None" ItemStyle-Width="8%">
-                            <ItemTemplate>
-                                <asp:ImageButton runat ="server" ImageUrl="~/Images/delete/1.jpg" />
-                            </ItemTemplate>
-                            <EditItemTemplate>
-                                <asp:ImageButton ID="btnCardDelete" runat="server" />
-                            </EditItemTemplate>
-                            <HeaderStyle HorizontalAlign="Center"></HeaderStyle>
-                        </asp:TemplateColumn>--%>
                             </Columns>
                         </asp:DataGrid>
                     </ContentTemplate>

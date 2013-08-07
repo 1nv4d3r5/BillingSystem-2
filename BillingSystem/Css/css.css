@@ -32,7 +32,7 @@
     width:455px;
 }
 .margin-top {
-  margin-top:5px;
+  margin-top:8px;
 }
 .margin {
     margin-left:5px;
@@ -40,11 +40,11 @@
 }
 .title {
     /*height: 30px;*/
-    margin-top: 5px;
+    /*margin-top: 5px;*/
     font-size: 18px;
     font-weight: 800;
     text-align: left;
-    /*background-color: #c6c2c2;*/
+    background-color: #cccfd2;
 }
 .highlight {
     background:#dff;
