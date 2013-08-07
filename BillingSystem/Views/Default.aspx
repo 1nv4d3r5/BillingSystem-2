@@ -14,7 +14,7 @@
     </style>
 </head>
 <body>
-    <form id="form1" runat="server">
+    <form id="form1" runat="server" style="width:100%">
         <div>
             <asp:Image ID="Image1" runat="server" ImageUrl="Image/default_logo.gif" />
         </div>

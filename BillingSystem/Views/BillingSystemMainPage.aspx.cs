@@ -28,7 +28,7 @@ namespace BillingSystem.Views
                 //}
             }
 
-            labWel.Text = "Welcome to login, " + Session["UserCode"];
+            //labWel.Text = "Welcome to login, " + Session["UserCode"];
         }
 
         protected void btn_exit_Click(object sender, EventArgs e)

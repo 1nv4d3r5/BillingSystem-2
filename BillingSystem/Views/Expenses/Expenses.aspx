@@ -61,23 +61,26 @@
 
 </head>
 <body>
-    <form id="Expenses" runat="server" style="width: 99%; height: 100%;">
+    <form id="Expenses" runat="server" style="width: 100%;">
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-        <div class="margin-left">
+        <div>
             <div>
                 <div id="divExpensesTitle" class="title">
                     支出管理
                 </div>
-                <br />
-                <div id="divSet">
+                <div id="divSet" style="height: 30px; margin-top: 5px;">
                     <div class="controls controls-row">
-                        <div class="span4">
-                            <asp:Button runat="server" Text="新增" ID="btnExpensesAdd" CssClass="btn btn-primary" OnClick="btnExpensesAdd_Click" />
-                            <asp:Button runat="server" Text="高级查询" ID="btnExpensesQuery" CssClass="btn btn-primary" OnClick="btnExpensesQuery_Click" />
+                        <div class="span1">
+                            <asp:ImageButton runat="server" ToolTip="新增" ID="btnExpensesAdd" OnClick="btnExpensesAdd_Click" ImageUrl="~/Views/Image/add5.png" />
+                            <asp:Button runat="server" Text="新增" BorderStyle="None" OnClick="btnExpensesAdd_Click" />
+                        </div>
+                        <div class="span1">
+                            <asp:ImageButton runat="server" ToolTip="高级查询" ID="btnExpensesQuery" OnClick="btnExpensesQuery_Click" ImageUrl="~/Views/Image/query6.ico" />
+                            <asp:Button runat="server" Text="高级查询" BorderStyle="None" OnClick="btnExpensesQuery_Click" />
                         </div>
                     </div>
                 </div>
-                <div id="ExpensesEdit">
+                <div id="ExpensesEdit" class="margin-top">
                     <div class="controls controls-row">
                         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                             <ContentTemplate>
@@ -120,7 +123,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="ExpensesQuery" style="margin-top: 15px;">
+                <div id="ExpensesQuery" class="margin-top">
                     <div class="controls controls-row">
                         <asp:Label runat="server" Text="卡号:" CssClass="span1" />
                         <asp:TextBox runat="server" ID="txtExpensesQueryCardNumber" CssClass="span3" />
@@ -144,13 +147,11 @@
                     </div>
                 </div>
             </div>
-            <div style="width: 100%; height: auto; margin-top: 15px;">
-                <hr />
-            </div>
+            <hr style="border-color: #cccfd2;" />
             <div class="margin-left">
                 <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                     <ContentTemplate>
-                        <asp:DataGrid runat="server" AutoGenerateColumns="false" ID="ExpensesListDataGrid" Width="100%" BorderColor="Black" BorderStyle="None" BorderWidth="5px" CellPadding="2" CellSpacing="2" GridLines="Both" Font-Size="Small"
+                        <asp:DataGrid runat="server" AutoGenerateColumns="false" ID="ExpensesListDataGrid" Width="99%" BorderColor="Black" BorderStyle="None" BorderWidth="5px" CellPadding="2" CellSpacing="2" GridLines="Both" Font-Size="Small"
                             HeaderStyle-HorizontalAlign="Center" HeaderStyle-VerticalAlign="Middle" ItemStyle-VerticalAlign="Middle" ItemStyle-Font-Size="Small" SelectedItemStyle-BorderColor="Red" OnItemCommand="ExpensesListDataGrid_ItemCommand">
                             <Columns>
                                 <asp:BoundColumn ReadOnly="true" DataField="Id" HeaderText="Id" ItemStyle-Width="5%" Visible="false" />

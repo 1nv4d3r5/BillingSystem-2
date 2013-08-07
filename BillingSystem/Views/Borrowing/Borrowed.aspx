@@ -12,19 +12,22 @@
     <script type="text/javascript" src="../../Scripts/borrow-jquery.js"></script>
     <script type="text/javascript" src="../../Scripts/jquery-ui-1.10.3.custom.min.js"></script>
 </head>
+
 <body>
-    <form id="form1" runat="server">
+    <form id="form1" runat="server" style="width: 100%;">
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-        <div class="margin-left">
+        <div>
             <div>
                 <div id="divBorrowTitle" class="title">
                     借入管理
                 </div>
-                <br />
-                <div id="divSet">
+                <div id="divSet" style="height: 30px; margin-top: 5px;">
                     <div class="controls controls-row">
-                        <div class="span3">
-                            <input type="button" value="新增" id="btnBorrowAdd" class="btn btn-primary" onclick="DisplayAddBorrowdiv()" />
+                        <div class="span1">
+                            <input type="image" title="新增" onclick="DisplayAddBorrowdiv()" src="../Image/add5.png" />
+                            <input type="button" style="border:none" value="新增" id="btnBorrowAdd" onclick="DisplayAddBorrowdiv()" />
+                        </div>
+                        <div class="span1">
                             <input type="button" value="高级查询" id="btnBorrowQuery" class="btn btn-primary" onclick="DisplayQueryBorrowdiv()" />
                         </div>
                     </div>
@@ -49,7 +52,7 @@
                             <asp:Label ID="Label2" runat="server" Text="借入账户:" CssClass="span1" />
                             <asp:TextBox runat="server" ID="txtBorrowAddBorrowAccount" CssClass="span2" />
                         </div>
-                        
+
                         <asp:Label runat="server" Text="出借人:" CssClass="span1" />
                         <asp:TextBox runat="server" ID="txtBorrowAddLender" CssClass="span2" />
                         <div runat="server" id="divLoan">
@@ -68,14 +71,14 @@
                     <div class="controls controls-row">
                         <asp:Label runat="server" Text="备注:" CssClass="span1" />
                         <asp:TextBox runat="server" ID="txtBorrowAddContent" CssClass="span8" TextMode="MultiLine" />
-                        <div class="span3" style="text-align:right">
+                        <div class="span3" style="text-align: right">
                             <asp:Button runat="server" ID="btnBorrowAddSubmit" CssClass="btn btn-primary" Text="提交" OnClick="btnBorrowAddSubmit_Click" />
                             <input type="button" id="btnBorrowAddCanel" class="btn btn-primary" value="返回" onclick="DisplaySysdiv()" />
                         </div>
                     </div>
                 </div>
 
-                <div id="BorrowQuery">
+                <div id="BorrowQuery" class="margin-top">
                     <div class="controls controls-row">
                         <asp:Label runat="server" Text="借款人:" CssClass="span1" />
                         <asp:TextBox runat="server" ID="txtBorrowQueryBorrower" CssClass="span2" />
@@ -95,7 +98,7 @@
             <div>
                 <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                     <ContentTemplate>
-                        <asp:DataGrid runat="server" AutoGenerateColumns="false" ID="BorrowListDataGrid" Width="100%" BorderColor="Black" BorderStyle="None" BorderWidth="5px" CellPadding="2" CellSpacing="2" GridLines="Both" Font-Size="Small"
+                        <asp:DataGrid runat="server" AutoGenerateColumns="false" ID="BorrowListDataGrid" Width="99%" BorderColor="Black" BorderStyle="None" BorderWidth="5px" CellPadding="2" CellSpacing="2" GridLines="Both" Font-Size="Small"
                             HeaderStyle-HorizontalAlign="Center" HeaderStyle-VerticalAlign="Middle" ItemStyle-VerticalAlign="Middle" ItemStyle-Font-Size="Small" SelectedItemStyle-BorderColor="Red"
                             OnItemCommand="BorrowListDataGrid_ItemCommand">
                             <Columns>
