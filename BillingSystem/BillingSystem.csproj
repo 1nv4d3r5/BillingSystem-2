@@ -120,6 +120,7 @@
     <Content Include="Images\delete\4.png" />
     <Content Include="Images\delete\XBOX 360.png" />
     <Content Include="Scripts\borrow-jquery.js" />
+    <Content Include="Scripts\common.js" />
     <Content Include="Scripts\jquery-2.0.3.min.js" />
     <Content Include="Scripts\jquery-ui-1.10.3.custom.min.js" />
     <Content Include="Scripts\Loan-Jquery.js" />
