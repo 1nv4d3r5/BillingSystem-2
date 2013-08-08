@@ -21,20 +21,24 @@
                 <div id="divBorrowTitle" class="title">
                     借入管理
                 </div>
-                <div id="divSet" style="height: 30px; margin-top: 5px;">
-                    <div class="controls controls-row">
-                        <div class="span1">
-                            <input type="image" title="新增" onclick="DisplayAddBorrowdiv()" src="../Image/add5.png" />
-                            <input type="button" style="border:none" value="新增" id="btnBorrowAdd" onclick="DisplayAddBorrowdiv()" />
+                <div id="divSet" style="margin-top:5px;margin-left:5px;height:20px;vertical-align:middle;">
+                    <div class="row">
+                        <div class="span1" onclick="DisplayAddBorrowdiv()">
+                            <img src="../Image/add2_16.png" title="新增" />
+                            <input type="button" style="border:none;background-color:transparent;" value="新增" />
                         </div>
-                        <div class="span1">
-                            <input type="button" value="高级查询" id="btnBorrowQuery" class="btn btn-primary" onclick="DisplayQueryBorrowdiv()" />
+                        <div style="border-right-color:red;border-left-color:red;width:2px;font-size:20px;" class="span1">|</div>
+                        <div style="margin-left:3px;width:90px;float:left" onclick="DisplayQueryBorrowdiv()">
+                            <img src="../Image/query1_16.png" title="高级查询" />
+                            <input type="button" style="border:none;background-color:transparent;" value="高级查询" />
                         </div>
+                        <div style="border-right-color:red;border-left-color:red;width:2px;font-size:22px;" class="span1">|</div>
                     </div>
                 </div>
-                <div id="BorrowEdit">
+                <hr style="border-color:#cccfd2;margin-top:10px;" />
+                <div id="BorrowEdit" class="margin-top">
                     <div class="controls controls-row">
-                        借入方式：
+                        <asp:Label runat="server" Text="借入方式：" CssClass="span1" />
                     </div>
                     <div class="controls controls-row">
                         <asp:RadioButtonList ID="RadioBorrowAddBorrowType" runat="server" RepeatDirection="Horizontal" CssClass="span2">
@@ -94,8 +98,8 @@
                     </div>
                 </div>
             </div>
-            <hr />
-            <div>
+            <hr id="fgdiv" style="border-color: #cccfd2;display:none;" />
+            <div class="margin">
                 <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                     <ContentTemplate>
                         <asp:DataGrid runat="server" AutoGenerateColumns="false" ID="BorrowListDataGrid" Width="99%" BorderColor="Black" BorderStyle="None" BorderWidth="5px" CellPadding="2" CellSpacing="2" GridLines="Both" Font-Size="Small"

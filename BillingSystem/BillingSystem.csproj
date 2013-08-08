@@ -128,7 +128,18 @@
     <Content Include="Views\Borrowing\Loan.aspx" />
     <Content Include="Views\Default.aspx" />
     <Content Include="Views\Expenses\Expenses.aspx" />
+    <Content Include="Views\Image\add1_16.png" />
+    <Content Include="Views\Image\add2_16.png" />
+    <Content Include="Views\Image\add3_16.png" />
+    <Content Include="Views\Image\add5.png" />
+    <Content Include="Views\Image\back1.png" />
+    <Content Include="Views\Image\back2_16.ico" />
     <Content Include="Views\Image\default_logo.gif" />
+    <Content Include="Views\Image\ok.png" />
+    <Content Include="Views\Image\query1_16.png" />
+    <Content Include="Views\Image\query5.ico" />
+    <Content Include="Views\Image\query6.ico" />
+    <Content Include="Views\Image\submit4.png" />
     <Content Include="Views\InCome\Bonus.aspx" />
     <Content Include="Views\Borrowing\Borrowed.aspx" />
     <Content Include="Views\Navigate.aspx" />
@@ -136,6 +147,7 @@
     <Content Include="Views\Install.aspx" />
     <Content Include="Views\Login.aspx" />
     <Content Include="Views\SystemSetting\CardSetting.aspx" />
+    <Content Include="Views\SystemSetting\ModifyPassword.aspx" />
     <Content Include="Views\SystemSetting\SystemSetting.aspx" />
     <Content Include="Views\SystemSetting\UserAdd.aspx" />
     <Content Include="Views\SystemSetting\UserQuery.aspx" />
@@ -268,6 +280,13 @@
     </Compile>
     <Compile Include="Views\SystemSetting\CardSetting.aspx.designer.cs">
       <DependentUpon>CardSetting.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SystemSetting\ModifyPassword.aspx.cs">
+      <DependentUpon>ModifyPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\SystemSetting\ModifyPassword.aspx.designer.cs">
+      <DependentUpon>ModifyPassword.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\SystemSetting\SystemSetting.aspx.cs">
       <DependentUpon>SystemSetting.aspx</DependentUpon>
