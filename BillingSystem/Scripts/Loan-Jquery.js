@@ -9,6 +9,7 @@ function DisplaySysdiv() {
     document.getElementById("LoanEdit").style.display = 'none';
     document.getElementById("LoanQuery").style.display = 'none';
     document.getElementById("divSet").style.display = '';
+    document.getElementById("fgdiv").style.display = 'none';
     document.getElementById("divLoanTitle").innerText = "借出管理";
     $('#HiddenField1').val('');
     $('input[type="radio"]').removeAttr('checked');
@@ -22,7 +23,8 @@ function DisplayAddLoandiv() {
     $('input[name="RadioLoanAddLoanType"]').val(['1']);
     document.getElementById("LoanEdit").style.display = '';
     document.getElementById("LoanQuery").style.display = 'none';
-    document.getElementById("divSet").style.display = 'none';
+    //document.getElementById("divSet").style.display = 'none';
+    document.getElementById("fgdiv").style.display = '';
     document.getElementById("divLoanTitle").innerText = "借出管理--新增";
 }
 
@@ -30,7 +32,8 @@ function DisplayAddLoandiv() {
 function DisplayEditLoandiv() {
     document.getElementById("LoanEdit").style.display = '';
     document.getElementById("LoanQuery").style.display = 'none';
-    document.getElementById("divSet").style.display = 'none';
+    //document.getElementById("divSet").style.display = 'none';
+    document.getElementById("fgdiv").style.display = '';
     document.getElementById("divLoanTitle").innerText = "借出管理--编辑";
 }
 
@@ -38,7 +41,8 @@ function DisplayEditLoandiv() {
 function DisplayQueryLoandiv() {
     document.getElementById("LoanEdit").style.display = 'none';
     document.getElementById("LoanQuery").style.display = '';
-    document.getElementById("divSet").style.display = 'none';
+    //document.getElementById("divSet").style.display = 'none';
+    document.getElementById("fgdiv").style.display = '';
     document.getElementById("divLoanTitle").innerText = "借出管理--查询";
     //InitializeQueryDivForm();
 }
@@ -123,5 +127,20 @@ $(function () {
         }
     });
 });
+
+function displayAddborder(str,id) {
+    if (id == 1) {
+        document.getElementById(str).style.border = '';
+    }
+    else {
+        document.getElementById(str).style.border = 'none';
+    }
+}
+
+function onclicksub() {
+    //document.getElementById("btnLoanAddSubmit").click();
+    document.getElementById('<%btnLoanAddSubmit%>').click() = btnLoanAddSubmit_Click;
+    //$("#btnLoanAddSubmit").click();
+}
 
 

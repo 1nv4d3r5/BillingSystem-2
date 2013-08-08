@@ -9,6 +9,7 @@ function DisplaySysdiv() {
     document.getElementById("BorrowEdit").style.display = 'none';
     document.getElementById("BorrowQuery").style.display = 'none';
     document.getElementById("divSet").style.display = '';
+    document.getElementById("fgdiv").style.display = 'none';
     document.getElementById("divBorrowTitle").innerText = "借入管理";
     $('#HiddenField1').val('');
     $('input[type="radio"]').removeAttr('checked');
@@ -22,7 +23,8 @@ function DisplayAddBorrowdiv() {
     $('input[name="RadioBorrowAddBorrowType"]').val(['1']);
     document.getElementById("BorrowEdit").style.display = '';
     document.getElementById("BorrowQuery").style.display = 'none';
-    document.getElementById("divSet").style.display = 'none';
+    //document.getElementById("divSet").style.display = 'none';
+    document.getElementById("fgdiv").style.display = '';
     document.getElementById("divBorrowTitle").innerText = "借入管理--新增";
 }
 
@@ -30,7 +32,8 @@ function DisplayAddBorrowdiv() {
 function DisplayEditBorrowdiv() {
     document.getElementById("BorrowEdit").style.display = '';
     document.getElementById("BorrowQuery").style.display = 'none';
-    document.getElementById("divSet").style.display = 'none';
+    //document.getElementById("divSet").style.display = 'none';
+    document.getElementById("fgdiv").style.display = '';
     document.getElementById("divBorrowTitle").innerText = "借入管理--编辑";
 }
 
@@ -38,7 +41,8 @@ function DisplayEditBorrowdiv() {
 function DisplayQueryBorrowdiv() {
     document.getElementById("BorrowEdit").style.display = 'none';
     document.getElementById("BorrowQuery").style.display = '';
-    document.getElementById("divSet").style.display = 'none';
+    //document.getElementById("divSet").style.display = 'none';
+    document.getElementById("fgdiv").style.display = '';
     document.getElementById("divBorrowTitle").innerText = "借入管理--查询";
 }
 
