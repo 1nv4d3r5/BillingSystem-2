@@ -243,6 +243,7 @@ namespace BillingSystem.Views
                 UserInfo userInfo = UserMethods.GetUserByName(this.txtLoanAddLender.Text.Trim());
                 if (userInfo.Id > 0)
                 {
+                    this.dropLoanAddLoanAccount.Enabled = true;
                     CardCollection coll = CardMethods.GetCardByUserId(userInfo.Id);
                     List<DropItem> list = new List<DropItem>();
                     list.Add(new DropItem { ValueField = "", DisplayField = " " });

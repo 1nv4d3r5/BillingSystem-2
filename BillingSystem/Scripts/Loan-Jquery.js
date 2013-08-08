@@ -68,7 +68,7 @@ function EditLoan(id) {
     var selectedRow = $("tr.highlight").children("td");
 
     //给出借方式赋值
-    var loanType = selectedRow[1].innerText;
+    var loanType = findLoanIndex(selectedRow[1].innerText);
     $('input[name="RadioLoanAddLoanType"]').val([loanType]);
     if (loanType == "2") {
         $("#divLoan").show();
