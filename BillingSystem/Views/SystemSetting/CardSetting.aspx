@@ -8,45 +8,45 @@
     <!--<link rel="stylesheet" type="text/css" href="/Css/css.css"/>-->
     <link rel="stylesheet" type="text/css" href="/Css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="/Css/css.css" />
-    <link rel ="stylesheet" type="text/css" href="../../Css/jquery-ui-1.10.3.custom.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../Css/jquery-ui-1.10.3.custom.min.css" />
     <script src="../../Scripts/jquery-2.0.3.min.js" type="text/javascript"></script>
     <script src="../../Scripts/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
     <script type="text/javascript" lang="ja">
         function openCardEditWin(Id) {
-            //showModalDialog("CardSetting.aspx?CardNumber=" + cardNumber, "CardSetting.aspx", 'dialogWidth:560px;dialogHeight:300px;center:yes;help:no;resizable:no;status:no');
-            //sessionStorage.setItem("CardNumber", cardNumber);
-            //location.reload(document.referrer);
-            location.replace(" CardSetting.aspx?Id=" + Id);
+            DisplayCardEditdiv();
+            EditUser(id);
         }
 
         function DisplaySysdiv() {
             document.getElementById("divSet").style.display = '';
             document.getElementById("cardEdit").style.display = 'none';
             document.getElementById("cardQuery").style.display = 'none';
+            document.getElementById("fgdiv").style.display = 'none';
             document.getElementById("divCardTitle").innerText = "卡信息管理";
         }
 
         function DisplayCardAdddiv() {
-            document.getElementById("divSet").style.display = 'none';
             document.getElementById("cardEdit").style.display = '';
             document.getElementById("cardQuery").style.display = 'none';
+            document.getElementById("fgdiv").style.display = '';
             document.getElementById("divCardTitle").innerText = "卡信息管理--新增";
+            $('#btnCardEditSave').hide();
         }
 
         function DisplayCardQuerydiv() {
-            document.getElementById("divSet").style.display = 'none';
             document.getElementById("cardEdit").style.display = 'none';
             document.getElementById("cardQuery").style.display = '';
+            document.getElementById("fgdiv").style.display = '';
             document.getElementById("divCardTitle").innerText = "卡信息管理--查询";
+            $('#btnCardQuerySelect').hide();
         }
 
         function DisplayCardEditdiv(cardNumber) {
-
-            document.getElementById("divSet").style.display = 'none';
             document.getElementById("cardEdit").style.display = '';
             document.getElementById("cardQuery").style.display = 'none';
+            document.getElementById("fgdiv").style.display = '';
             document.getElementById("divCardTitle").innerText = "卡信息管理--编辑";
-            //window.opener.location = window.opener.location;
+            $('#btnCardEditSave').hide();
         }
 
         //$(function () {
@@ -54,11 +54,32 @@
         //        $(this).css('background-color', '#dff');
         //    });
         //});
-        //$(function () {
-        //    $("#CardListDataGrid tr").first().nextAll().bind('click', function () {
-        //      $(this).toggleClass("highlight");
-        //    });
-        //});
+        function InitializeEditDivForm() {
+            //$('input[type="text"]').val('');
+            //$('input[type="password"]').val('');
+            //$('#HiddenField1').val('');
+            //$("#txtContent").val('');
+        }
+
+        function EditCard(id) {
+            //清空编辑div
+            //InitializeEditDivForm();
+            //var selectedRow = $("tr.highlight").children("td");
+
+            //$("#HiddenField1").val(id);
+            //$("#txtUserName").val(selectedRow[1].innerText);
+            //$("#txtIdCode").val(selectedRow[0].innerText);
+            //$("#txtEmail").val(selectedRow[2].innerText);
+            //$("#txtContent").val(selectedRow[4].innerText);
+
+            //if (selectedRow[3].innerText == "使用者") {
+            //    $("#dropRole").val('2');
+            //}
+            //else {
+            //    $("#dropRole").val('1');
+            //}
+        }
+
         $(function () {
             $("#CardListDataGrid tr").first().nextAll().bind('click', function () {
                 $("#CardListDataGrid tr.highlight").removeClass('highlight');
@@ -68,10 +89,30 @@
 
         $(document).ready(function () {
             $('#txtAddCardOpenDate').datepicker({ dateFormate: "yy-mm-dd" });
-
             $('#txtCardQueryBOpenDate').datepicker({ dateFormate: "yy-mm-dd" });
             $('#txtCardQueryEOpenDate').datepicker({ dateFormate: "yy-mm-dd" });
+            $('#btnCardEditSave').hide();
+            $('#btnCardQuerySelect').hide();
         });
+
+        $(function () {
+            $("#btnCardAdd").button();
+            $("#btnCardQuery").button();
+            $("#btnCardEditConfirm").button();
+            $("#btnCardEditCanel").button();
+
+            $("#btnCardQueryConfirm").button();
+            $("#btnCardQueryCanel").button();
+        });
+
+        function onclicksub(id) {
+            if (id == 1) {
+                document.getElementById("btnCardEditSave").click();
+            }
+            else {
+                document.getElementById("btnCardQuerySelect").click();
+            }
+        }
     </script>
 </head>
 <body>
@@ -82,18 +123,22 @@
                 <div id="divCardTitle" class="title">
                     卡信息管理
                 </div>
-                <div id="divSet" style="margin-top:5px;height:30px;">
-                    <div class="controls controls-row">
-                        <div class="span1">
-                            <asp:ImageButton runat="server" ToolTip="新增" ID="btnCardAdd" OnClick="btnCardAdd_Click" ImageUrl="~/Views/Image/add5.png" />
-                            <asp:Button runat="server" Text="新增" BorderStyle="None" OnClick="btnCardAdd_Click" />
-                            </div>
-                        <div class="span1">
-                            <asp:ImageButton runat="server" ToolTip="高级查询" ID="btnCardQuery" OnClick="btnCardQuery_Click" ImageUrl="~/Views/Image/query6.ico" />
-                            <asp:Button runat="server" Text="高级查询" BorderStyle="None" OnClick="btnCardQuery_Click" />
+                <div id="divSet" style="height: 30px; margin-top: 5px; vertical-align: middle; margin-left: 5px;">
+                    <div class="row">
+                        <div class="span3">
+                            <button type="button" title="新增" id="btnCardAdd" onclick="DisplayCardAdddiv();">
+                                <img src="../Image/add3_16.png" />
+                                新增
+                            </button>
+                            <button type="button" title="查询" id="btnCardQuery" onclick="DisplayCardQuerydiv();">
+                                <img src="../Image/query1_16.png" />
+                                查询
+                            </button>
                         </div>
                     </div>
                 </div>
+                <hr style="border-color: #cccfd2; margin-top: 10px;" />
+
                 <div id="cardEdit" class="margin-top">
                     <div class="controls controls-row">
                         <asp:Label ID="Label16" runat="server" Text="卡号:" CssClass="span1" />
@@ -117,10 +162,16 @@
                     <div class="controls controls-row">
                         <asp:Label ID="Label8" runat="server" Text="备注:" CssClass="span1" />
                         <asp:TextBox runat="server" ID="txtCardAddContent" TextMode="MultiLine" CssClass="span8" />
-                        <label class="span1">&nbsp;</label>
-                        <div class="span2">
+                        <div class="span3">
                             <asp:Button runat="server" Text="提交" ID="btnCardEditSave" OnClick="btnCardEditSave_Click" CssClass="btn btn-primary" />
-                            <asp:Button runat="server" Text="后退" ID="btnCardEditCanel" OnClick="btnCardEditCanel_Click" CssClass="btn btn-primary" />
+                            <button type="button" title="提交" id="btnCardEditConfirm" onclick="onclicksub('1')">
+                                <img src="../Image/query2_16.png" />
+                                提交
+                            </button>
+                            <button type="button" title="返回" id="btnCardEditCanel" onclick="DisplaySysdiv();">
+                                <img src="../Image/back2_16.ico" />
+                                返回
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -142,15 +193,22 @@
                         <asp:TextBox runat="server" ID="txtCardQueryBOpenDate" CssClass="span2" />
                         <asp:Label ID="Label15" runat="server" Text="到:" CssClass="span1" />
                         <asp:TextBox runat="server" ID="txtCardQueryEOpenDate" CssClass="span2" />
-                        <label class ="span1">&nbsp;</label>
-                        <div class="span2">
-                            <asp:Button runat="server" Text="查询" ID="btnCardQuerySelect" OnClick="btnCardQuerySelect_Click" CssClass="btn btn-primary" />
-                            <asp:Button runat="server" Text="后退" ID="btnCardQueryCanel" OnClick="btnCardQueryCanel_Click" CssClass="btn btn-primary" />
+                        <div class="span3">
+                            <asp:Button runat="server" ID="btnCardQuerySelect" OnClick="btnCardQuerySelect_Click" />
+                            <button type="button" id="btnCardQueryConfirm" onclick="onclicksub('2')">
+                                <img src="../Image/submit1_16.png" />
+                                查询
+                            </button>
+                            <button type="button" title="返回" id="btnCardQueryCanel" onclick="DisplaySysdiv();">
+                                <img src="../Image/query2_16.png" />
+                                返回
+                            </button>
+<%--                            <asp:Button runat="server" Text="后退" ID="btnCardQueryCanel" OnClick="btnCardQueryCanel_Click" CssClass="btn btn-primary" />--%>
                         </div>
                     </div>
                 </div>
             </div>
-            <hr style="border-color:#cccfd2" />
+            <hr id="fgdiv" style="border-color: #cccfd2; margin-top: 10px;" />
             <div class="margin-left">
                 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                     <ContentTemplate>

@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using BillingSystem.Models;
 using BillingSystem.Services;
 using MySql.Data.MySqlClient;
+using BillingSystem.Common;
 
 namespace BillingSystem.Views
 {
@@ -61,36 +62,35 @@ namespace BillingSystem.Views
                 int selectindex = e.Item.ItemIndex;
                 id = this.LoanListDataGrid.Items[selectindex].Cells[0].Text;
             }
-           // Response.Write("<script> if(confirm('是否删除')) document.getElementById('HidderField2').value='1';</script>");
+            // Response.Write("<script> if(confirm('是否删除')) document.getElementById('HidderField2').value='1';</script>");
 
-            if (this.HidderField2.Value == "1")
+            if (!string.IsNullOrEmpty(id) && this.deleteflag == true)
             {
-                if (!string.IsNullOrEmpty(id)&&this.deleteflag==true)
+                int iSuccess = LoanMethods.DeleteLoanById(Convert.ToInt32(id));
+                if (iSuccess > 0)
                 {
-                    int iSuccess = LoanMethods.DeleteLoanById(Convert.ToInt32(id));
-                    if (iSuccess > 0)
-                    {
-                        Alert.Show(this, "删除成功！");
-                    }
-                    else
-                    {
-                        Alert.Show(this, "删除失败！");
-                    }
-                    if (queryList == null)
-                    {
-                        queryList = new List<QueryElement>();
-                    }
-                    BindLoanListDataGrid(queryList);
-                    this.ClientScript.RegisterStartupScript(this.GetType(), "", "HideORShowColumn();", true);
+                    Alert.Show(this, "删除成功！");
                 }
+                else
+                {
+                    Alert.Show(this, "删除失败！");
+                }
+                if (queryList == null)
+                {
+                    queryList = new List<QueryElement>();
+                }
+                BindLoanListDataGrid(queryList);
+                this.ClientScript.RegisterStartupScript(this.GetType(), "", "HideORShowColumn();", true);
             }
         }
 
         protected void btnLoanAddSubmit_Click(object sender, EventArgs e)
         {
             #region 验证
+            this.ClientScript.RegisterStartupScript(this.GetType(), "", "DisplayAddLoandiv();", true);
             if (string.IsNullOrEmpty(this.txtLoanAddLender.Text.Trim()))
             {
+
                 Alert.Show(this, "请输入出借人！");
                 this.txtLoanAddLender.Focus();
                 return;
@@ -120,13 +120,6 @@ namespace BillingSystem.Views
                 return;
             }
 
-            //if (this.RadioLoanAddBorrowType.SelectedValue == "2" && string.IsNullOrEmpty(this.txtLoanAddBorrowAccount.Text.Trim()))
-            //{
-            //    Alert.Show(this, "请输入出借账户！");
-            //    this.txtLoanAddBorrowAccount.Focus();
-            //    return;
-            //}
-
             if (string.IsNullOrEmpty(this.txtLoanAddLoanAmount.Text.Trim()))
             {
                 Alert.Show(this, "请输入借出金额!");
@@ -154,9 +147,10 @@ namespace BillingSystem.Views
 
             //loanInfo.BorrowType = Convert.ToInt32(this.RadioLoanAddBorrowType.SelectedValue);
             loanInfo.Borrower = this.txtLoanAddBorrower.Text.Trim();
-            if (this.RadioLoanAddLoanType.SelectedValue == "2")
+            if (this.RadioLoanAddLoanType.SelectedValue == "2" && !string.IsNullOrEmpty(this.dropLoanAddLoanAccount.SelectedValue))
             {
-                loanInfo.LoanAccount = this.dropLoanAddLoanAccount.SelectedValue;
+                CardInfo cardInfo = CardMethods.GetCardById(Convert.ToInt32(this.dropLoanAddLoanAccount.SelectedValue));
+                loanInfo.LoanAccount = this.dropLoanAddLoanAccount.SelectedItem.Text ;
             }
             loanInfo.Lender = this.txtLoanAddLender.Text.Trim();
             loanInfo.BorrowedAccount = this.txtLoanAddBorrowAccount.Text.Trim();
@@ -243,15 +237,16 @@ namespace BillingSystem.Views
                 UserInfo userInfo = UserMethods.GetUserByName(this.txtLoanAddLender.Text.Trim());
                 if (userInfo.Id > 0)
                 {
-                    this.dropLoanAddLoanAccount.Enabled = true;
                     CardCollection coll = CardMethods.GetCardByUserId(userInfo.Id);
                     List<DropItem> list = new List<DropItem>();
                     list.Add(new DropItem { ValueField = "", DisplayField = " " });
                     for (int i = 0; i < coll.Count; i++)
                     {
-                        list.Add(new DropItem { ValueField = coll[i].Id.ToString(), DisplayField = coll[i].CardNumber });
+                        string bank = StaticRescourse.DisplayBank(coll[i].BankId);
+                        list.Add(new DropItem { ValueField = coll[i].Id.ToString(), DisplayField = coll[i].CardNumber + " " + bank });
                     }
                     this.dropLoanAddLoanAccount.DataSource = list;
+                    Helper.SetDropDownList(this.dropLoanAddLoanAccount);
                 }
             }
         }

@@ -9,7 +9,7 @@ namespace BillingSystem.Services
 {
     public static class LoanMethods
     {
-        public static BorrowORLoanInfo GetBorrowById(int id)
+        public static BorrowORLoanInfo GetLoanById(int id)
         {
             return LoanProxy.GetLoanById(id);
         }

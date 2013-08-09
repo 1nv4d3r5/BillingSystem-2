@@ -23,7 +23,6 @@ function DisplayAddLoandiv() {
     $('input[name="RadioLoanAddLoanType"]').val(['1']);
     document.getElementById("LoanEdit").style.display = '';
     document.getElementById("LoanQuery").style.display = 'none';
-    //document.getElementById("divSet").style.display = 'none';
     document.getElementById("fgdiv").style.display = '';
     document.getElementById("divLoanTitle").innerText = "借出管理--新增";
 }
@@ -32,7 +31,6 @@ function DisplayAddLoandiv() {
 function DisplayEditLoandiv() {
     document.getElementById("LoanEdit").style.display = '';
     document.getElementById("LoanQuery").style.display = 'none';
-    //document.getElementById("divSet").style.display = 'none';
     document.getElementById("fgdiv").style.display = '';
     document.getElementById("divLoanTitle").innerText = "借出管理--编辑";
 }
@@ -41,10 +39,9 @@ function DisplayEditLoandiv() {
 function DisplayQueryLoandiv() {
     document.getElementById("LoanEdit").style.display = 'none';
     document.getElementById("LoanQuery").style.display = '';
-    //document.getElementById("divSet").style.display = 'none';
     document.getElementById("fgdiv").style.display = '';
     document.getElementById("divLoanTitle").innerText = "借出管理--查询";
-    //InitializeQueryDivForm();
+    InitializeQueryDivForm();
 }
 
 //清空编辑div
@@ -64,16 +61,16 @@ function EditLoan(id) {
 
     //清空编辑div
     InitializeEditDivForm();
-
     var selectedRow = $("tr.highlight").children("td");
-
     //给出借方式赋值
     var loanType = findLoanIndex(selectedRow[1].innerText);
     $('input[name="RadioLoanAddLoanType"]').val([loanType]);
     if (loanType == "2") {
         $("#divLoan").show();
         $("#divBorrow").show();
-        $("#txtLoanAddLoanAccount").val(selectedRow[2].innerText);
+        var s = selectedRow[2].innerText;
+        //$("#dropLoanAddLoanAccount").prepend("<option value='0'>"+s+"</option>");
+        //$("#dropLoanAddLoanAccount").val(selectedRow[2].innerText);
         $("#txtLoanAddBorrowAccount").val(selectedRow[4].innerText);
     }
     else {
@@ -99,6 +96,7 @@ $(document).ready(function () {
     //查询div的日期
     $('#txtLoanQueryBLoanDate').datepicker({ dateFormat: "yy-mm-dd" });
     $('#txtLoanQueryELoanDate').datepicker({ dateFormat: "yy-mm-dd" });
+    //$('#btnLoanAddSubmit').hide();
 });
 
 //DataGrid行选择的click事件，添加行样式
@@ -122,7 +120,7 @@ $(function () {
         else {
             $("#divLoan").hide();
             $("#divBorrow").hide();
-            $("#txtLoanAddLoanAccount").val("");
+            $("#dropLoanAddLoanAccount").val("");
             $("#txtLoanAddBorrowAccount").val("");
         }
     });
@@ -139,8 +137,8 @@ function displayAddborder(str,id) {
 
 function onclicksub() {
     //document.getElementById("btnLoanAddSubmit").click();
-    document.getElementById('<%btnLoanAddSubmit%>').click() = btnLoanAddSubmit_Click;
-    //$("#btnLoanAddSubmit").click();
+   // document.getElementById('<%btnLoanAddSubmit%>').click() = btnLoanAddSubmit_Click;
+    $("#btnLoanAddSubmit").click();
 }
 
 

@@ -45,7 +45,7 @@ namespace BillingSystem.DAL
         {
             CardCollection coll = new CardCollection();
             StringBuilder sb = new StringBuilder();
-            sb.Append(" select card.*,a.name as ownerName,b.name as userName from card left join user a on card.ownerId=a.id left join user b on card.userId = b.id where UserId=@UserId ");
+            sb.Append(" select card.*,a.name as ownerName,b.name as userName from card left join user a on card.ownerId=a.id left join user b on card.userId = b.id where card.UserId=@UserId ");
             MySqlParameter par = new MySqlParameter("@UserId", MySqlDbType.Int32);
             par.Value = userId;
             using (MySqlDataReader reader = MySqlDBHelper.GetReader(sb.ToString(), par))

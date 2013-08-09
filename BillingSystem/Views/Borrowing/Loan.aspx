@@ -11,12 +11,13 @@
     <script type="text/javascript" src="../../Scripts/jquery-2.0.3.min.js"></script>
     <script type="text/javascript" src="../../Scripts/jquery-ui-1.10.3.custom.min.js"></script>
     <script type="text/javascript" src="../../Scripts/common.js"></script>
-
     <script type="text/javascript" src="../../Scripts/Loan-Jquery.js"></script>
     <script type="text/javascript">
         $(function () {
             $('#btnLoanAdd').button();
             $('#btnLoanQuery').button();
+            $('#btnLoanAddCanel').button();
+            $('#btnLoanAddSubmit').button();
         });
     </script>
 </head>
@@ -60,12 +61,15 @@
                 </div>
                 <div class="controls controls-row">
                     <asp:Label ID="Label1" runat="server" Text="出借人:" CssClass="span1" />
-                    <asp:TextBox runat="server" ID="txtLoanAddLender" CssClass="span2" AutoPostBack="true" OnTextChanged="txtLoanAddLender_TextChanged" />
-                    <div runat="server" id="divLoan">
-                        <asp:Label ID="Label2" runat="server" Text="出借账户:" CssClass="span1" />
-                        <asp:DropDownList runat="server" ID="dropLoanAddLoanAccount" CssClass="span2" Enabled="false" />
-                        <%--<asp:TextBox runat="server" ID="txtLoanAddLoanAccount" CssClass="span2" />--%>
-                    </div>
+                    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                        <ContentTemplate>
+                            <asp:TextBox runat="server" ID="txtLoanAddLender" AutoPostBack="true" CssClass="span2" OnTextChanged="txtLoanAddLender_TextChanged" />
+                            <div id="divLoan">
+                                <asp:Label ID="Label2" runat="server" Text="出借账户:" CssClass="span1" />
+                                <asp:DropDownList runat="server" ID="dropLoanAddLoanAccount" CssClass="span2" />
+                            </div>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
                     <asp:Label ID="Label3" runat="server" Text="借款人:" CssClass="span1" />
                     <asp:TextBox runat="server" ID="txtLoanAddBorrower" CssClass="span2" />
                     <div runat="server" id="divBorrow">
@@ -87,9 +91,16 @@
                 </div>
                 <div class="controls controls-row">
                     <label class="span7">&nbsp;</label>
-                    <div class="span2" style="text-align: right">
-                        <asp:Button runat="server" ID="btnLoanAddSubmit" CssClass="btn btn-primary" Text="提交" OnClick="btnLoanAddSubmit_Click" />
-                        <input type="button" id="btnLoanAddCanel" class="btn btn-primary" value="返回" onclick="DisplaySysdiv()" />
+                    <div class="span3">
+                        <asp:Button runat="server" ID="btnLoanAddSubmit" Text="提交" OnClick="btnLoanAddSubmit_Click" />
+                        <%--<button type="button" id="btnLoanAddConfirm" title="提交" onclick="onclicksub();">
+                            <img src="../Image/submit1_16.png" />
+                            提交
+                        </button>--%>
+                        <button type="button" id="btnLoanAddCanel" title="返回" onclick="DisplaySysdiv();">
+                            <img src="../Image/back2_16.ico" />
+                            返回
+                        </button>
                     </div>
                 </div>
             </div>
@@ -103,7 +114,7 @@
                     <asp:Label ID="Label11" runat="server" Text="到:" CssClass="span1" />
                     <asp:TextBox runat="server" ID="txtLoanQueryELoanDate" CssClass="span2" />
                     <label class="span1">&nbsp;</label>
-                    <div class="span2">
+                    <div class="span3">
                         <asp:Button runat="server" ID="btnLoanQuerySubmit" Text="查询" CssClass="btn btn-primary" OnClick="btnLoanQuerySubmit_Click" />
                         <input type="button" id="btnLoanQueryCanel" value="返回" class="btn btn-primary" onclick="DisplaySysdiv()" />
                     </div>
@@ -138,7 +149,6 @@
                     </asp:DataGrid>
                 </ContentTemplate>
             </asp:UpdatePanel>
-        </div>
         </div>
     </form>
 </body>

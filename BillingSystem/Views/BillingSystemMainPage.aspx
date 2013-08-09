@@ -30,8 +30,8 @@
                             EnableTheming="True" ForeColor="Blue" ShowCheckBoxes="Parent">
                             <Nodes>
                                 <asp:TreeNode Text="系统设置" Value="system" Target="content">
-                                    <asp:TreeNode Text="卡信息维护" Value="卡信息维护" NavigateUrl="~/Views/SystemSetting/CardSetting.aspx" Target="content" />
                                     <asp:TreeNode Text="用户信息维护" Value="用户信息维护" NavigateUrl="~/Views/SystemSetting/UserSetting.aspx" Target="content" />
+                                    <asp:TreeNode Text="卡信息维护" Value="卡信息维护" NavigateUrl="~/Views/SystemSetting/CardSetting.aspx" Target="content" />                              
                                     <asp:TreeNode Text="修改密码" Value="修改密码" NavigateUrl="~/Views/SystemSetting/ModifyPassword.aspx" Target="content" />
                                 </asp:TreeNode>
                                 <asp:TreeNode Text="收入管理" Value="InCome" Target="content" >
