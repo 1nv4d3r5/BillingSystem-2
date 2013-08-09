@@ -31,24 +31,6 @@ namespace BillingSystem.Views {
         protected global::System.Web.UI.ScriptManager ScriptManager1;
         
         /// <summary>
-        /// btnCardAdd control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton btnCardAdd;
-        
-        /// <summary>
-        /// btnCardQuery control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton btnCardQuery;
-        
-        /// <summary>
         /// Label16 control.
         /// </summary>
         /// <remarks>
@@ -202,15 +184,6 @@ namespace BillingSystem.Views {
         protected global::System.Web.UI.WebControls.Button btnCardEditSave;
         
         /// <summary>
-        /// btnCardEditCanel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCardEditCanel;
-        
-        /// <summary>
         /// Label9 control.
         /// </summary>
         /// <remarks>
@@ -344,15 +317,6 @@ namespace BillingSystem.Views {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCardQuerySelect;
-        
-        /// <summary>
-        /// btnCardQueryCanel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCardQueryCanel;
         
         /// <summary>
         /// UpdatePanel1 control.

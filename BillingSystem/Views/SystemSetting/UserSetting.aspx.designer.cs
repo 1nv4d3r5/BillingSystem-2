@@ -31,22 +31,13 @@ namespace BillingSystem.Views {
         protected global::System.Web.UI.ScriptManager ScriptManager1;
         
         /// <summary>
-        /// btnUserAdd control.
+        /// HiddenField1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton btnUserAdd;
-        
-        /// <summary>
-        /// btnUserQuery control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton btnUserQuery;
+        protected global::System.Web.UI.WebControls.HiddenField HiddenField1;
         
         /// <summary>
         /// Label1 control.
@@ -166,15 +157,6 @@ namespace BillingSystem.Views {
         protected global::System.Web.UI.WebControls.Button btnUserEditSave;
         
         /// <summary>
-        /// btnUserEditCanel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnUserEditCanel;
-        
-        /// <summary>
         /// Label7 control.
         /// </summary>
         /// <remarks>
@@ -218,15 +200,6 @@ namespace BillingSystem.Views {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnUserQuerySave;
-        
-        /// <summary>
-        /// btnUserQueryCancel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnUserQueryCancel;
         
         /// <summary>
         /// UpdatePanel1 control.

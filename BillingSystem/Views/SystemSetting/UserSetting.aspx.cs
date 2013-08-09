@@ -60,23 +60,6 @@ namespace BillingSystem.Views
             }
         }
 
-        protected void btnUserAdd_Click(object sender, EventArgs e)
-        {
-            this.ClientScript.RegisterStartupScript(this.GetType(), "", "displayUserAdddiv();", true);
-            UserInfo info = new UserInfo();
-            Initialize(info);
-            ClearEditFrom();
-        }
-
-        protected void btnUserSelect_Click(object sender, EventArgs e)
-        {
-            this.ClientScript.RegisterStartupScript(this.GetType(), "", "displayUserQuery();", true);
-            ClearQueryForm();
-            //double height = rect.Height - rect.Height * 0.8;
-            //double width = rect.Width - rect.Width * 0.8;
-            //OpenNewWindow.OpenANewWindow(this.Page, "UserQuery.aspx", "UserQuery.aspx", width.ToString(), height.ToString(), "50", "50", "yes", true);
-        }
-
         protected void btnUserEditSave_Click(object sender, EventArgs e)
         {
             #region 验证
@@ -84,18 +67,18 @@ namespace BillingSystem.Views
             if (string.IsNullOrEmpty(this.txtIdCode.Text.Trim()))
             {
                 Alert.Show(this, "请输入IdCode！");
-
                 this.txtIdCode.Focus();
                 return;
             }
             if (this.txtIdCode.Text.Trim().Length > 10 || this.txtIdCode.Text.Trim().Length < 5)
             {
                 Alert.Show(this, "请输入长度在5到10之间的IdCode！");
-
                 this.txtIdCode.Focus();
                 return;
             }
-            if (string.IsNullOrEmpty(Request.QueryString["Code"]))
+
+            //if (string.IsNullOrEmpty(Request.QueryString["Code"]))
+            if (string.IsNullOrEmpty(this.HiddenField1.Value))
             {
                 if (string.IsNullOrEmpty(this.txtPassword.Text.Trim()))
                 {
@@ -121,6 +104,7 @@ namespace BillingSystem.Views
             userInfo.EMail = this.txtEmail.Text.Trim();
             int isuccess = UserMethods.InsertOrUpdatetoUser(userInfo);
             this.ClientScript.RegisterStartupScript(this.GetType(), "", "displayUserAdddiv();", true);
+            
             if (isuccess > 0)
             {
                 Alert.Show(this, "新增用户成功！");
@@ -135,17 +119,13 @@ namespace BillingSystem.Views
             {
                 Alert.Show(this, "操作失败！");
             }
+           
             BindDataGrid(queryList);
             //if (i > 0)
             //{
                 //this.ClientScript.RegisterStartupScript(this.GetType(), "", "closeWin();", true);
                 //Response.Write("<script type='text/javascript'>window.opener = null; window.close();</script>");
             //}
-        }
-
-        protected void btnUserEditCanel_Click(object sender, EventArgs e)
-        {
-            this.ClientScript.RegisterStartupScript(this.GetType(), "", "displayUserSet();", true);
         }
 
         private void Initialize(UserInfo info)
@@ -166,11 +146,6 @@ namespace BillingSystem.Views
             {
                 this.dropRole.SelectedValue = "1";
             }
-        }
-
-        protected void btnUserQueryCancel_Click(object sender, EventArgs e)
-        {
-            this.ClientScript.RegisterStartupScript(this.GetType(), "", "displayUserSet();", true);
         }
 
         protected void btnUserQuerySave_Click(object sender, EventArgs e)
