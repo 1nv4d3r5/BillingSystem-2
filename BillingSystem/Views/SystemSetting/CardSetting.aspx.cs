@@ -28,10 +28,10 @@ namespace BillingSystem.Views
             {
                 //if (Application["user"] != null)
                 //{
-                    if (!string.IsNullOrEmpty(Request.QueryString["Id"]))
+                if (!string.IsNullOrEmpty(Request.QueryString["CardSettingId"]))
                     {
                         this.ClientScript.RegisterStartupScript(this.GetType(), "", "DisplayCardEditdiv();", true);
-                        CardInfo info = CardMethods.GetCardById(Convert.ToInt32(Request.QueryString["Id"]));
+                        CardInfo info = CardMethods.GetCardById(Convert.ToInt32(Request.QueryString["CardSettingId"]));
                         Initialize(info);
                     }
                     else
@@ -60,20 +60,6 @@ namespace BillingSystem.Views
             }
         }
 
-        protected void btnCardAdd_Click(object sender, EventArgs e)
-        {
-            CardInfo cardInfo = new CardInfo();
-            this.ClientScript.RegisterStartupScript(this.GetType(), "", "DisplayCardAdddiv();", true);
-            ClearEditForm();
-            Initialize(cardInfo);
-        }
-
-        protected void btnCardQuery_Click(object sender, EventArgs e)
-        {
-            this.ClientScript.RegisterStartupScript(this.GetType(), "", "DisplayCardQuerydiv();", true);
-            InitializeQuery();
-        }
-
         protected void btnCardEditSave_Click(object sender, EventArgs e)
         {
             int isuccess = 0;
@@ -98,10 +84,6 @@ namespace BillingSystem.Views
 
         protected void btnCardEditCanel_Click(object sender, EventArgs e)
         {
-            //this.divSet.Visible = true;
-            //this.cardQuery.Visible = false;
-            //this.cardEdit.Visible = false;
-            //this.divCardTitle.InnerText = "卡信息管理";
             this.ClientScript.RegisterStartupScript(this.GetType(), "", "DisplaySysdiv();", true);
         }
 
@@ -295,9 +277,15 @@ namespace BillingSystem.Views
                 this.txtCardAddContent.Text = !string.IsNullOrEmpty(info.Content) ? info.Content : string.Empty;
                 this.txtAddBankName.Text = !string.IsNullOrEmpty(info.BankName) ? info.BankName : string.Empty;
                 this.txtAddCardOpenDate.Text = date > 20000101 ? info.OpenDate.ToString("yyyy-MM-dd") : string.Empty;
+                this.txtAddCardNumber.Enabled = false;
+                this.dropAddBank.Enabled = false;
+                this.dropCardAddAccountType.Enabled = false;
             }
             else
             {
+                this.txtAddCardNumber.Enabled = true;
+                this.dropAddBank.Enabled = true;
+                this.dropCardAddAccountType.Enabled = true;
                 this.dropAddBank.SelectedIndex = 0;
                 this.dropCardAddAccountType.SelectedIndex = 0;
                 //this.dropAddCardOwner.SelectedValue = loginInfo.Id.ToString();
@@ -342,8 +330,6 @@ namespace BillingSystem.Views
             Helper.SetDropDownList(this.dropCardQueryUser);
             this.dropCardQueryUser.SelectedValue = string.Empty;
 
-            //this.txtCardQueryBOpenDate.Text = DateTime.Now.AddDays(-6).ToString("yyyy-MM-dd");
-            //this.txtCardQueryEOpenDate.Text = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd");
             this.txtCardQueryCardNumber.Text = string.Empty;
             this.txtCardQueryBankName.Text = string.Empty;
             this.txtCardQueryBOpenDate.Text = string.Empty;
@@ -392,6 +378,20 @@ namespace BillingSystem.Views
                 queryList = new List<QueryElement>();
             }
             BindDataGrid(queryList);
+        }
+
+        protected void btnCardAddS_Click(object sender, EventArgs e)
+        {
+            CardInfo cardInfo = new CardInfo();
+            this.ClientScript.RegisterStartupScript(this.GetType(), "", "DisplayCardAdddiv();", true);
+            ClearEditForm();
+            Initialize(cardInfo);
+        }
+
+        protected void btnCardQueryS_Click(object sender, EventArgs e)
+        {
+            this.ClientScript.RegisterStartupScript(this.GetType(), "", "DisplayCardQuerydiv();", true);
+            InitializeQuery();
         }
     }
 }

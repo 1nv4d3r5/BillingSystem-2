@@ -23,7 +23,6 @@ function DisplayAddBorrowdiv() {
     $('input[name="RadioBorrowAddBorrowType"]').val(['1']);
     document.getElementById("BorrowEdit").style.display = '';
     document.getElementById("BorrowQuery").style.display = 'none';
-    //document.getElementById("divSet").style.display = 'none';
     document.getElementById("fgdiv").style.display = '';
     document.getElementById("divBorrowTitle").innerText = "借入管理--新增";
 }
@@ -32,7 +31,6 @@ function DisplayAddBorrowdiv() {
 function DisplayEditBorrowdiv() {
     document.getElementById("BorrowEdit").style.display = '';
     document.getElementById("BorrowQuery").style.display = 'none';
-    //document.getElementById("divSet").style.display = 'none';
     document.getElementById("fgdiv").style.display = '';
     document.getElementById("divBorrowTitle").innerText = "借入管理--编辑";
 }
@@ -41,7 +39,6 @@ function DisplayEditBorrowdiv() {
 function DisplayQueryBorrowdiv() {
     document.getElementById("BorrowEdit").style.display = 'none';
     document.getElementById("BorrowQuery").style.display = '';
-    //document.getElementById("divSet").style.display = 'none';
     document.getElementById("fgdiv").style.display = '';
     document.getElementById("divBorrowTitle").innerText = "借入管理--查询";
 }
@@ -98,6 +95,9 @@ $(document).ready(function () {
     //查询div的日期
     $('#txtBorrowQueryBBorrowDate').datepicker({ dateFormat: "yy-mm-dd" });
     $('#txtBorrowQueryEBorrowDate').datepicker({ dateFormat: "yy-mm-dd" });
+
+    $('#btnBorrowAddSubmit').hide();
+    $('#btnBorrowQuerySubmit').hide();
 });
 
 //DataGrid行选择的click事件，添加行样式
@@ -126,3 +126,20 @@ $(function () {
         }
     });
 });
+
+$(function () {
+    $("#btnBorrowAdd").button();
+    $("#btnBorrowQuery").button();
+    $('#btnBorrowAddConfirm').button();
+    $('#btnBorrowQueryConfirm').button();
+    $('#btnBorrowAddCanel').button();
+    $('#btnBorrowQueryCanel').button();
+});
+
+function onborrowqueryconfirmclick() {
+    $('#btnBorrowQuerySubmit').click();
+}
+
+function onborrowaddconfirmclick() {
+    $('#btnBorrowAddSubmit').click();
+}

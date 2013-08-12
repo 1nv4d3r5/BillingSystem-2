@@ -13,8 +13,7 @@
     <script src="../../Scripts/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
     <script type="text/javascript" lang="ja">
         function openCardEditWin(Id) {
-            DisplayCardEditdiv();
-            EditUser(id);
+            location.replace(" CardSetting.aspx?CardSettingId=" + Id);
         }
 
         function DisplaySysdiv() {
@@ -55,29 +54,10 @@
         //    });
         //});
         function InitializeEditDivForm() {
-            //$('input[type="text"]').val('');
+            $('input[type="text"]').val('');
             //$('input[type="password"]').val('');
             //$('#HiddenField1').val('');
-            //$("#txtContent").val('');
-        }
-
-        function EditCard(id) {
-            //清空编辑div
-            //InitializeEditDivForm();
-            //var selectedRow = $("tr.highlight").children("td");
-
-            //$("#HiddenField1").val(id);
-            //$("#txtUserName").val(selectedRow[1].innerText);
-            //$("#txtIdCode").val(selectedRow[0].innerText);
-            //$("#txtEmail").val(selectedRow[2].innerText);
-            //$("#txtContent").val(selectedRow[4].innerText);
-
-            //if (selectedRow[3].innerText == "使用者") {
-            //    $("#dropRole").val('2');
-            //}
-            //else {
-            //    $("#dropRole").val('1');
-            //}
+            $("#txtContent").val('');
         }
 
         $(function () {
@@ -93,6 +73,8 @@
             $('#txtCardQueryEOpenDate').datepicker({ dateFormate: "yy-mm-dd" });
             $('#btnCardEditSave').hide();
             $('#btnCardQuerySelect').hide();
+            $('#btnCardAddS').hide();
+            $('#btnCardQueryS').hide();
         });
 
         $(function () {
@@ -113,6 +95,15 @@
                 document.getElementById("btnCardQuerySelect").click();
             }
         }
+        function oncardaddclick() {
+            DisplayCardAdddiv();
+            $('#btnCardAddS').click();
+        }
+        function oncardqueryclick() {
+            DisplayCardQuerydiv();
+            $('#btnCardQueryS').click();
+        }
+
     </script>
 </head>
 <body>
@@ -126,11 +117,13 @@
                 <div id="divSet" style="height: 30px; margin-top: 5px; vertical-align: middle; margin-left: 5px;">
                     <div class="row">
                         <div class="span3">
-                            <button type="button" title="新增" id="btnCardAdd" onclick="DisplayCardAdddiv();">
+                            <asp:Button runat="server" ID="btnCardAddS" OnClick="btnCardAddS_Click" />
+                            <button type="button" title="新增" id="btnCardAdd" onclick="oncardaddclick();">
                                 <img src="../Image/add3_16.png" />
                                 新增
                             </button>
-                            <button type="button" title="查询" id="btnCardQuery" onclick="DisplayCardQuerydiv();">
+                            <asp:Button runat="server" ID="btnCardQueryS" OnClick="btnCardQueryS_Click" />
+                            <button type="button" title="查询" id="btnCardQuery" onclick="oncardqueryclick();">
                                 <img src="../Image/query1_16.png" />
                                 查询
                             </button>

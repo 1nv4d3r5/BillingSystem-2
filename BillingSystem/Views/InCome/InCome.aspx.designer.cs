@@ -37,7 +37,7 @@ namespace BillingSystem.Views {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton btnIncomeAdd;
+        protected global::System.Web.UI.WebControls.Button btnIncomeAdd;
         
         /// <summary>
         /// btnIncomeQuery control.
@@ -46,7 +46,7 @@ namespace BillingSystem.Views {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton btnIncomeQuery;
+        protected global::System.Web.UI.WebControls.Button btnIncomeQuery;
         
         /// <summary>
         /// Label2 control.
@@ -337,15 +337,6 @@ namespace BillingSystem.Views {
         protected global::System.Web.UI.WebControls.Button btnIncomeEditSave;
         
         /// <summary>
-        /// btnIncomeEditCanel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnIncomeEditCanel;
-        
-        /// <summary>
         /// Label9 control.
         /// </summary>
         /// <remarks>
@@ -515,15 +506,6 @@ namespace BillingSystem.Views {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnIncomeQuerySelect;
-        
-        /// <summary>
-        /// btnIncomeQueryCanel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnIncomeQueryCanel;
         
         /// <summary>
         /// UpdatePanel4 control.
