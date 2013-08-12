@@ -24,7 +24,7 @@
                 <div id="divSet" style="height: 30px; margin-top: 5px; vertical-align: middle; margin-left: 5px;">
                     <div class="row">
                         <div class="span3">
-                            <button type="button" title="新增" id="btnBorrowAdd" onclick="DisplayAddBorrowdiv();">
+                            <button type="button" title="新增" id="btnBorrowAdd" onclick="onbtnborrowaddclick();">
                                 <img src="../Image/add3_16.png" />
                                 新增
                             </button>

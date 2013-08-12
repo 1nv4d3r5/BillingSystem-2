@@ -14,17 +14,22 @@ function DisplaySysdiv() {
     $('#HiddenField1').val('');
     $('input[type="radio"]').removeAttr('checked');
 }
-
-//显示新增的div
-function DisplayAddBorrowdiv() {
-    $("#divBorrow").hide();
-    $("#divLoan").hide();
+function onbtnborrowaddclick() {
+    //$("#divBorrow").hide();
+    //$("#divLoan").hide();
     InitializeEditDivForm();
     $('input[name="RadioBorrowAddBorrowType"]').val(['1']);
+
+    DisplayAddBorrowdiv('1');
+}
+
+//显示新增的div
+function DisplayAddBorrowdiv(id) {  
     document.getElementById("BorrowEdit").style.display = '';
     document.getElementById("BorrowQuery").style.display = 'none';
     document.getElementById("fgdiv").style.display = '';
     document.getElementById("divBorrowTitle").innerText = "借入管理--新增";
+    hideorshowAccount(id)
 }
 
 //显示编辑的div
@@ -50,6 +55,17 @@ function InitializeEditDivForm() {
     $("#txtBorrowAddContent").val('');
 }
 
+function hideorshowAccount(i) {
+    if (i == 1) {
+        $('#divBorrow').hide();
+        $('#divLoan').hide();
+    }
+    else {
+        $('#divBorrow').show();
+        $('#divLoan').show();
+    }
+}
+
 //清空查询div
 function InitializeQueryDivForm() {
     $('input[type="text"]').val('');
@@ -65,17 +81,30 @@ function EditBorrow(id) {
 
     //给出借方式赋值
     var borrowType = selectedRow[1].innerText;
-    $('input[name="RadioBorrowAddBorrowType"]').val([borrowType]);
-    if (borrowType == "2") {
-        $("#divLoan").show();
-        $("#divBorrow").show();
-        $("#txtBorrowAddLoanAccount").val(selectedRow[4].innerText);
-        $("#txtBorrowAddBorrowAccount").val(selectedRow[2].innerText);
-    }
-    else {
+
+    if (borrowType == '现金') {
+        $('input[name="RadioBorrowAddBorrowType"]').val([1]);
         $("#divBorrow").hide();
         $("#divLoan").hide();
     }
+    else {
+        $('input[name="RadioBorrowAddBorrowType"]').val([2]);
+        $("#divBorrow").show();
+        $("#divLoan").show();
+        $("#txtBorrowAddLoanAccount").val(selectedRow[4].innerText);
+        $("#txtBorrowAddBorrowAccount").val(selectedRow[2].innerText);
+    }
+    //$('input[name="RadioBorrowAddBorrowType"]').val([borrowType]);
+    //if (borrowType == "2") {
+    //    $("#divLoan").show();
+    //    $("#divBorrow").show();
+    //    $("#txtBorrowAddLoanAccount").val(selectedRow[4].innerText);
+    //    $("#txtBorrowAddBorrowAccount").val(selectedRow[2].innerText);
+    //}
+    //else {
+    //    $("#divBorrow").hide();
+    //    $("#divLoan").hide();
+    //}
 
     $("#HiddenField1").val(id);
     $("#txtBorrowAddLender").val(selectedRow[3].innerText);
@@ -142,4 +171,5 @@ function onborrowqueryconfirmclick() {
 
 function onborrowaddconfirmclick() {
     $('#btnBorrowAddSubmit').click();
+    
 }

@@ -8,6 +8,7 @@ using BillingSystem.Models;
 using BillingSystem.Services;
 using MySql.Data.MySqlClient;
 using BillingSystem.Common;
+using System.Web.Services;
 
 namespace BillingSystem.Views
 {

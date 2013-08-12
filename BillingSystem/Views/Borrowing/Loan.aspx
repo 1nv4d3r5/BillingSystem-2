@@ -18,7 +18,36 @@
             $('#btnLoanQuery').button();
             $('#btnLoanAddCanel').button();
             $('#btnLoanAddSubmit').button();
+
+            $('#txtLoanAddLender').change(loadLoanAccount);
         });
+
+        function loadLoanAccount() {
+            //$.post('Loan.aspx/test', {}, function (msg) {
+            //    alert(msg);
+            //}, 'json');
+            $.ajax({
+                //要用post方式       
+                type: "POST",
+                //方法所在页面和方法名  
+                url: "/Views/Ajax.aspx/getLoanAccountByPerson",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: "{ 'loanName':'" + $('#txtLoanAddLender').val() + "'}",
+                success: function (data) {
+                    //返回的数据用data.d获取内容       
+                    // alert(data.d);
+
+                    $(data.d).each(function () {
+                        //插入结果到li里面     
+                        $("#dropLoanAddLoanAccount").append("<option value='" + this + "'>" + this + "</option>");
+                    });
+                },
+                error: function (err) {
+                    alert(err);
+                }
+            });
+        }
     </script>
 </head>
 <body>
@@ -61,15 +90,15 @@
                 </div>
                 <div class="controls controls-row">
                     <asp:Label ID="Label1" runat="server" Text="出借人:" CssClass="span1" />
-                    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-                        <ContentTemplate>
-                            <asp:TextBox runat="server" ID="txtLoanAddLender" AutoPostBack="true" CssClass="span2" OnTextChanged="txtLoanAddLender_TextChanged" />
-                            <div id="divLoan">
-                                <asp:Label ID="Label2" runat="server" Text="出借账户:" CssClass="span1" />
-                                <asp:DropDownList runat="server" ID="dropLoanAddLoanAccount" CssClass="span2" />
-                            </div>
-                        </ContentTemplate>
-                    </asp:UpdatePanel>
+                    <%--  <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                        <ContentTemplate>--%>
+                    <asp:TextBox runat="server" ID="txtLoanAddLender" CssClass="span2"/>
+                    <div id="divLoan">
+                        <asp:Label ID="Label2" runat="server" Text="出借账户:" CssClass="span1" />
+                        <asp:DropDownList runat="server" ID="dropLoanAddLoanAccount" CssClass="span2" />
+                    </div>
+                    <%--     </ContentTemplate>
+                    </asp:UpdatePanel>--%>
                     <asp:Label ID="Label3" runat="server" Text="借款人:" CssClass="span1" />
                     <asp:TextBox runat="server" ID="txtLoanAddBorrower" CssClass="span2" />
                     <div runat="server" id="divBorrow">
