@@ -21,9 +21,19 @@
                 <div id="divBorrowTitle" class="title">
                     借入管理
                 </div>
-                <div id="divSet" style="margin-top:5px;margin-left:5px;height:20px;vertical-align:middle;">
+                <div id="divSet" style="height: 30px; margin-top: 5px; vertical-align: middle; margin-left: 5px;">
                     <div class="row">
-                        <div class="span1" onclick="DisplayAddBorrowdiv()">
+                        <div class="span3">
+                            <button type="button" title="新增" id="btnBorrowAdd" onclick="DisplayAddBorrowdiv();">
+                                <img src="../Image/add3_16.png" />
+                                新增
+                            </button>
+                            <button type="button" title="查询" id="btnBorrowQuery" onclick="DisplayQueryBorrowdiv();">
+                                <img src="../Image/query1_16.png" />
+                                查询
+                            </button>
+                        </div>
+<%--                        <div class="span1" onclick="DisplayAddBorrowdiv()">
                             <img src="../Image/add2_16.png" title="新增" />
                             <input type="button" style="border:none;background-color:transparent;" value="新增" />
                         </div>
@@ -32,7 +42,7 @@
                             <img src="../Image/query1_16.png" title="高级查询" />
                             <input type="button" style="border:none;background-color:transparent;" value="高级查询" />
                         </div>
-                        <div style="border-right-color:red;border-left-color:red;width:2px;font-size:22px;" class="span1">|</div>
+                        <div style="border-right-color:red;border-left-color:red;width:2px;font-size:22px;" class="span1">|</div>--%>
                     </div>
                 </div>
                 <hr style="border-color:#cccfd2;margin-top:10px;" />
@@ -76,8 +86,17 @@
                         <asp:Label runat="server" Text="备注:" CssClass="span1" />
                         <asp:TextBox runat="server" ID="txtBorrowAddContent" CssClass="span8" TextMode="MultiLine" />
                         <div class="span3" style="text-align: right">
-                            <asp:Button runat="server" ID="btnBorrowAddSubmit" CssClass="btn btn-primary" Text="提交" OnClick="btnBorrowAddSubmit_Click" />
-                            <input type="button" id="btnBorrowAddCanel" class="btn btn-primary" value="返回" onclick="DisplaySysdiv()" />
+                            <asp:Button runat="server" ID="btnBorrowAddSubmit" OnClick="btnBorrowAddSubmit_Click" />
+                            <button type="button" id="btnBorrowAddConfirm" title="提交" onclick="onborrowaddconfirmclick();">
+                                <img src="../Image/submit1_16.png" />
+                                提交
+                            </button>
+
+                            <button type="button" title="返回" id="btnBorrowAddCanel" onclick="DisplaySysdiv();">
+                                <img src="../Image/submit1_16.png" />
+                                返回
+                            </button>
+<%--                            <input type="button" id="btnBorrowAddCanel" class="btn btn-primary" value="返回" onclick="DisplaySysdiv()" />--%>
                         </div>
                     </div>
                 </div>
@@ -90,10 +109,17 @@
                         <asp:TextBox runat="server" ID="txtBorrowQueryBBorrowDate" CssClass="span2" />
                         <asp:Label runat="server" Text="到:" CssClass="span1" />
                         <asp:TextBox runat="server" ID="txtBorrowQueryEBorrowDate" CssClass="span2" />
-                        <label class="span1">&nbsp;</label>
-                        <div class="span2">
-                            <asp:Button runat="server" ID="btnBorrowQuerySubmit" Text="查询" CssClass="btn btn-primary" OnClick="btnBorrowQuerySubmit_Click" />
-                            <input type="button" id="btnBorrowQueryCanel" value="返回" class="btn btn-primary" onclick="DisplaySysdiv()" />
+                        <div class="span3">
+                            <asp:Button runat="server" ID="btnBorrowQuerySubmit" OnClick="btnBorrowQuerySubmit_Click" />
+                            <button type="button" title="查询" id ="btnBorrowQueryConfirm" onclick="onborrowqueryconfirmclick();">
+                                <img src="../Image/query2_16.png" />
+                                查询
+                            </button>
+                            <button type="button" title="返回" id="btnBorrowQueryCanel" onclick="DisplaySysdiv();">
+                                <img src="../Image/back2_16.ico" />
+                                返回
+                            </button>
+<%--                            <input type="button" id="btnBorrowQueryCanel" value="返回" class="btn btn-primary" onclick="DisplaySysdiv()" />--%>
                         </div>
                     </div>
                 </div>

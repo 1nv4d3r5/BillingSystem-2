@@ -83,6 +83,16 @@ namespace BillingSystem.Views
         protected void btnExpensesAddSubmit_Click(object sender, EventArgs e)
         {
             #region 验证
+            ExpensesInfo expensesInfo = new ExpensesInfo();
+            if (Session["expensensEditFlag"].Equals("true"))
+            {
+                this.ClientScript.RegisterStartupScript(this.GetType(), "", "DisplayExpensesEditdiv();", true);
+                expensesInfo.Id = Convert.ToInt32(Request.QueryString["ExpensesId"]);
+            }
+            else
+            {
+                this.ClientScript.RegisterStartupScript(this.GetType(), "", "DisplayExpensesAdddiv();", true);
+            }
             if (string.IsNullOrEmpty(this.dropExpensesAddCardNumber.SelectedValue))
             {
                 Alert.Show(this, "请输入卡号！");
@@ -127,16 +137,7 @@ namespace BillingSystem.Views
             #endregion
 
             #region 赋值
-            ExpensesInfo expensesInfo = new ExpensesInfo();
-            if (Session["expensensEditFlag"].Equals("true"))
-            {
-                this.ClientScript.RegisterStartupScript(this.GetType(), "", "DisplayExpensesEditdiv();", true);
-                expensesInfo.Id = Convert.ToInt32(Request.QueryString["ExpensesId"]);
-            }
-            else
-            {
-                this.ClientScript.RegisterStartupScript(this.GetType(), "", "DisplayExpensesAdddiv();", true);
-            }
+            
             expensesInfo.OwnerId = Convert.ToInt32(this.dropExpensesAddOwner.SelectedValue);
             expensesInfo.OwnerName = this.dropExpensesAddOwner.SelectedItem.Text;
             CardInfo cardInfo = CardMethods.GetCardById(Convert.ToInt32(this.dropExpensesAddCardNumber.SelectedValue));

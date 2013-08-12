@@ -376,10 +376,10 @@ namespace BillingSystem.Views
 
         protected void btnIncomeAdd_Click(object sender, EventArgs e)
         {
-            this.ClientScript.RegisterStartupScript(this.GetType(), "", "DisplayAddIncomediv();", true);
             Session["editFlag"] = "false";
             CashIncomeInfo info = new CashIncomeInfo();
             InitializeIncomeAdd(info);
+            this.ClientScript.RegisterStartupScript(this.GetType(), "", "DisplayAddIncomediv();", true);
         }
 
         protected void btnIncomeQuery_Click(object sender, EventArgs e)

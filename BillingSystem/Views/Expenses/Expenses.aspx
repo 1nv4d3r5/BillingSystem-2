@@ -19,28 +19,28 @@
             document.getElementById("divSet").style.display = '';
             document.getElementById("ExpensesEdit").style.display = 'none';
             document.getElementById("ExpensesQuery").style.display = 'none';
+            document.getElementById("fgdiv").style.display = 'none';
             document.getElementById("divExpensesTitle").innerText = "支出管理";
         }
 
         function DisplayExpensesAdddiv() {
-            document.getElementById("divSet").style.display = 'none';
             document.getElementById("ExpensesEdit").style.display = '';
             document.getElementById("ExpensesQuery").style.display = 'none';
+            document.getElementById("fgdiv").style.display = '';
             document.getElementById("divExpensesTitle").innerText = "支出管理--新增";
         }
 
         function DisplayExpensesQuerydiv() {
-            document.getElementById("divSet").style.display = 'none';
             document.getElementById("ExpensesEdit").style.display = 'none';
             document.getElementById("ExpensesQuery").style.display = '';
+            document.getElementById("fgdiv").style.display = '';
             document.getElementById("divExpensesTitle").innerText = "支出管理--查询";
         }
 
         function DisplayExpensesEditdiv(cardNumber) {
-
-            document.getElementById("divSet").style.display = 'none';
             document.getElementById("ExpensesEdit").style.display = '';
             document.getElementById("ExpensesQuery").style.display = 'none';
+            document.getElementById("fgdiv").style.display = '';
             document.getElementById("divExpensesTitle").innerText = "支出管理--编辑";
         }
         $(function () {
@@ -53,10 +53,41 @@
         $(document).ready(function () {
             //新增、编辑div的日期
             $('#txtExpensesAddSpendDate').datepicker({ dateFormat: "yy-mm-dd" });
-
             $('#txtExpensesQueryBSpendDate').datepicker({ dateFormat: "yy-mm-dd" });
             $('#txtExpensesQueryESpendDate').datepicker({ dateFormat: "yy-mm-dd" });
+
+            $('#btnExpensesAdd').hide();
+            $('#btnExpensesQuery').hide();
+            $('#btnExpensesAddSubmit').hide();
+            $('#btnExpensesQuerySubmit').hide();
         });
+
+        $(function () {
+            $('#btnExpensesAddC').button();
+            $('#btnExpensesQueryC').button();
+            $('#btnExpensesAddConfirm').button();
+            $('#btnExpensesAddCanel').button();
+            $('#btnExpensesQueryConfirm').button();
+            $('#btnExpensesQueryCanel').button();
+        });
+
+        function onexpensesaddclick() {
+            DisplayExpensesAdddiv();
+            $('#btnExpensesAdd').click();
+        }
+
+        function onexpensesqueryclick() {
+            DisplayExpensesQuerydiv();
+            $('#btnExpensesQuery').click();
+        }
+
+        function onexpensesaddconfirmclick() {
+            $('#btnExpensesAddSubmit').click();
+        }
+
+        function onexpensesqueryconfirmclick() {
+            $('#btnExpensesQuerySubmit').click();
+        }
     </script>
 
 </head>
@@ -68,18 +99,23 @@
                 <div id="divExpensesTitle" class="title">
                     支出管理
                 </div>
-                <div id="divSet" style="height: 30px; margin-top: 5px;">
-                    <div class="controls controls-row">
-                        <div class="span1">
-                            <asp:ImageButton runat="server" ToolTip="新增" ID="btnExpensesAdd" OnClick="btnExpensesAdd_Click" ImageUrl="~/Views/Image/add5.png" />
-                            <asp:Button runat="server" Text="新增" BorderStyle="None" OnClick="btnExpensesAdd_Click" />
-                        </div>
-                        <div class="span1">
-                            <asp:ImageButton runat="server" ToolTip="高级查询" ID="btnExpensesQuery" OnClick="btnExpensesQuery_Click" ImageUrl="~/Views/Image/query6.ico" />
-                            <asp:Button runat="server" Text="高级查询" BorderStyle="None" OnClick="btnExpensesQuery_Click" />
+                <div id="divSet" style="height: 30px; margin-top: 5px; vertical-align: middle; margin-left: 5px;">
+                    <div class="row">
+                        <div class="span3">
+                            <asp:Button runat="server" ID="btnExpensesAdd" OnClick="btnExpensesAdd_Click" />
+                            <button type="button" title="新增" id="btnExpensesAddC" onclick="onexpensesaddclick();">
+                                <img src="../Image/add3_16.png" />
+                                新增
+                            </button>
+                            <asp:Button ID="btnExpensesQuery" runat="server" OnClick="btnExpensesQuery_Click" />
+                            <button type="button" title="查询" id="btnExpensesQueryC" onclick="onexpensesqueryclick();">
+                                <img src="../Image/query1_16.png" />
+                                查询
+                            </button>
                         </div>
                     </div>
                 </div>
+                <hr style="border-color: #cccfd2; margin-top: 10px;" />
                 <div id="ExpensesEdit" class="margin-top">
                     <div class="controls controls-row">
                         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
@@ -116,10 +152,16 @@
                     <div class="controls controls-row">
                         <asp:Label runat="server" Text="备注:" CssClass="span1" />
                         <asp:TextBox runat="server" ID="txtExpensesAddContent" CssClass="span8" TextMode="MultiLine" />
-                        <label class="span1">&nbsp;</label>
-                        <div class="span2">
-                            <asp:Button runat="server" ID="btnExpensesAddSubmit" CssClass="btn btn-primary" Text="提交" OnClick="btnExpensesAddSubmit_Click" />
-                            <asp:Button runat="server" ID="btnExpensesAddCanel" CssClass="btn btn-primary" Text="后退" OnClick="btnExpensesAddCanel_Click" />
+                        <div class="span3">
+                            <asp:Button runat="server" ID="btnExpensesAddSubmit" OnClick="btnExpensesAddSubmit_Click" />
+                            <button type="button" id="btnExpensesAddConfirm" title="提交" onclick="onexpensesaddconfirmclick();">
+                                <img src="../Image/submit1_16.png" />
+                                提交
+                            </button>
+                            <button type="button" id="btnExpensesAddCanel" title="返回" onclick="DisplaySysdiv();">
+                                <img src="../Image/back2_16.ico" />
+                                返回
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -127,27 +169,38 @@
                     <div class="controls controls-row">
                         <asp:Label runat="server" Text="卡号:" CssClass="span1" />
                         <asp:TextBox runat="server" ID="txtExpensesQueryCardNumber" CssClass="span3" />
-                        <asp:Label runat="server" Text="分类:" CssClass="span1" />
-                        <asp:DropDownList runat="server" ID="dropExpensesQuerySpendType" CssClass="span2" />
-                        <asp:Label runat="server" Text="方式:" CssClass="span1" />
-                        <asp:DropDownList runat="server" ID="dropExpensesQuerySpendMode" CssClass="span2" />
+
                     </div>
                     <div class="controls controls-row">
-                        <asp:Label runat="server" Text="消费者:" CssClass="span1" />
+                        <asp:Label ID="Label3" runat="server" Text="分类:" CssClass="span1" />
+                        <asp:DropDownList runat="server" ID="dropExpensesQuerySpendType" CssClass="span2" />
+                        <%--                        <label class="span1">&nbsp;</label>--%>
+                        <asp:Label ID="Label4" runat="server" Text="方式:" CssClass="span1" />
+                        <asp:DropDownList runat="server" ID="dropExpensesQuerySpendMode" CssClass="span2" />
+                        <asp:Label ID="Label5" runat="server" Text="消费者:" CssClass="span1" />
                         <asp:TextBox runat="server" ID="txtExpensesQueryConsumerName" CssClass="span2" />
-                        <label class="span1">&nbsp;</label>
+                    </div>
+                    <div class="controls controls-row">
                         <asp:Label runat="server" Text="消费日期:" CssClass="span1" />
                         <asp:TextBox runat="server" ID="txtExpensesQueryBSpendDate" CssClass="span2" />
                         <asp:Label runat="server" Text="到:" CssClass="span1" />
                         <asp:TextBox runat="server" ID="txtExpensesQueryESpendDate" CssClass="span2" />
-                        <div class="span2">
-                            <asp:Button runat="server" ID="btnExpensesQuerySubmit" Text="查询" CssClass="btn btn-primary" OnClick="btnExpensesQuerySubmit_Click" />
-                            <asp:Button runat="server" ID="btnExpensesQueryCanel" Text="后退" CssClass="btn btn-primary" OnClick="btnExpensesQueryCanel_Click" />
+                        <label class="span1">&nbsp;</label>
+                        <div class="span3">
+                            <asp:Button runat="server" ID="btnExpensesQuerySubmit" OnClick="btnExpensesQuerySubmit_Click" />
+                            <button type="button" id="btnExpensesQueryConfirm" title="查询" onclick="onexpensesqueryconfirmclick();">
+                                <img src="../Image/query2_16.png" />
+                                查询
+                            </button>
+                            <button type="button" id="btnExpensesQueryCanel" title="返回" onclick="DisplaySysdiv();">
+                                <img src="../Image/back2_16.ico" />
+                                返回
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
-            <hr style="border-color: #cccfd2;" />
+            <hr id="fgdiv" style="border-color: #cccfd2; margin-top: 10px;" />
             <div class="margin-left">
                 <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                     <ContentTemplate>

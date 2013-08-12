@@ -28,7 +28,7 @@ namespace BillingSystem.Views {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton btnExpensesAdd;
+        protected global::System.Web.UI.WebControls.Button btnExpensesAdd;
         
         /// <summary>
         /// btnExpensesQuery control.
@@ -37,7 +37,7 @@ namespace BillingSystem.Views {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton btnExpensesQuery;
+        protected global::System.Web.UI.WebControls.Button btnExpensesQuery;
         
         /// <summary>
         /// UpdatePanel1 control.
@@ -175,15 +175,6 @@ namespace BillingSystem.Views {
         protected global::System.Web.UI.WebControls.Button btnExpensesAddSubmit;
         
         /// <summary>
-        /// btnExpensesAddCanel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnExpensesAddCanel;
-        
-        /// <summary>
         /// txtExpensesQueryCardNumber control.
         /// </summary>
         /// <remarks>
@@ -191,6 +182,15 @@ namespace BillingSystem.Views {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtExpensesQueryCardNumber;
+        
+        /// <summary>
+        /// Label3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label3;
         
         /// <summary>
         /// dropExpensesQuerySpendType control.
@@ -202,6 +202,15 @@ namespace BillingSystem.Views {
         protected global::System.Web.UI.WebControls.DropDownList dropExpensesQuerySpendType;
         
         /// <summary>
+        /// Label4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label4;
+        
+        /// <summary>
         /// dropExpensesQuerySpendMode control.
         /// </summary>
         /// <remarks>
@@ -209,6 +218,15 @@ namespace BillingSystem.Views {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList dropExpensesQuerySpendMode;
+        
+        /// <summary>
+        /// Label5 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label5;
         
         /// <summary>
         /// txtExpensesQueryConsumerName control.
@@ -245,15 +263,6 @@ namespace BillingSystem.Views {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnExpensesQuerySubmit;
-        
-        /// <summary>
-        /// btnExpensesQueryCanel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnExpensesQueryCanel;
         
         /// <summary>
         /// UpdatePanel2 control.

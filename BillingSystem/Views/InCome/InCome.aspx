@@ -19,47 +19,38 @@
             document.getElementById("IncomeEdit").style.display = 'none';
             document.getElementById("IncomeQuery").style.display = 'none';
             document.getElementById("divSet").style.display = '';
+            document.getElementById("fgdiv").style.display = 'none';
             document.getElementById("divIncomeTitle").innerText = "收入管理";
         }
 
         function DisplayAddIncomediv() {
             document.getElementById("IncomeEdit").style.display = '';
             document.getElementById("IncomeQuery").style.display = 'none';
-            document.getElementById("divSet").style.display = 'none';
+            document.getElementById("fgdiv").style.display = '';
             document.getElementById("divIncomeTitle").innerText = "收入管理--新增";
         }
 
         function DisplayEditIncomediv() {
             document.getElementById("IncomeEdit").style.display = '';
             document.getElementById("IncomeQuery").style.display = 'none';
-            document.getElementById("divSet").style.display = 'none';
+            document.getElementById("fgdiv").style.display = '';
             document.getElementById("divIncomeTitle").innerText = "收入管理--编辑";
         }
 
         function DisplayQueryIncomediv() {
             document.getElementById("IncomeEdit").style.display = 'none';
             document.getElementById("IncomeQuery").style.display = '';
-            document.getElementById("divSet").style.display = 'none';
+            document.getElementById("fgdiv").style.display = '';
             document.getElementById("divIncomeTitle").innerText = "收入管理--查询";
         }
 
-        //$(function () {
-        //    $("#IncomeListDataGrid tr").first().nextAll().bind('click', function () {
-        //        $(this).css('background-color','#dff');
-        //    });
-        //});
-
-        //$(function () {
-        //    $("#IncomeListDataGrid tr").first().nextAll().bind('click', function () {                
-        //        $(this).toggleClass("highlight");
-        //    });
-        //});
         $(function () {
             $("#IncomeListDataGrid tr").first().nextAll().bind('click', function () {
                 $("#IncomeListDataGrid tr.highlight").removeClass('highlight');
                 $(this).toggleClass("highlight");
             });
         });
+
         $(document).ready(function () {
             $('#txtIncomeAddDepositDate').datepicker({ dateFormat: "yy-mm-dd" });
             $('#txtIncomeAddBDate').datepicker({ dateFormat: "yy-mm-dd" });
@@ -67,7 +58,36 @@
 
             $('#txtIncomeQueryBDepositDate').datepicker({ dateFormat: "yy-mm-dd" });
             $('#txtIncomeQueryEDepositDate').datepicker({ dateFormat: "yy-mm-dd" });
+            $('#btnIncomeAdd').hide();
+            $('#btnIncomeQuery').hide();
+            $('#btnIncomeEditSave').hide();
+            $('#btnIncomeQuerySelect').hide();
         });
+
+        $(function () {
+            $('#btnIncomeAddC').button();
+            $('#btnIncomeQueryC').button();
+            $('#btnIncomeQueryConfirm').button();
+            $('#btnIncomeQueryCanel').button();
+            $('#btnIncomeEditConfirm').button();
+            $('#btnIncomeEditCanel').button();
+        });
+
+        function onincomeEditCclick() {
+            DisplayAddIncomediv();
+            $('#btnIncomeAdd').click();
+        }
+        function onincomequeryCclick() {
+            DisplayQueryIncomediv();
+            $('#btnIncomeQuery').click();
+        }
+
+        function onIncomeeditconfirmclick() {
+            $('#btnIncomeEditSave').click();
+        }
+        function onincomequeryconfirmclick() {
+            $('#btnIncomeQuerySelect').click();
+        }
     </script>
 </head>
 <body>
@@ -75,125 +95,146 @@
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
         <div>
             <div>
-                <div id="divIncomeTitle" class="title">
-                    收入管理
-                </div>
-                <div id="divSet" style="height: 30px; margin-top: 5px;">
-                    <div class="controls controls-row">
-                        <div class="span1">
-                            <asp:ImageButton runat="server" ToolTip="新增" ID="btnIncomeAdd" OnClick="btnIncomeAdd_Click" ImageUrl="~/Views/Image/add5.png" />
-                            <asp:Button runat="server" Text="新增" BorderStyle="None" OnClick="btnIncomeAdd_Click" />
+<%--                <asp:UpdatePanel ID="UpdatePanel5" runat="server">
+                    <ContentTemplate>--%>
+                        <div id="divIncomeTitle" class="title">
+                            收入管理
                         </div>
-                        <div class="span1">
-                            <asp:ImageButton runat="server" ToolTip="高级查询" ID="btnIncomeQuery" OnClick="btnIncomeQuery_Click" ImageUrl="~/Views/Image/query6.ico" />
-                            <asp:Button runat="server" Text="高级查询" BorderStyle="None" OnClick="btnIncomeQuery_Click" />
+                        <div id="divSet" style="height: 30px; margin-top: 5px; vertical-align: middle; margin-left: 5px;">
+                            <div class="row">
+                                <div class="span3">
+                                    <asp:Button runat="server" ID="btnIncomeAdd" OnClick="btnIncomeAdd_Click" />
+                                    <button type="button" title="新增" id="btnIncomeAddC" onclick="onincomeEditCclick();">
+                                        <img src="../Image/add3_16.png" />
+                                        新增
+                                    </button>
+                                    <asp:Button runat="server" ID="btnIncomeQuery" OnClick="btnIncomeQuery_Click" />
+                                    <button type="button" id="btnIncomeQueryC" title="查询" onclick="onincomequeryCclick();">
+                                        <img src="../Image/query1_16.png" />
+                                        查询
+                                    </button>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div id="IncomeEdit" class="margin-top">
-                    <div class="controls controls-row">
-                        <asp:Label ID="Label2" runat="server" Text="卡号:" CssClass="span1" />
-                        <asp:DropDownList runat="server" ID="dropIncomeAddCardNumber" CssClass="span3" />
-                        <asp:Label ID="Label4" runat="server" Text="金额:" CssClass="span1" />
-                        <asp:TextBox runat="server" ID="txtIncomeAddAmount" CssClass="span2" />
-                        <label class="span1">&nbsp;</label>
-                        <asp:Label ID="Label21" runat="server" Text="所有者:" CssClass="span1" />
-                        <asp:TextBox runat="server" ID="txtIncomeAddOwner" CssClass="span2" />
-                    </div>
-                    <div class="controls controls-row">
-                        <asp:Label ID="Label5" runat="server" Text="存入日期:" CssClass="span1" />
-                        <asp:TextBox runat="server" ID="txtIncomeAddDepositDate" CssClass="span2" />
-                        <label class="span1">&nbsp;</label>
-                        <asp:Label ID="Label20" runat="server" Text="存款方式:" CssClass="span1" />
-                        <asp:DropDownList runat="server" ID="dropIncomeAddDepositMode" CssClass="span2" />
-                        <label class="span1">&nbsp;</label>
-                        <asp:Label ID="Label7" runat="server" Text="存款人:" CssClass="span1" />
-                        <asp:TextBox runat="server" ID="txtIncomeAddDepositorName" CssClass="span2" />
-                    </div>
-                    <div class="controls controls-row">
-                        <asp:Label ID="Label1" runat="server" Text="收入类型:" CssClass="span1" />
-                        <asp:DropDownList runat="server" ID="dropIncomeAddInComeType" CssClass="span2" />
-                        <label class="span1">&nbsp;</label>
-                        <asp:Label ID="Label3" runat="server" Text="存款状态:" CssClass="span1" />
-                        <div class="span3">
-                            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-                                <ContentTemplate>
-                                    <asp:DropDownList runat="server" ID="dropIncomeAddPreMode" AutoPostBack="true" OnSelectedIndexChanged="dropIncomeAddPreMode_SelectedIndexChanged" CssClass="input-small" />
-                                    <asp:DropDownList runat="server" ID="dropIncomeAddMode" CssClass="input-small" />
-                                </ContentTemplate>
-                            </asp:UpdatePanel>
+                        <hr style="border-color: #cccfd2; margin-top: 10px;" />
+                        <div id="IncomeEdit" class="margin-top">
+                            <div class="controls controls-row">
+                                <asp:Label ID="Label2" runat="server" Text="卡号:" CssClass="span1" />
+                                <asp:DropDownList runat="server" ID="dropIncomeAddCardNumber" CssClass="span3" />
+                                <asp:Label ID="Label4" runat="server" Text="金额:" CssClass="span1" />
+                                <asp:TextBox runat="server" ID="txtIncomeAddAmount" CssClass="span2" />
+                                <label class="span1">&nbsp;</label>
+                                <asp:Label ID="Label21" runat="server" Text="所有者:" CssClass="span1" />
+                                <asp:TextBox runat="server" ID="txtIncomeAddOwner" CssClass="span2" />
+                            </div>
+                            <div class="controls controls-row">
+                                <asp:Label ID="Label5" runat="server" Text="存入日期:" CssClass="span1" />
+                                <asp:TextBox runat="server" ID="txtIncomeAddDepositDate" CssClass="span2" />
+                                <label class="span1">&nbsp;</label>
+                                <asp:Label ID="Label20" runat="server" Text="存款方式:" CssClass="span1" />
+                                <asp:DropDownList runat="server" ID="dropIncomeAddDepositMode" CssClass="span2" />
+                                <label class="span1">&nbsp;</label>
+                                <asp:Label ID="Label7" runat="server" Text="存款人:" CssClass="span1" />
+                                <asp:TextBox runat="server" ID="txtIncomeAddDepositorName" CssClass="span2" />
+                            </div>
+                            <div class="controls controls-row">
+                                <asp:Label ID="Label1" runat="server" Text="收入类型:" CssClass="span1" />
+                                <asp:DropDownList runat="server" ID="dropIncomeAddInComeType" CssClass="span2" />
+                                <label class="span1">&nbsp;</label>
+                                <asp:Label ID="Label3" runat="server" Text="存款状态:" CssClass="span1" />
+                                <div class="span3">
+                                    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                                        <ContentTemplate>
+                                            <asp:DropDownList runat="server" ID="dropIncomeAddPreMode" AutoPostBack="true" OnSelectedIndexChanged="dropIncomeAddPreMode_SelectedIndexChanged" CssClass="input-small" />
+                                            <asp:DropDownList runat="server" ID="dropIncomeAddMode" CssClass="input-small" />
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                </div>
+                                <asp:Label ID="Label6" runat="server" Text="利率:" CssClass="span1" />
+                                <div class="span3">
+                                    <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                                        <ContentTemplate>
+                                            <asp:DropDownList runat="server" ID="dropIncomeAddPreRate" CssClass="input-small" AutoPostBack="true" OnSelectedIndexChanged="dropIncomeAddPreRate_SelectedIndexChanged" />
+                                            <asp:DropDownList runat="server" ID="dropIncomeAddRate" CssClass="input-small" />
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                </div>
+                            </div>
+                            <div class="controls controls-row">
+                                <asp:Label ID="Label17" runat="server" Text="状态:" CssClass="span1" />
+                                <asp:DropDownList runat="server" ID="dropIncomeAddStatus" CssClass="span2" />
+                                <label class="span1">&nbsp;</label>
+                                <asp:Label ID="Label16" runat="server" Text="起息日:" CssClass="span1" />
+                                <asp:TextBox runat="server" ID="txtIncomeAddBDate" CssClass="span2" />
+                                <label class="span1">&nbsp;</label>
+                                <asp:Label ID="Label18" runat="server" Text="到期日:" CssClass="span1" />
+                                <asp:TextBox runat="server" ID="txtIncomeAddEDate" CssClass="span2" />
+                            </div>
+                            <div class="controls controls-row">
+                                <asp:Label ID="Label8" runat="server" Text="备注:" CssClass="span1" />
+                                <asp:TextBox runat="server" ID="txtIncomeAddContent" TextMode="MultiLine" CssClass="span6" />
+                                <asp:CheckBox runat="server" ID="checkIncomeAddAutoSave" Text="是否自动转存" CssClass="span2" />
+                                <div class="span3">
+                                    <asp:Button runat="server" ID="btnIncomeEditSave" OnClick="btnIncomeEditSave_Click" />
+                                    <button type="button" title="提交" id="btnIncomeEditConfirm" onclick="onIncomeeditconfirmclick();">
+                                        <img src="../Image/submit1_16.png" />
+                                        提交
+                                    </button>
+                                    <button type="button" id="btnIncomeEditCanel" onclick="DisplaySysdiv();">
+                                        <img src="../Image/back2_16.ico" />
+                                        返回
+                                    </button>
+                                </div>
+                            </div>
                         </div>
-                        <asp:Label ID="Label6" runat="server" Text="利率:" CssClass="span1" />
-                        <div class="span3">
-                            <asp:UpdatePanel ID="UpdatePanel2" runat="server">
-                                <ContentTemplate>
-                                    <asp:DropDownList runat="server" ID="dropIncomeAddPreRate" CssClass="input-small" AutoPostBack="true" OnSelectedIndexChanged="dropIncomeAddPreRate_SelectedIndexChanged" />
-                                    <asp:DropDownList runat="server" ID="dropIncomeAddRate" CssClass="input-small" />
-                                </ContentTemplate>
-                            </asp:UpdatePanel>
-                        </div>
-                    </div>
-                    <div class="controls controls-row">
-                        <asp:Label ID="Label17" runat="server" Text="状态:" CssClass="span1" />
-                        <asp:DropDownList runat="server" ID="dropIncomeAddStatus" CssClass="span2" />
-                        <label class="span1">&nbsp;</label>
-                        <asp:Label ID="Label16" runat="server" Text="起息日:" CssClass="span1" />
-                        <asp:TextBox runat="server" ID="txtIncomeAddBDate" CssClass="span2" />
-                        <label class="span1">&nbsp;</label>
-                        <asp:Label ID="Label18" runat="server" Text="到期日:" CssClass="span1" />
-                        <asp:TextBox runat="server" ID="txtIncomeAddEDate" CssClass="span2" />
-                    </div>
-                    <div class="controls controls-row">
-                        <asp:Label ID="Label8" runat="server" Text="备注:" CssClass="span1" />
-                        <asp:TextBox runat="server" ID="txtIncomeAddContent" TextMode="MultiLine" CssClass="span6" />
-                        <label class="span1">&nbsp;</label>
-                        <asp:CheckBox runat="server" ID="checkIncomeAddAutoSave" Text="是否自动转存" CssClass="span2" />
-                        <div class="span2">
-                            <asp:Button runat="server" Text="提交" ID="btnIncomeEditSave" CssClass="btn btn-primary" OnClick="btnIncomeEditSave_Click" />
-                            <asp:Button runat="server" Text="后退" ID="btnIncomeEditCanel" CssClass="btn btn-primary" OnClick="btnIncomeEditCanel_Click" />
-                        </div>
-                    </div>
-                </div>
-                <div id="IncomeQuery" class="margin-top">
-                    <div class="controls controls-row">
-                        <asp:Label ID="Label9" runat="server" Text="卡号:" CssClass="span1" />
-                        <asp:TextBox runat="server" ID="txtIncomeQueryCardNumber" CssClass="span3" />
-                        <asp:Label ID="Label13" runat="server" Text="收入类型:" CssClass="span1" />
+                        <div id="IncomeQuery" class="margin-top">
+                            <div class="controls controls-row">
+                                <asp:Label ID="Label9" runat="server" Text="卡号:" CssClass="span1" />
+                                <asp:TextBox runat="server" ID="txtIncomeQueryCardNumber" CssClass="span3" />
+                                <asp:Label ID="Label13" runat="server" Text="收入类型:" CssClass="span1" />
 
-                        <asp:DropDownList runat="server" ID="dropIncomeQueryIncomeType" CssClass="span2" />
-                        <asp:Label ID="Label12" runat="server" Text="所有者:" CssClass="span1" />
-                        <asp:TextBox runat="server" ID="txtIncomeQueryOwnerName" CssClass="span3" />
-                    </div>
-                    <div class="controls controls-row">
-                        <asp:Label ID="Label10" runat="server" Text="存款状态:" CssClass="span1" />
-                        <div class="span3">
-                            <asp:UpdatePanel ID="UpdatePanel3" runat="server">
-                                <ContentTemplate>
-                                    <asp:DropDownList runat="server" ID="dropIncomeQueryPreMode" CssClass="drop-small" AutoPostBack="true" OnSelectedIndexChanged="dropIncomeQueryPreMode_SelectedIndexChanged" />
-                                    <asp:DropDownList runat="server" ID="dropIncomeQueryMode" CssClass="drop-middle" />
-                                </ContentTemplate>
-                            </asp:UpdatePanel>
+                                <asp:DropDownList runat="server" ID="dropIncomeQueryIncomeType" CssClass="span2" />
+                                <asp:Label ID="Label12" runat="server" Text="所有者:" CssClass="span1" />
+                                <asp:TextBox runat="server" ID="txtIncomeQueryOwnerName" CssClass="span3" />
+                            </div>
+                            <div class="controls controls-row">
+                                <asp:Label ID="Label10" runat="server" Text="存款状态:" CssClass="span1" />
+                                <div class="span3">
+                                    <asp:UpdatePanel ID="UpdatePanel3" runat="server">
+                                        <ContentTemplate>
+                                            <asp:DropDownList runat="server" ID="dropIncomeQueryPreMode" CssClass="drop-small" AutoPostBack="true" OnSelectedIndexChanged="dropIncomeQueryPreMode_SelectedIndexChanged" />
+                                            <asp:DropDownList runat="server" ID="dropIncomeQueryMode" CssClass="drop-middle" />
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                </div>
+                                <asp:Label ID="Label11" runat="server" Text="存款人:" CssClass="span1" />
+                                <asp:TextBox runat="server" ID="txtIncomeQueryDepositorName" CssClass="span2" />
+                                <asp:Label ID="Label19" runat="server" Text="存款方式:" CssClass="span1" />
+                                <asp:DropDownList runat="server" ID="dropIncomeQueryDepositMode" CssClass="span2" />
+                            </div>
+                            <div class="controls controls-row">
+                                <asp:Label ID="Label14" runat="server" Text="存款日期:" CssClass="span1" />
+                                <asp:TextBox runat="server" ID="txtIncomeQueryBDepositDate" CssClass="span2" />
+                                <label class="span1">&nbsp;</label>
+                                <asp:Label ID="Label15" runat="server" Text="到:" CssClass="span1" />
+                                <asp:TextBox runat="server" ID="txtIncomeQueryEDepositDate" CssClass="span2" />
+                                <div class="span3">
+                                    <asp:Button runat="server" ID="btnIncomeQuerySelect" OnClick="btnIncomeQuerySelect_Click" />
+                                    <button type="button" title="查询" id="btnIncomeQueryConfirm" onclick="onincomequeryconfirmclick();">
+                                        <img src="../Image/query2_16.png" />
+                                        查询
+                                    </button>
+                                    <button type="button" title="返回" id="btnIncomeQueryCanel" onclick="DisplaySysdiv();">
+                                        <img src="../Image/back2_16.ico" />
+                                        返回
+                                    </button>
+                                </div>
+                            </div>
                         </div>
-                        <asp:Label ID="Label11" runat="server" Text="存款人:" CssClass="span1" />
-                        <asp:TextBox runat="server" ID="txtIncomeQueryDepositorName" CssClass="span2" />
-                        <asp:Label ID="Label19" runat="server" Text="存款方式:" CssClass="span1" />
-                        <asp:DropDownList runat="server" ID="dropIncomeQueryDepositMode" CssClass="span2" />
-                    </div>
-                    <div class="controls controls-row">
-                        <asp:Label ID="Label14" runat="server" Text="存款日期:" CssClass="span1" />
-                        <asp:TextBox runat="server" ID="txtIncomeQueryBDepositDate" CssClass="span2" />
-                        <label class="span1">&nbsp;</label>
-                        <asp:Label ID="Label15" runat="server" Text="到:" CssClass="span1" />
-                        <asp:TextBox runat="server" ID="txtIncomeQueryEDepositDate" CssClass="span2" />
-                        <label class="span1">&nbsp;</label>
-                        <div class="span2">
-                            <asp:Button runat="server" Text="查询" ID="btnIncomeQuerySelect" CssClass="btn btn-primary" OnClick="btnIncomeQuerySelect_Click" />
-                            <asp:Button runat="server" Text="后退" ID="btnIncomeQueryCanel" CssClass="btn btn-primary" OnClick="btnIncomeQueryCanel_Click" />
-                        </div>
-                    </div>
-                </div>
+<%--                    </ContentTemplate>
+                </asp:UpdatePanel>--%>
             </div>
-            <hr style="border-color: #cccfd2;" />
+            <hr id="fgdiv" style="border-color: #cccfd2; margin-top: 10px;" />
             <div class="margin-left">
                 <asp:UpdatePanel ID="UpdatePanel4" runat="server">
                     <ContentTemplate>
