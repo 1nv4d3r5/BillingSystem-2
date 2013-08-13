@@ -94,20 +94,21 @@ namespace BillingSystem.DAL
             StringBuilder sb = new StringBuilder();
             if (info.Id > 0)
             {
-                sb.Append(" update borrowing set BorrowORLoanType = @BorrowORLoanType,BorrowedAccount = @BorrowedAccount,LoanAccount=@LoanAccount,");
+                sb.Append(" update borrowing set BorrowORLoanType = @BorrowORLoanType,BorrowORLoanAccountId=@BorrowORLoanAccountId,BorrowedAccount = @BorrowedAccount,LoanAccount=@LoanAccount,");
                 sb.Append("Lender = @Lender,Amount = @Amount,HappenedDate = @HappenedDate,ReturnDate = @ReturnDate,Content = @Content ");
                 sb.Append(" where Id = @Id ");
             }
             else
             {
-                sb.Append(" insert into borrowing (borrowORLoan,BorrowORLoanType,BorrowedAccount,Borrower,LoanAccount,Lender,Amount,HappenedDate,ReturnDate,Content) ");
-                sb.Append(" Values (@borrowORLoan,@BorrowORLoanType,@BorrowedAccount,@Borrower,@LoanAccount,@Lender,@Amount,@HappenedDate,@ReturnDate,@Content) ");
+                sb.Append(" insert into borrowing (borrowORLoan,BorrowORLoanType,BorrowORLoanAccountId,BorrowedAccount,Borrower,LoanAccount,Lender,Amount,HappenedDate,ReturnDate,Content) ");
+                sb.Append(" Values (@borrowORLoan,@BorrowORLoanType,@BorrowORLoanAccountId,@BorrowedAccount,@Borrower,@LoanAccount,@Lender,@Amount,@HappenedDate,@ReturnDate,@Content) ");
             }
             MySqlParameter[] pars = new MySqlParameter[] 
             {
                 new MySqlParameter("@Id",MySqlDbType.Int32),
                 new MySqlParameter("@borrowORLoan",MySqlDbType.Int32),
                 new MySqlParameter("@BorrowORLoanType",MySqlDbType.Int32),
+                new MySqlParameter("@BorrowORLoanAccountId",MySqlDbType.Int32),
                 new MySqlParameter("@BorrowedAccount",MySqlDbType.String),
                 new MySqlParameter("@Borrower",MySqlDbType.String),
                 new MySqlParameter("@LoanAccount",MySqlDbType.String),
@@ -121,14 +122,15 @@ namespace BillingSystem.DAL
             pars[0].Value = info.Id;
             pars[1].Value = 2;
             pars[2].Value = info.BorrowORLoanType;
-            pars[3].Value = info.BorrowedAccount;
-            pars[4].Value = info.Borrower;
-            pars[5].Value = info.LoanAccount;
-            pars[6].Value = info.Lender;
-            pars[7].Value = info.Amount;
-            pars[8].Value = info.HappenedDate;
-            pars[9].Value = info.ReturnDate;
-            pars[10].Value = info.Content;
+            pars[3].Value = info.BorrowORLoanAccountId;
+            pars[4].Value = info.BorrowedAccount;
+            pars[5].Value = info.Borrower;
+            pars[6].Value = info.LoanAccount;
+            pars[7].Value = info.Lender;
+            pars[8].Value = info.Amount;
+            pars[9].Value = info.HappenedDate;
+            pars[10].Value = info.ReturnDate;
+            pars[11].Value = info.Content;
             iSuccess = MySqlDBHelper.ExecuteCommand(sb.ToString(), pars);
         }
 

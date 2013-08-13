@@ -17,22 +17,40 @@ namespace BillingSystem.Views
 
         }
 
+        //[WebMethod]
+        //public static List<string> getLoanAccountByPerson(string loanName)
+        //{
+        //    UserInfo userInfo = UserMethods.GetUserByName(loanName);
+        //    if (userInfo.Id > 0)
+        //    {
+        //        CardCollection coll = CardMethods.GetCardByUserId(userInfo.Id);
+        //        List<string> list = new List<string>();
+        //        for (int i = 0; i < coll.Count; i++)
+        //        {
+        //            string bank = StaticRescourse.DisplayBank(coll[i].BankId);
+        //            list.Add( coll[i].CardNumber + " " + bank );
+        //        }
+        //        return list;
+        //    }
+        //    return new List<string>(0);
+        //}
         [WebMethod]
-        public static List<string> getLoanAccountByPerson(string loanName)
+        public static List<DropItem> getLoanAccountByPerson(string loanName)
         {
             UserInfo userInfo = UserMethods.GetUserByName(loanName);
             if (userInfo.Id > 0)
             {
                 CardCollection coll = CardMethods.GetCardByUserId(userInfo.Id);
-                List<string> list = new List<string>();
+                List<DropItem> list = new List<DropItem>();
+                //list.Add(new DropItem { ValueField = "", DisplayField = " " });
                 for (int i = 0; i < coll.Count; i++)
                 {
                     string bank = StaticRescourse.DisplayBank(coll[i].BankId);
-                    list.Add( coll[i].CardNumber + " " + bank );
+                    list.Add(new DropItem { ValueField = coll[i].Id.ToString(), DisplayField = coll[i].CardNumber + " " + bank });
                 }
                 return list;
             }
-            return new List<string>(0);
+            return new List<DropItem>();
         }
 
     }
