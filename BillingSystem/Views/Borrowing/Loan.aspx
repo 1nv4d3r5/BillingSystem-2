@@ -20,12 +20,18 @@
             $('#btnLoanAddSubmit').button();
 
             $('#txtLoanAddLender').change(loadLoanAccount);
+            $('#dropLoanAddLoanAccount').change(function () {
+                var loanAccountValue = $("#dropLoanAddLoanAccount").val();   //获取Select选择的Value   
+                var loanAccountText = $("#dropLoanAddLoanAccount").find("option:selected").text();
+                $('#dropLoanAddLoanAccount').attr('value', loanAccountValue);
+                $('#HidderField2').val(loanAccountValue + '¢' + loanAccountText);
+            });
         });
 
         function loadLoanAccount() {
-            //$.post('Loan.aspx/test', {}, function (msg) {
-            //    alert(msg);
-            //}, 'json');
+            $('#dropLoanAddLoanAccount').empty(); //清空select
+            $('#dropLoanAddLoanAccount').removeAttr('value');
+
             $.ajax({
                 //要用post方式       
                 type: "POST",
@@ -37,17 +43,17 @@
                 success: function (data) {
                     //返回的数据用data.d获取内容       
                     // alert(data.d);
-
                     $(data.d).each(function () {
                         //插入结果到li里面     
-                        $("#dropLoanAddLoanAccount").append("<option value='" + this + "'>" + this + "</option>");
+                        //$("#dropLoanAddLoanAccount").append("<option value='" + this + "'>" + this + "</option>");
+                        $("#dropLoanAddLoanAccount").append("<option value='" + this["ValueField"] + "'>" + this["DisplayField"] + "</option>");
                     });
                 },
                 error: function (err) {
                     alert(err);
                 }
             });
-        }
+        }      
     </script>
 </head>
 <body>
@@ -90,15 +96,11 @@
                 </div>
                 <div class="controls controls-row">
                     <asp:Label ID="Label1" runat="server" Text="出借人:" CssClass="span1" />
-                    <%--  <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-                        <ContentTemplate>--%>
                     <asp:TextBox runat="server" ID="txtLoanAddLender" CssClass="span2"/>
                     <div id="divLoan">
                         <asp:Label ID="Label2" runat="server" Text="出借账户:" CssClass="span1" />
                         <asp:DropDownList runat="server" ID="dropLoanAddLoanAccount" CssClass="span2" />
                     </div>
-                    <%--     </ContentTemplate>
-                    </asp:UpdatePanel>--%>
                     <asp:Label ID="Label3" runat="server" Text="借款人:" CssClass="span1" />
                     <asp:TextBox runat="server" ID="txtLoanAddBorrower" CssClass="span2" />
                     <div runat="server" id="divBorrow">
@@ -161,10 +163,11 @@
                             <asp:BoundColumn ReadOnly="true" DataField="Id" HeaderText="Id" ItemStyle-Width="5%" Visible="false" />
                             <asp:HyperLinkColumn HeaderText="出借人" DataTextField="Lender" DataNavigateUrlField="Id" DataNavigateUrlFormatString="javascript:openLoanEditWin('{0}')" ItemStyle-Width="5%"></asp:HyperLinkColumn>
                             <asp:BoundColumn ReadOnly="true" DataField="BorrowORLoanType" HeaderText="出借方式" ItemStyle-Width="5%" />
+                            <asp:BoundColumn ReadOnly="true" DataField="BorrowedORLoanAccountId" HeaderText="账户Id" ItemStyle-Width="2%" Visible="false" />
                             <asp:BoundColumn ReadOnly="true" DataField="LoanAccount" HeaderText="出借账户" ItemStyle-Width="10%" />
                             <asp:BoundColumn ReadOnly="true" DataField="Borrower" HeaderText="借款人" ItemStyle-Width="5%" />
                             <asp:BoundColumn ReadOnly="true" DataField="BorrowedAccount" HeaderText="借款账户" ItemStyle-Width="10%" />
-                            <asp:BoundColumn ReadOnly="true" DataField="Amount" HeaderText="金额" ItemStyle-Width="7%" />
+                            <asp:BoundColumn ReadOnly="true" DataField="Amount" HeaderText="金额" ItemStyle-Width="7%" ItemStyle-HorizontalAlign="Right" />
                             <asp:BoundColumn ReadOnly="true" DataField="HappenedDate" HeaderText="借款日期" ItemStyle-Width="7%" />
                             <asp:BoundColumn ReadOnly="true" DataField="ReturnDate" HeaderText="归还日期" ItemStyle-Width="7%" />
                             <asp:BoundColumn ReadOnly="true" DataField="Content" HeaderText="备注" ItemStyle-Width="15%" />

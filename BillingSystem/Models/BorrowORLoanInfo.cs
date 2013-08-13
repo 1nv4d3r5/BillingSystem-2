@@ -17,9 +17,9 @@ namespace BillingSystem.Models
         private int id;
         private int borrowORLoan;
         private int borrowORLoanType;
+        private int borrowedORLoanAccountId;
         private string borrowedAccount;
         private string borrower;
-        //private int loanType;
         private string loanAccount;
         private string lender;
         private float amount;
@@ -35,9 +35,9 @@ namespace BillingSystem.Models
             this.id = 0;
             this.borrowORLoan = 0;
             this.borrowORLoanType = 0;
+            this.borrowedORLoanAccountId = 0;
             this.borrowedAccount = string.Empty;
             this.borrower = string.Empty;
-            //this.loanType = 0;
             this.loanAccount = string.Empty;
             this.lender = string.Empty;
             this.amount = 0;
@@ -51,9 +51,9 @@ namespace BillingSystem.Models
             this.id = borrowInfo.Id;
             this.borrowORLoan = borrowInfo.BorrowORLoan;
             this.borrowORLoanType = borrowInfo.BorrowORLoanType;
+            this.borrowedORLoanAccountId = borrowInfo.BorrowedORLoanAccountId;
             this.borrowedAccount = borrowInfo.BorrowedAccount;
             this.borrower = borrowInfo.Borrower;
-            //this.loanType = borrowInfo.LoanType;
             this.loanAccount = borrowInfo.LoanAccount;
             this.lender = borrowInfo.Lender;
             this.amount = borrowInfo.Amount;
@@ -68,9 +68,9 @@ namespace BillingSystem.Models
             loader.LoadInt32("Id", ref this.id);
             loader.LoadInt32("BorrowORLoan", ref this.borrowORLoan);
             loader.LoadInt32("BorrowORLoanType", ref this.borrowORLoanType);
+            loader.LoadInt32("BorrowedORLoanAccountId", ref this.borrowedORLoanAccountId);
             loader.LoadString("BorrowedAccount", ref this.borrowedAccount);
             loader.LoadString("Borrower", ref this.borrower);
-            //loader.LoadInt32("LoanType",ref this.loanType);
             loader.LoadString("LoanAccount", ref this.loanAccount);
             loader.LoadString("Lender", ref this.lender);
             loader.LoadFloat("Amount", ref this.amount);
@@ -133,6 +133,23 @@ namespace BillingSystem.Models
         }
 
         /// <summary>
+        /// 借入：借入账户Id；借出：借出账户Id
+        /// </summary>
+        [Browsable(true)]
+        [ReadOnly(false)]
+        public int BorrowedORLoanAccountId
+        {
+            get
+            {
+                return borrowedORLoanAccountId;
+            }
+            set
+            {
+                borrowedORLoanAccountId = value;
+            }
+        }
+
+        /// <summary>
         /// 借入账户
         /// </summary>
         [Browsable(true)]
@@ -165,23 +182,6 @@ namespace BillingSystem.Models
                 borrower = value;
             }
         }
-
-        ///// <summary>
-        ///// 借出方式：1，现金；2，转账
-        ///// </summary>
-        //[Browsable(true)]
-        //[ReadOnly(false)]
-        //public int LoanType
-        //{
-        //    get
-        //    {
-        //        return loanType;
-        //    }
-        //    set
-        //    {
-        //        loanType = value;
-        //    }
-        //}
 
         /// <summary>
         /// 借出账户
@@ -294,9 +294,9 @@ namespace BillingSystem.Models
             sb.AppendFormat("<Id>{0}</Id>", this.Id);
             sb.AppendFormat("<BorrowORLoan>{0}</BorrowORLoan>", this.BorrowORLoan);
             sb.AppendFormat("<BorrowORLoanType>{0}</BorrowORLoanType>", this.BorrowORLoanType);
+            sb.AppendFormat("<BorrowedORLoanAccountId>{0}</BorrowedORLoanAccountId>", this.BorrowedORLoanAccountId);
             sb.AppendFormat("<BorrowedAccount>{0}</BorrowedAccount>", this.BorrowedAccount);
             sb.AppendFormat("<Borrower>{0}</Borrower>", this.Borrower);
-            //sb.AppendFormat("<LoanType>{0}</LoanType>", this.LoanType);
             sb.AppendFormat("<LoanAccount>{0}</LoanAccount>", this.LoanAccount);
             sb.AppendFormat("<Lender>{0}</Lender>", this.Lender);
             sb.AppendFormat("<Amount>{0}</Amount>", this.Amount);
@@ -327,6 +327,10 @@ namespace BillingSystem.Models
             FbjJsonHelper.WriteValue(jsonStringBuilder, this.borrowORLoanType);
             jsonStringBuilder.Append(",");
 
+            jsonStringBuilder.Append("BorrowedORLoanAccountId:");
+            FbjJsonHelper.WriteValue(jsonStringBuilder, this.borrowedORLoanAccountId);
+            jsonStringBuilder.Append(",");
+
             jsonStringBuilder.Append("BorrowedAccount:");
             FbjJsonHelper.WriteValue(jsonStringBuilder, this.borrowedAccount);
             jsonStringBuilder.Append(",");
@@ -334,10 +338,6 @@ namespace BillingSystem.Models
             jsonStringBuilder.Append("Borrower:");
             FbjJsonHelper.WriteValue(jsonStringBuilder, this.borrower);
             jsonStringBuilder.Append(",");
-
-            //jsonStringBuilder.Append("LoanType:");
-            //FbjJsonHelper.WriteValue(jsonStringBuilder, this.loanType);
-            //jsonStringBuilder.Append(",");
 
             jsonStringBuilder.Append("LoanAccount:");
             FbjJsonHelper.WriteValue(jsonStringBuilder, this.loanAccount);
@@ -431,9 +431,9 @@ namespace BillingSystem.Models
             table.Columns.Add("Id", typeof(int));
             table.Columns.Add("BorrowORLoan", typeof(int));
             table.Columns.Add("BorrowORLoanType", typeof(int));
+            table.Columns.Add("BorrowedORLoanAccountId", typeof(int));
             table.Columns.Add("BorrowedAccount", typeof(string));
             table.Columns.Add("Borrower", typeof(string));
-            //table.Columns.Add("LoanType", typeof(int));
             table.Columns.Add("LoanAccount", typeof(string));
             table.Columns.Add("Lender", typeof(string));
             table.Columns.Add("Amount", typeof(float));
@@ -450,9 +450,9 @@ namespace BillingSystem.Models
             dr["Id"] = borrowInfo.id;
             dr["BorrowORLoan"] = borrowInfo.borrowORLoan;
             dr["BorrowORLoanType"] = borrowInfo.borrowORLoanType;
+            dr["BorrowedORLoanAccountId"] = borrowInfo.borrowedORLoanAccountId;
             dr["BorrowedAccount"] = borrowInfo.borrowedAccount;
             dr["Borrower"] = borrowInfo.borrower;
-            //dr["LoanType"] = borrowInfo.loanType;
             dr["LoanAccount"] = borrowInfo.loanAccount;
             dr["Lender"] = borrowInfo.lender;
             dr["Amount"] = borrowInfo.amount;

@@ -61,16 +61,18 @@ function EditLoan(id) {
 
     //清空编辑div
     InitializeEditDivForm();
+    $("#HiddenField1").val(id);
+
     var selectedRow = $("tr.highlight").children("td");
     //给出借方式赋值
     var loanType = findLoanIndex(selectedRow[1].innerText);
     $('input[name="RadioLoanAddLoanType"]').val([loanType]);
+
     if (loanType == "2") {
         $("#divLoan").show();
         $("#divBorrow").show();
-        var s = selectedRow[2].innerText;
+
         //$("#dropLoanAddLoanAccount").prepend("<option value='0'>"+s+"</option>");
-        //$("#dropLoanAddLoanAccount").val(selectedRow[2].innerText);
         $("#txtLoanAddBorrowAccount").val(selectedRow[4].innerText);
     }
     else {
@@ -78,8 +80,16 @@ function EditLoan(id) {
         $("#divLoan").hide();
     }
 
-    $("#HiddenField1").val(id);
+
     $("#txtLoanAddLender").val(selectedRow[0].innerText);
+
+    if (loanType == 2) {
+        loadLoanAccount();
+        //$('#dropLoanAddLoanAccount').val('13');
+        //$('#dropLoanAddLoanAccount').attr('value', '13');
+   
+        //alert(document.getElementById('dropLoanAddLoanAccount').innerText)
+    }
     $("#txtLoanAddBorrower").val(selectedRow[3].innerText);
     $("#txtLoanAddLoanAmount").val(selectedRow[5].innerText);
     $("#txtLoanAddLoanDate").val(selectedRow[6].innerText);
@@ -108,6 +118,7 @@ $(function () {
         $(this).toggleClass("highlight");
     });
 });
+
 
 //出借方式选择，当选择现金，会隐藏和清空账户
 $(function () {

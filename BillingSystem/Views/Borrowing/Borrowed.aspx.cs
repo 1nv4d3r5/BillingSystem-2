@@ -179,7 +179,7 @@ namespace BillingSystem.Views
                 borrowInfo.ReturnDate = HelperCommon.ConverToDateTime(string.Format("{0:d}", this.txtBorrowAddReturnDate.Text.Trim()));
             }
             borrowInfo.Content = this.txtBorrowAddContent.Text.Trim();
-
+            borrowInfo.BorrowedORLoanAccountId = 1;
             int iSuccess = BorrowedMethods.InsertOrUpdatetoBorrowed(borrowInfo);
             this.ClientScript.RegisterStartupScript(this.GetType(), "", "DisplayAddBorrowdiv();", true);
             if (iSuccess == 1)
