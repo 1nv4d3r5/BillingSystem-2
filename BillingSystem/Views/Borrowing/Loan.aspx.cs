@@ -41,10 +41,11 @@ namespace BillingSystem.Views
             this.LoanListDataGrid.DataBind();
             for (int i = 0; i < coll.Count; i++)
             {
-                CardInfo cardInfo = CardMethods.GetCardById(Convert.ToInt32(this.LoanListDataGrid.Items[i].Cells[3].Text));
+
+                CardInfo cardInfo = CardMethods.GetCardById(coll[i].BorrowORLoanAccountId);
                 string bank = StaticRescourse.DisplayBank(cardInfo.BankId);
                 this.LoanListDataGrid.Items[i].Cells[2].Text = StaticRescourse.DisplayBorrowORLoanType(coll[i].BorrowORLoanType);
-                this.LoanListDataGrid.Items[i].Cells[4].Text = cardInfo.CardNumber+" "+bank;
+                this.LoanListDataGrid.Items[i].Cells[4].Text = coll[i].LoanAccount + " " + bank;
                 this.LoanListDataGrid.Items[i].Cells[8].Text = coll[i].HappenedDate.ToString("yyyy-MM-dd");
                 bool dateFlag = HelperCommon.CompareAccordToRequired(coll[i].ReturnDate);
                 if (dateFlag)
@@ -102,11 +103,11 @@ namespace BillingSystem.Views
 
             if (this.RadioLoanAddLoanType.SelectedValue == "2")
             {
-                //if (string.IsNullOrEmpty(this.dropLoanAddLoanAccount.SelectedItem.Value))
                 if (string.IsNullOrEmpty(this.HidderField2.Value.Trim()))
                 {
                     Alert.Show(this, "请输入出借账户！");
-                    this.dropLoanAddLoanAccount.Focus();
+                    this.ClientScript.RegisterStartupScript(this.GetType(), "", "$('#dropLoanAddLoanAccount').focus();", true);
+                   // this.dropLoanAddLoanAccount.Focus();
                     return;
                 }
             }
@@ -155,13 +156,12 @@ namespace BillingSystem.Views
 
             //loanInfo.BorrowType = Convert.ToInt32(this.RadioLoanAddBorrowType.SelectedValue);
             loanInfo.Borrower = this.txtLoanAddBorrower.Text.Trim();
-            //if (this.RadioLoanAddLoanType.SelectedValue == "2" && !string.IsNullOrEmpty(this.dropLoanAddLoanAccount.SelectedValue))
             if (this.RadioLoanAddLoanType.SelectedValue == "2" && !string.IsNullOrEmpty(this.HidderField2.Value.Trim()))
             {
-                string[] s = this.HidderField2.Value.Split('¢');
+                string[] s = this.HidderField2.Value.Split(',');
                 CardInfo cardInfo = CardMethods.GetCardById(Convert.ToInt32(s[0]));
-                loanInfo.LoanAccount = cardInfo.CardNumber;
-                loanInfo.BorrowedORLoanAccountId = Convert.ToInt32(s[0]);
+                loanInfo.LoanAccount = cardInfo.CardNumber ;
+                loanInfo.BorrowORLoanAccountId = cardInfo.Id;
             }
             loanInfo.Lender = this.txtLoanAddLender.Text.Trim();
             loanInfo.BorrowedAccount = this.txtLoanAddBorrowAccount.Text.Trim();

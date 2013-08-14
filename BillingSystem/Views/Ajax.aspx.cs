@@ -28,11 +28,11 @@ namespace BillingSystem.Views
         //        for (int i = 0; i < coll.Count; i++)
         //        {
         //            string bank = StaticRescourse.DisplayBank(coll[i].BankId);
-        //            list.Add(coll[i].CardNumber+" "+bank);
+        //            list.Add( coll[i].CardNumber + " " + bank );
         //        }
         //        return list;
         //    }
-        //    return new List<string>();
+        //    return new List<string>(0);
         //}
         [WebMethod]
         public static List<DropItem> getLoanAccountByPerson(string loanName)

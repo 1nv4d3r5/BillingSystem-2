@@ -47,6 +47,7 @@ function DisplayQueryLoandiv() {
 //清空编辑div
 function InitializeEditDivForm() {
     $('input[type="text"]').val('');
+    $('#dropLoanAddLoanAccount').val('');
     $('#HiddenField1').val('');
     $("#txtLoanAddContent").val('');
 }
@@ -58,6 +59,7 @@ function InitializeQueryDivForm() {
 
 //点击借款人修改一条记录
 function EditLoan(id) {
+    $("#HiddenField1").val(id);
 
     //清空编辑div
     InitializeEditDivForm();
@@ -73,22 +75,18 @@ function EditLoan(id) {
         $("#divBorrow").show();
 
         //$("#dropLoanAddLoanAccount").prepend("<option value='0'>"+s+"</option>");
-        $("#txtLoanAddBorrowAccount").val(selectedRow[4].innerText);
+        //$("#dropLoanAddLoanAccount").val(selectedRow[2].innerText);
+        //$("#txtLoanAddBorrowAccount").val(selectedRow[4].innerText);
     }
     else {
         $("#divBorrow").hide();
         $("#divLoan").hide();
     }
 
-
+    
     $("#txtLoanAddLender").val(selectedRow[0].innerText);
-
     if (loanType == 2) {
-        loadLoanAccount();
-        //$('#dropLoanAddLoanAccount').val('13');
-        //$('#dropLoanAddLoanAccount').attr('value', '13');
-   
-        //alert(document.getElementById('dropLoanAddLoanAccount').innerText)
+        loadLoanAccount(function () { $('#dropLoanAddLoanAccount').val('13'); });
     }
     $("#txtLoanAddBorrower").val(selectedRow[3].innerText);
     $("#txtLoanAddLoanAmount").val(selectedRow[5].innerText);

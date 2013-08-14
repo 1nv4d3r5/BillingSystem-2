@@ -20,18 +20,23 @@
             $('#btnLoanAddSubmit').button();
 
             $('#txtLoanAddLender').change(loadLoanAccount);
+
             $('#dropLoanAddLoanAccount').change(function () {
-                var loanAccountValue = $("#dropLoanAddLoanAccount").val();   //获取Select选择的Value   
-                var loanAccountText = $("#dropLoanAddLoanAccount").find("option:selected").text();
-                $('#dropLoanAddLoanAccount').attr('value', loanAccountValue);
-                $('#HidderField2').val(loanAccountValue + '¢' + loanAccountText);
+                var accountType = $('#dropLoanAddLoanAccount').val();
+                var loanaccount = $("#dropLoanAddLoanAccount").find("option:selected").text();//¢
+                $('#HidderField2').val(accountType + "," + loanaccount);
+                //alert($('#HidderField2').val())
             });
         });
 
-        function loadLoanAccount() {
-            $('#dropLoanAddLoanAccount').empty(); //清空select
-            $('#dropLoanAddLoanAccount').removeAttr('value');
+        function checkForm() {
+            return false;
+        }
 
+        function loadLoanAccount(callback) {
+            //$.post('Loan.aspx/test', {}, function (msg) {
+            //    alert(msg);
+            //}, 'json');
             $.ajax({
                 //要用post方式       
                 type: "POST",
@@ -43,11 +48,14 @@
                 success: function (data) {
                     //返回的数据用data.d获取内容       
                     // alert(data.d);
+                    $("#dropLoanAddLoanAccount").append("<option value=''>请选择</option>");
                     $(data.d).each(function () {
                         //插入结果到li里面     
                         //$("#dropLoanAddLoanAccount").append("<option value='" + this + "'>" + this + "</option>");
                         $("#dropLoanAddLoanAccount").append("<option value='" + this["ValueField"] + "'>" + this["DisplayField"] + "</option>");
                     });
+                    if (typeof (callback) == 'function')
+                        callback();
                 },
                 error: function (err) {
                     alert(err);
@@ -96,10 +104,11 @@
                 </div>
                 <div class="controls controls-row">
                     <asp:Label ID="Label1" runat="server" Text="出借人:" CssClass="span1" />
-                    <asp:TextBox runat="server" ID="txtLoanAddLender" CssClass="span2"/>
+                    <asp:TextBox runat="server" ID="txtLoanAddLender" CssClass="span2" />
                     <div id="divLoan">
                         <asp:Label ID="Label2" runat="server" Text="出借账户:" CssClass="span1" />
-                        <asp:DropDownList runat="server" ID="dropLoanAddLoanAccount" CssClass="span2" />
+                        <%--<asp:DropDownList runat="server" ID="dropLoanAddLoanAccount" CssClass="span2" />--%>
+                        <select id="dropLoanAddLoanAccount" name="dropLoanAddLoanAccount" class="span2"></select>
                     </div>
                     <asp:Label ID="Label3" runat="server" Text="借款人:" CssClass="span1" />
                     <asp:TextBox runat="server" ID="txtLoanAddBorrower" CssClass="span2" />
@@ -123,7 +132,7 @@
                 <div class="controls controls-row">
                     <label class="span7">&nbsp;</label>
                     <div class="span3">
-                        <asp:Button runat="server" ID="btnLoanAddSubmit" Text="提交" OnClick="btnLoanAddSubmit_Click" />
+                        <asp:Button runat="server" ID="btnLoanAddSubmit" Text="提交" OnClientClick="checkForm()" OnClick="btnLoanAddSubmit_Click" />
                         <%--<button type="button" id="btnLoanAddConfirm" title="提交" onclick="onclicksub();">
                             <img src="../Image/submit1_16.png" />
                             提交
@@ -163,7 +172,11 @@
                             <asp:BoundColumn ReadOnly="true" DataField="Id" HeaderText="Id" ItemStyle-Width="5%" Visible="false" />
                             <asp:HyperLinkColumn HeaderText="出借人" DataTextField="Lender" DataNavigateUrlField="Id" DataNavigateUrlFormatString="javascript:openLoanEditWin('{0}')" ItemStyle-Width="5%"></asp:HyperLinkColumn>
                             <asp:BoundColumn ReadOnly="true" DataField="BorrowORLoanType" HeaderText="出借方式" ItemStyle-Width="5%" />
+<<<<<<< HEAD
                             <asp:BoundColumn ReadOnly="true" DataField="BorrowedORLoanAccountId" HeaderText="账户Id" ItemStyle-Width="2%" Visible="false" />
+=======
+                            <asp:BoundColumn ReadOnly="true" DataField="BorrowORLoanAccountId" HeaderText="账户Id" ItemStyle-Width="1%" Visible="false" />
+>>>>>>> a325109eb70853c662944c3b7515ee80cdeb8310
                             <asp:BoundColumn ReadOnly="true" DataField="LoanAccount" HeaderText="出借账户" ItemStyle-Width="10%" />
                             <asp:BoundColumn ReadOnly="true" DataField="Borrower" HeaderText="借款人" ItemStyle-Width="5%" />
                             <asp:BoundColumn ReadOnly="true" DataField="BorrowedAccount" HeaderText="借款账户" ItemStyle-Width="10%" />
