@@ -7,6 +7,8 @@ using System.Web;
 using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using BillingSystem.ViewModels;
+using BillingSystem.Services.Utils;
 
 namespace BillingSystem.Views
 {
@@ -53,8 +55,14 @@ namespace BillingSystem.Views
             return new List<DropItem>();
         }
 
-        //[WebMethod]
-        //public static List<DropItem> Get
+        [WebMethod]
+        public static BorrowORLoanViewInfo GetBorrowInfo(string Id)
+        {
+            BorrowORLoanInfo info = BorrowedMethods.GetBorrowById(Convert.ToInt32(Id));
+            BorrowORLoanViewInfo viewInfo = ViewInfoUtils.BuildBorrowORLoanViewInfo(info);
+            viewInfo.BorrowedAccountList = getLoanAccountByPerson(viewInfo.Borrower);
+            return viewInfo;
+        }
 
     }
 }

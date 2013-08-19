@@ -210,6 +210,8 @@
     <Compile Include="Services\LoanMethods.cs" />
     <Compile Include="Services\ExpensesMethods.cs" />
     <Compile Include="Services\UserMethods.cs" />
+    <Compile Include="Services\Utils\ViewInfoUtils.cs" />
+    <Compile Include="ViewModels\BorrowORLoanViewInfo.cs" />
     <Compile Include="Views\Ajax.aspx.cs">
       <DependentUpon>Ajax.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

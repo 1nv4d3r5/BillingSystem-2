@@ -1,7 +1,8 @@
 ﻿//列表出借人超链接，编辑一条记录
 function openBorrowEditWin(id) {
     DisplayEditBorrowdiv();
-    EditBorrow(id);
+    // EditBorrow(id);
+    loadBorrowEditInfo(id);
 }
 
 //隐藏编辑、查询的div
@@ -77,42 +78,31 @@ function EditBorrow(id) {
     //清空编辑div
     InitializeEditDivForm();
 
-    var selectedRow = $("tr.highlight").children("td");
+    //var selectedRow = $("tr.highlight").children("td");
 
-    //给出借方式赋值
-    var borrowType = selectedRow[1].innerText;
+    ////给出借方式赋值
+    //var borrowType = selectedRow[1].innerText;
 
-    if (borrowType == '现金') {
-        $('input[name="RadioBorrowAddBorrowType"]').val([1]);
-        $("#divBorrow").hide();
-        $("#divLoan").hide();
-    }
-    else {
-        $('input[name="RadioBorrowAddBorrowType"]').val([2]);
-        $("#divBorrow").show();
-        $("#divLoan").show();
-        $("#txtBorrowAddLoanAccount").val(selectedRow[4].innerText);
-        $("#txtBorrowAddBorrowAccount").val(selectedRow[2].innerText);
-    }
-    //$('input[name="RadioBorrowAddBorrowType"]').val([borrowType]);
-    //if (borrowType == "2") {
-    //    $("#divLoan").show();
-    //    $("#divBorrow").show();
-    //    $("#txtBorrowAddLoanAccount").val(selectedRow[4].innerText);
-    //    $("#txtBorrowAddBorrowAccount").val(selectedRow[2].innerText);
-    //}
-    //else {
+    //if (borrowType == '现金') {
+    //    $('input[name="RadioBorrowAddBorrowType"]').val([1]);
     //    $("#divBorrow").hide();
     //    $("#divLoan").hide();
     //}
+    //else {
+    //    $('input[name="RadioBorrowAddBorrowType"]').val([2]);
+    //    $("#divBorrow").show();
+    //    $("#divLoan").show();
+    //    $("#txtBorrowAddLoanAccount").val(selectedRow[4].innerText);
+    //    $("#txtBorrowAddBorrowAccount").val(selectedRow[2].innerText);
+    //}
 
-    $("#HiddenField1").val(id);
-    $("#txtBorrowAddLender").val(selectedRow[3].innerText);
-    $("#txtBorrowAddBorrower").val(selectedRow[0].innerText);
-    $("#txtBorrowAddBorrowAmount").val(selectedRow[5].innerText);
-    $("#txtBorrowAddBorrowDate").val(selectedRow[6].innerText);
-    $("#txtBorrowAddReturnDate").val(selectedRow[7].innerText);
-    $("#txtBorrowAddContent").val(selectedRow[8].innerText);
+    //$("#HiddenField1").val(id);
+    //$("#txtBorrowAddLender").val(selectedRow[3].innerText);
+    //$("#txtBorrowAddBorrower").val(selectedRow[0].innerText);
+    //$("#txtBorrowAddBorrowAmount").val(selectedRow[5].innerText);
+    //$("#txtBorrowAddBorrowDate").val(selectedRow[6].innerText);
+    //$("#txtBorrowAddReturnDate").val(selectedRow[7].innerText);
+    //$("#txtBorrowAddContent").val(selectedRow[8].innerText);
 }
 
 //默认加载，隐藏DataGrid的Id这一列

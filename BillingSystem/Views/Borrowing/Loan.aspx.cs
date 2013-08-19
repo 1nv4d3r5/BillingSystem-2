@@ -154,7 +154,6 @@ namespace BillingSystem.Views
                 loanInfo.Id = 0;
             }
 
-            //loanInfo.BorrowType = Convert.ToInt32(this.RadioLoanAddBorrowType.SelectedValue);
             loanInfo.Borrower = this.txtLoanAddBorrower.Text.Trim();
             if (this.RadioLoanAddLoanType.SelectedValue == "2" && !string.IsNullOrEmpty(this.HidderField2.Value.Trim()))
             {
@@ -172,6 +171,7 @@ namespace BillingSystem.Views
             {
                 loanInfo.ReturnDate = HelperCommon.ConverToDateTime(string.Format("{0:d}", this.txtLoanAddReturnDate.Text.Trim()));
             }
+            loanInfo.Status = Convert.ToInt32(this.dropLoanAddStatus.SelectedValue);
             loanInfo.Content = this.txtLoanAddContent.Text.Trim();
 
             int iSuccess = LoanMethods.InsertOrUpdatetoLoan(loanInfo);
@@ -230,6 +230,12 @@ namespace BillingSystem.Views
                 queryList.Add(query);
             }
 
+            if (!string.IsNullOrEmpty(this.dropLoanQueryStatus.SelectedValue))
+            {
+                QueryElement query = new QueryElement { Queryname = "Status", QueryElementType = MySqlDbType.Int32, Queryvalue = Convert.ToInt32(this.dropLoanQueryStatus.SelectedValue) };
+                queryList.Add(query);
+            }
+
             if (!string.IsNullOrEmpty(this.txtLoanQueryBLoanDate.Text.Trim()) && !string.IsNullOrEmpty(this.txtLoanQueryELoanDate.Text.Trim()))
             {
                 QueryElement query = new QueryElement { Queryname = "LoanDate", QueryElementType = MySqlDbType.DateTime, Queryvalue = this.txtLoanQueryBLoanDate.Text.Trim(), QueryOperation = ">=" };
@@ -240,27 +246,6 @@ namespace BillingSystem.Views
             BindLoanListDataGrid(queryList);
             this.ClientScript.RegisterStartupScript(this.GetType(), "", "DisplayQueryLoandiv();", true);
         }
-
-        //protected void txtLoanAddLender_TextChanged(object sender, EventArgs e)
-        //{
-        //    if (this.RadioLoanAddLoanType.SelectedValue == "2" && !string.IsNullOrEmpty(this.txtLoanAddLender.Text.Trim()))
-        //    {
-        //        UserInfo userInfo = UserMethods.GetUserByName(this.txtLoanAddLender.Text.Trim());
-        //        if (userInfo.Id > 0)
-        //        {
-        //            CardCollection coll = CardMethods.GetCardByUserId(userInfo.Id);
-        //            List<DropItem> list = new List<DropItem>();
-        //            list.Add(new DropItem { ValueField = "", DisplayField = " " });
-        //            for (int i = 0; i < coll.Count; i++)
-        //            {
-        //                string bank = StaticRescourse.DisplayBank(coll[i].BankId);
-        //                list.Add(new DropItem { ValueField = coll[i].Id.ToString(), DisplayField = coll[i].CardNumber + " " + bank });
-        //            }
-        //            this.dropLoanAddLoanAccount.DataSource = list;
-        //            Helper.SetDropDownList(this.dropLoanAddLoanAccount);
-        //        }
-        //    }
-        //}
 
         protected void btnLoanDelete_Click(object sender, ImageClickEventArgs e)
         {

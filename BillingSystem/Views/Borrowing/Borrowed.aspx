@@ -11,6 +11,102 @@
     <script type="text/javascript" src="../../Scripts/jquery-2.0.3.min.js"></script>
     <script type="text/javascript" src="../../Scripts/borrow-jquery.js"></script>
     <script type="text/javascript" src="../../Scripts/jquery-ui-1.10.3.custom.min.js"></script>
+    <script>
+        $(function () {
+            $('#txtBorrowAddBorrower').change(loadBorrowAccount);
+
+            $('#dropBorrowAddBorrowAccount').change(function () {
+                var accountType = $('#dropBorrowAddBorrowAccount').val();
+                var loanaccount = $("#dropBorrowAddBorrowAccount").find("option:selected").text();//¢
+                $('#HidderField2').val(accountType + "," + loanaccount);
+            });
+        });
+
+        function loadBorrowEditInfo(id) {
+            
+            $.ajax({
+                //要用post方式       
+                type: "POST",
+                //方法所在页面和方法名  
+                url: "/Views/Ajax.aspx/GetBorrowInfo",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: "{ 'Id':'" + id + "'}",
+                success: function (data) {
+                    //返回的数据用data.d获取内容       
+                    var d = data.d;
+                    //插入结果到li里面     
+                    //$("#dropBorrowAddBorrowAccount").append("<option value='" + this["ValueField"] + "'>" + this["DisplayField"] + "</option>");
+                    if (d.BorrowORLoanType == '1') {
+                        $('#divBorrow').hide();
+                        $('#divLoan').hide();
+                    }
+                    else {
+                        $('#divBorrow').show();
+                        $('#divLoan').show();
+                    }
+                    $('input[name="RadioBorrowAddBorrowType"]').val([d.BorrowORLoanType]);
+                    $('#txtBorrowAddBorrower').val(d.Borrower);
+
+                    buildBorrowAccountSelect(d.BorrowedAccountList);
+
+                    //var temp = d['BorrowORLoanAccountId'];
+                    //loadBorrowAccount(function () {$('#dropBorrowAddBorrowAccount').val(temp) });
+                    // $('#dropBorrowAddBorrowAccount').val(this['BorrowORLoanAccountId']);
+                    $('#txtBorrowAddLender').val(d.Lender);
+                    $('#txtBorrowAddLoanAccount').val(d.LoanAccount);
+                    $('#txtBorrowAddBorrowAmount').val(d.Amount);
+                    $('#txtBorrowAddBorrowDate').val(d.HappenedDate);
+                    $('#txtBorrowAddReturnDate').val(d.ReturnDate);
+                    $('#dropBorrowAddStatus').val(d.Status);
+                    $('#txtBorrowAddContent').val(d.Content);
+
+                },
+                error: function (err) {
+                    alert(err);
+                }
+            });
+        }
+
+        function buildBorrowAccountSelect(list) {
+            $('#dropBorrowAddBorrowAccount').empty();
+            $(list).each(function () {
+                //插入结果到li里面     
+                $("#dropBorrowAddBorrowAccount").append("<option value='" + this["ValueField"] + "'>" + this["DisplayField"] + "</option>");
+            });
+        }
+
+        function fillFormField(params) {
+            alert(params);
+            alert(params.borrowAccount);
+        }
+
+        function loadBorrowAccount(callback) {
+            $('#dropBorrowAddBorrowAccount').empty();
+            $.ajax({
+                //要用post方式       
+                type: "POST",
+                //方法所在页面和方法名  
+                url: "/Views/Ajax.aspx/getLoanAccountByPerson",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: "{ 'loanName':'" + $('#txtBorrowAddBorrower').val() + "'}",
+                success: function (data) {
+                    //返回的数据用data.d获取内容       
+                    $("#dropBorrowAddBorrowAccount").append("<option value=''>请选择</option>");
+                    $(data.d).each(function () {
+                        //插入结果到li里面     
+                        $("#dropBorrowAddBorrowAccount").append("<option value='" + this["ValueField"] + "'>" + this["DisplayField"] + "</option>");
+                    });
+                    if (typeof (callback) == 'function')
+                        callback();
+                },
+                error: function (err) {
+                    alert(err);
+                }
+            });
+        }
+    </script>
 </head>
 
 <body>
@@ -48,19 +144,20 @@
                         <label class="span1">&nbsp;</label>
 
                         <asp:HiddenField ID="HiddenField1" runat="server" />
+                        <asp:HiddenField ID="HiddenField2" runat="server" />
                     </div>
                     <div class="controls controls-row">
                         <asp:Label ID="Label1" runat="server" Text="借款人:" CssClass="span1" />
                         <asp:TextBox runat="server" ID="txtBorrowAddBorrower" CssClass="span2" />
                         <div runat="server" id="divBorrow">
                             <asp:Label ID="Label2" runat="server" Text="借入账户:" CssClass="span1" />
-                            <asp:TextBox runat="server" ID="txtBorrowAddBorrowAccount" CssClass="span2" />
+                            <select id="dropBorrowAddBorrowAccount" name="dropBorrowAddBorrowAccount" class="span2"></select>
                         </div>
 
                         <asp:Label runat="server" Text="出借人:" CssClass="span1" />
                         <asp:TextBox runat="server" ID="txtBorrowAddLender" CssClass="span2" />
                         <div runat="server" id="divLoan">
-                            <asp:Label runat="server" Text="借出账户:" CssClass="span1" />
+                            <asp:Label runat="server" Text="出借账户:" CssClass="span1" />
                             <asp:TextBox runat="server" ID="txtBorrowAddLoanAccount" CssClass="span2" />
                         </div>
                     </div>
@@ -72,7 +169,7 @@
                         <asp:Label runat="server" Text="归还日期:" CssClass="span1" />
                         <asp:TextBox runat="server" ID="txtBorrowAddReturnDate" CssClass="span2" />
                         <asp:Label runat="server" Text="状态：" CssClass="span1" />
-                        <asp:DropDownList runat="server" ID="dropStatus" CssClass="span2">
+                        <asp:DropDownList runat="server" ID="dropBorrowAddStatus" CssClass="span2">
                             <asp:ListItem Value="1" Text="未还" />
                             <asp:ListItem Value="2" Text="已还" />
                         </asp:DropDownList>
@@ -86,7 +183,6 @@
                                 <img src="../Image/submit1_16.png" />
                                 提交
                             </button>
-
                             <button type="button" title="返回" id="btnBorrowAddCanel" onclick="DisplaySysdiv();">
                                 <img src="../Image/submit1_16.png" />
                                 返回
@@ -100,7 +196,7 @@
                         <asp:Label runat="server" Text="借款人:" CssClass="span1" />
                         <asp:TextBox runat="server" ID="txtBorrowQueryBorrower" CssClass="span2" />
                         <asp:Label runat="server" Text="状态：" CssClass="span1" />
-                        <asp:DropDownList runat ="server" CssClass="span2" ID="dropBorrowQueryStatus">
+                        <asp:DropDownList runat="server" CssClass="span2" ID="dropBorrowQueryStatus">
                             <asp:ListItem Value="" Text="请选择..." />
                             <asp:ListItem Value="1" Text="未还" />
                             <asp:ListItem Value="2" Text="已还" />
@@ -109,7 +205,10 @@
                         <asp:TextBox runat="server" ID="txtBorrowQueryBBorrowDate" CssClass="span2" />
                         <asp:Label runat="server" Text="到:" CssClass="span1" />
                         <asp:TextBox runat="server" ID="txtBorrowQueryEBorrowDate" CssClass="span2" />
-                        <div class="span3">
+                    </div>
+                    <div class="controls controls-row">
+                        <label class="span9">&nbsp;</label>
+                        <div class="span3" style="text-align: right;">
                             <asp:Button runat="server" ID="btnBorrowQuerySubmit" OnClick="btnBorrowQuerySubmit_Click" />
                             <button type="button" title="查询" id="btnBorrowQueryConfirm" onclick="onborrowqueryconfirmclick();">
                                 <img src="../Image/query2_16.png" />
@@ -134,13 +233,15 @@
                                 <asp:BoundColumn ReadOnly="true" DataField="Id" HeaderText="Id" ItemStyle-Width="5%" Visible="false" />
                                 <asp:HyperLinkColumn HeaderText="借款人" DataTextField="Borrower" DataNavigateUrlField="Id" DataNavigateUrlFormatString="javascript:openBorrowEditWin('{0}')" ItemStyle-Width="5%"></asp:HyperLinkColumn>
                                 <asp:BoundColumn ReadOnly="true" DataField="BorrowORLoanType" HeaderText="借入方式" ItemStyle-Width="5%" />
+                                <asp:BoundColumn ReadOnly="true" DataField="BorrowORLoanAccountId" HeaderText="账户Id" ItemStyle-Width="1%" Visible="false" />
                                 <asp:BoundColumn ReadOnly="true" DataField="BorrowedAccount" HeaderText="借入账户" ItemStyle-Width="10%" />
                                 <asp:BoundColumn ReadOnly="true" DataField="Lender" HeaderText="出借方" ItemStyle-Width="5%" />
                                 <asp:BoundColumn ReadOnly="true" DataField="LoanAccount" HeaderText="出借账户" ItemStyle-Width="10%" />
                                 <asp:BoundColumn ReadOnly="true" DataField="Amount" HeaderText="金额" ItemStyle-Width="7%" />
                                 <asp:BoundColumn ReadOnly="true" DataField="HappenedDate" HeaderText="借款日期" ItemStyle-Width="7%" />
                                 <asp:BoundColumn ReadOnly="true" DataField="ReturnDate" HeaderText="归还日期" ItemStyle-Width="7%" />
-                                <asp:BoundColumn ReadOnly="true" DataField="Content" HeaderText="备注" ItemStyle-Width="15%" />
+                                <asp:BoundColumn ReadOnly="true" DataField="Status" HeaderText="状态" ItemStyle-Width="5%" />
+                                <asp:BoundColumn ReadOnly="true" DataField="Content" HeaderText="备注" ItemStyle-Width="10%" />
                                 <asp:TemplateColumn HeaderText="操作" HeaderStyle-HorizontalAlign="Center" FooterStyle-BorderStyle="None" ItemStyle-Width="3%">
                                     <ItemTemplate>
                                         <asp:ImageButton runat="server" ID="btnBorrowDelete" ImageUrl="~/Images/delete/1.jpg" CommandName="BorrowImageDelete" OnClientClick="return confirm('确定删除？')" OnClick="btnBorrowDelete_Click" />

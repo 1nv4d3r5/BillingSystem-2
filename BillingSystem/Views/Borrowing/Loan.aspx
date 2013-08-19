@@ -163,8 +163,11 @@
                     <asp:TextBox runat="server" ID="txtLoanQueryBLoanDate" CssClass="span2" />
                     <asp:Label ID="Label11" runat="server" Text="到:" CssClass="span1" />
                     <asp:TextBox runat="server" ID="txtLoanQueryELoanDate" CssClass="span2" />
-                    <label class="span1">&nbsp;</label>
-                    <div class="span3">
+                    
+                </div>
+                <div class="controls controls-row">
+                    <label class="span9">&nbsp;</label>
+                    <div class="span3" style="text-align:right;">
                         <asp:Button runat="server" ID="btnLoanQuerySubmit" OnClick="btnLoanQuerySubmit_Click" />
                         <button type="button" id="btnLoanQueryConfirm" title="查询" onclick="onLoanQueryConfirmclick();">
                             <img src="../Image/query2_16.png" />
@@ -196,8 +199,8 @@
                             <asp:BoundColumn ReadOnly="true" DataField="Amount" HeaderText="金额" ItemStyle-Width="7%" ItemStyle-HorizontalAlign="Right" />
                             <asp:BoundColumn ReadOnly="true" DataField="HappenedDate" HeaderText="借款日期" ItemStyle-Width="7%" />
                             <asp:BoundColumn ReadOnly="true" DataField="ReturnDate" HeaderText="归还日期" ItemStyle-Width="7%" />
-                            <asp:BoundColumn ReadOnly="true" DataField="Status" HeaderText="状态" ItemStyle-Width="2%" />
-                            <asp:BoundColumn ReadOnly="true" DataField="Content" HeaderText="备注" ItemStyle-Width="15%" />
+                            <asp:BoundColumn ReadOnly="true" DataField="Status" HeaderText="状态" ItemStyle-Width="5%" />
+                            <asp:BoundColumn ReadOnly="true" DataField="Content" HeaderText="备注" ItemStyle-Width="10%" />
                             <asp:TemplateColumn HeaderText="操作" HeaderStyle-HorizontalAlign="Center" FooterStyle-BorderStyle="None" ItemStyle-Width="3%">
                                 <ItemTemplate>
                                     <asp:ImageButton runat="server" ID="btnLoanDelete" ImageUrl="~/Images/delete/1.jpg" CommandName="LoanImageDelete" OnClientClick="return confirm('确定删除？')" OnClick="btnLoanDelete_Click" />
