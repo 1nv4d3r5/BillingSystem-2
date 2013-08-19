@@ -25,7 +25,6 @@
                 var accountType = $('#dropLoanAddLoanAccount').val();
                 var loanaccount = $("#dropLoanAddLoanAccount").find("option:selected").text();//¢
                 $('#HidderField2').val(accountType + "," + loanaccount);
-                //alert($('#HidderField2').val())
             });
         });
 
@@ -107,7 +106,6 @@
                     <asp:TextBox runat="server" ID="txtLoanAddLender" CssClass="span2" />
                     <div id="divLoan">
                         <asp:Label ID="Label2" runat="server" Text="出借账户:" CssClass="span1" />
-                        <%--<asp:DropDownList runat="server" ID="dropLoanAddLoanAccount" CssClass="span2" />--%>
                         <select id="dropLoanAddLoanAccount" name="dropLoanAddLoanAccount" class="span2"></select>
                     </div>
                     <asp:Label ID="Label3" runat="server" Text="借款人:" CssClass="span1" />
@@ -172,11 +170,7 @@
                             <asp:BoundColumn ReadOnly="true" DataField="Id" HeaderText="Id" ItemStyle-Width="5%" Visible="false" />
                             <asp:HyperLinkColumn HeaderText="出借人" DataTextField="Lender" DataNavigateUrlField="Id" DataNavigateUrlFormatString="javascript:openLoanEditWin('{0}')" ItemStyle-Width="5%"></asp:HyperLinkColumn>
                             <asp:BoundColumn ReadOnly="true" DataField="BorrowORLoanType" HeaderText="出借方式" ItemStyle-Width="5%" />
-<<<<<<< HEAD
-                            <asp:BoundColumn ReadOnly="true" DataField="BorrowedORLoanAccountId" HeaderText="账户Id" ItemStyle-Width="2%" Visible="false" />
-=======
                             <asp:BoundColumn ReadOnly="true" DataField="BorrowORLoanAccountId" HeaderText="账户Id" ItemStyle-Width="1%" Visible="false" />
->>>>>>> a325109eb70853c662944c3b7515ee80cdeb8310
                             <asp:BoundColumn ReadOnly="true" DataField="LoanAccount" HeaderText="出借账户" ItemStyle-Width="10%" />
                             <asp:BoundColumn ReadOnly="true" DataField="Borrower" HeaderText="借款人" ItemStyle-Width="5%" />
                             <asp:BoundColumn ReadOnly="true" DataField="BorrowedAccount" HeaderText="借款账户" ItemStyle-Width="10%" />

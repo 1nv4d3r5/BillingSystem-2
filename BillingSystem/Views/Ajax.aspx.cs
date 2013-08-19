@@ -53,5 +53,8 @@ namespace BillingSystem.Views
             return new List<DropItem>();
         }
 
+        //[WebMethod]
+        //public static List<DropItem> Get
+
     }
 }
