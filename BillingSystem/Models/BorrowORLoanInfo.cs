@@ -25,6 +25,7 @@ namespace BillingSystem.Models
         private float amount;
         private DateTime happenedDate;
         private DateTime returnDate;
+        private int status;
         private string content;
 
         /// <summary>
@@ -43,6 +44,7 @@ namespace BillingSystem.Models
             this.amount = 0;
             this.happenedDate = DateTime.MinValue;
             this.returnDate = DateTime.MinValue;
+            this.status = 0;
             this.content = string.Empty;
         }
 
@@ -59,6 +61,7 @@ namespace BillingSystem.Models
             this.amount = borrowInfo.Amount;
             this.happenedDate = borrowInfo.HappenedDate;
             this.returnDate = borrowInfo.ReturnDate;
+            this.status = borrowInfo.Status;
             this.content = borrowInfo.Content;
         }
 
@@ -76,6 +79,7 @@ namespace BillingSystem.Models
             loader.LoadFloat("Amount", ref this.amount);
             loader.LoadDateTime("HappenedDate", ref this.happenedDate);
             loader.LoadDateTime("ReturnDate", ref this.returnDate);
+            loader.LoadInt32("Status",ref this.status);
             loader.LoadString("Content", ref this.content);
         }
 
@@ -269,6 +273,23 @@ namespace BillingSystem.Models
         }
 
         /// <summary>
+        /// 状态
+        /// </summary>
+        [Browsable(true)]
+        [ReadOnly(false)]
+        public int Status
+        {
+            get
+            {
+                return status;
+            }
+            set
+            {
+                status = value;
+            }
+        }
+
+        /// <summary>
         /// 备注
         /// </summary>
         [Browsable(true)]
@@ -302,6 +323,7 @@ namespace BillingSystem.Models
             sb.AppendFormat("<Amount>{0}</Amount>", this.Amount);
             sb.AppendFormat("<HappenedDate>{0}</HappenedDate>", this.HappenedDate.ToString("yyyy-MM-dd"));
             sb.AppendFormat("<ReturnDate>{0}</ReturnDate>", this.ReturnDate.ToString("yyyy-MM-dd"));
+            sb.AppendFormat("<Status>{0}</Status>", this.Status);
             sb.AppendFormat("<Content>{0}</Content>", this.Content);
             //sb.AppendFormat("<EnterTime>{0}</EnterTime>", this.EnterTime.ToString("yyyy-MM-ddTHH:mm:ss"));
             //sb.AppendFormat("<ModifyTime>{0}</ModifyTime>", this.ModifyTime.ToString("yyyy-MM-ddTHH:mm:ss"));
@@ -357,6 +379,10 @@ namespace BillingSystem.Models
 
             jsonStringBuilder.Append("ReturnDate:");
             FbjJsonHelper.WriteValue(jsonStringBuilder, this.returnDate);
+            jsonStringBuilder.Append(",");
+
+            jsonStringBuilder.Append("Status:");
+            FbjJsonHelper.WriteValue(jsonStringBuilder, this.status);
             jsonStringBuilder.Append(",");
 
             jsonStringBuilder.Append("Content:");
@@ -439,6 +465,7 @@ namespace BillingSystem.Models
             table.Columns.Add("Amount", typeof(float));
             table.Columns.Add("HappenedDate", typeof(DateTime));
             table.Columns.Add("ReturnDate", typeof(DateTime));
+            table.Columns.Add("Status", typeof(int));
             table.Columns.Add("Content", typeof(string));
             return table;
         }
@@ -458,6 +485,7 @@ namespace BillingSystem.Models
             dr["Amount"] = borrowInfo.amount;
             dr["HappenedDate"] = borrowInfo.happenedDate;
             dr["ReturnDate"] = borrowInfo.returnDate;
+            dr["Status"] = borrowInfo.status;
             dr["Content"] = borrowInfo.content;
             table.Rows.Add(dr);
         }

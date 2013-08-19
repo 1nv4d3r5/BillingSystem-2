@@ -86,13 +86,14 @@ function EditLoan(id) {
     
     $("#txtLoanAddLender").val(selectedRow[0].innerText);
     if (loanType == 2) {
-        loadLoanAccount(function () { $('#dropLoanAddLoanAccount').val('13'); });
+        loadLoanAccount(function () { $('#dropLoanAddLoanAccount').val('13')});
     }
     $("#txtLoanAddBorrower").val(selectedRow[3].innerText);
     $("#txtLoanAddLoanAmount").val(selectedRow[5].innerText);
     $("#txtLoanAddLoanDate").val(selectedRow[6].innerText);
     $("#txtLoanAddReturnDate").val(selectedRow[7].innerText);
-    $("#txtLoanAddContent").val(selectedRow[8].innerText);
+    //$('#dropLoanAddStatus').val();
+    $("#txtLoanAddContent").val(selectedRow[9].innerText);
 }
 
 //默认加载，隐藏DataGrid的Id这一列
@@ -104,7 +105,8 @@ $(document).ready(function () {
     //查询div的日期
     $('#txtLoanQueryBLoanDate').datepicker({ dateFormat: "yy-mm-dd" });
     $('#txtLoanQueryELoanDate').datepicker({ dateFormat: "yy-mm-dd" });
-    //$('#btnLoanAddSubmit').hide();
+    $('#btnLoanAddSubmit').hide();
+    $('#btnLoanQuerySubmit').hide();
 });
 
 //DataGrid行选择的click事件，添加行样式
@@ -144,10 +146,14 @@ function displayAddborder(str,id) {
     }
 }
 
-function onclicksub() {
+function onLoanAddConfirmclick() {
     //document.getElementById("btnLoanAddSubmit").click();
    // document.getElementById('<%btnLoanAddSubmit%>').click() = btnLoanAddSubmit_Click;
     $("#btnLoanAddSubmit").click();
+}
+
+function onLoanQueryConfirmclick() {
+    $('#btnLoanQuerySubmit').click();
 }
 
 

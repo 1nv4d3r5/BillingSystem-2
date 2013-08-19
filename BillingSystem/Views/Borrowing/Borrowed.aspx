@@ -33,19 +33,9 @@
                                 查询
                             </button>
                         </div>
-<%--                        <div class="span1" onclick="DisplayAddBorrowdiv()">
-                            <img src="../Image/add2_16.png" title="新增" />
-                            <input type="button" style="border:none;background-color:transparent;" value="新增" />
-                        </div>
-                        <div style="border-right-color:red;border-left-color:red;width:2px;font-size:20px;" class="span1">|</div>
-                        <div style="margin-left:3px;width:90px;float:left" onclick="DisplayQueryBorrowdiv()">
-                            <img src="../Image/query1_16.png" title="高级查询" />
-                            <input type="button" style="border:none;background-color:transparent;" value="高级查询" />
-                        </div>
-                        <div style="border-right-color:red;border-left-color:red;width:2px;font-size:22px;" class="span1">|</div>--%>
                     </div>
                 </div>
-                <hr style="border-color:#cccfd2;margin-top:10px;" />
+                <hr style="border-color: #cccfd2; margin-top: 10px;" />
                 <div id="BorrowEdit" class="margin-top">
                     <div class="controls controls-row">
                         <asp:Label runat="server" Text="借入方式：" CssClass="span1" />
@@ -81,6 +71,11 @@
                         <asp:TextBox runat="server" ID="txtBorrowAddBorrowDate" CssClass="span2" />
                         <asp:Label runat="server" Text="归还日期:" CssClass="span1" />
                         <asp:TextBox runat="server" ID="txtBorrowAddReturnDate" CssClass="span2" />
+                        <asp:Label runat="server" Text="状态：" CssClass="span1" />
+                        <asp:DropDownList runat="server" ID="dropStatus" CssClass="span2">
+                            <asp:ListItem Value="1" Text="未还" />
+                            <asp:ListItem Value="2" Text="已还" />
+                        </asp:DropDownList>
                     </div>
                     <div class="controls controls-row">
                         <asp:Label runat="server" Text="备注:" CssClass="span1" />
@@ -96,7 +91,6 @@
                                 <img src="../Image/submit1_16.png" />
                                 返回
                             </button>
-<%--                            <input type="button" id="btnBorrowAddCanel" class="btn btn-primary" value="返回" onclick="DisplaySysdiv()" />--%>
                         </div>
                     </div>
                 </div>
@@ -105,13 +99,19 @@
                     <div class="controls controls-row">
                         <asp:Label runat="server" Text="借款人:" CssClass="span1" />
                         <asp:TextBox runat="server" ID="txtBorrowQueryBorrower" CssClass="span2" />
+                        <asp:Label runat="server" Text="状态：" CssClass="span1" />
+                        <asp:DropDownList runat ="server" CssClass="span2" ID="dropBorrowQueryStatus">
+                            <asp:ListItem Value="" Text="请选择..." />
+                            <asp:ListItem Value="1" Text="未还" />
+                            <asp:ListItem Value="2" Text="已还" />
+                        </asp:DropDownList>
                         <asp:Label runat="server" Text="借款日期:" CssClass="span1" />
                         <asp:TextBox runat="server" ID="txtBorrowQueryBBorrowDate" CssClass="span2" />
                         <asp:Label runat="server" Text="到:" CssClass="span1" />
                         <asp:TextBox runat="server" ID="txtBorrowQueryEBorrowDate" CssClass="span2" />
                         <div class="span3">
                             <asp:Button runat="server" ID="btnBorrowQuerySubmit" OnClick="btnBorrowQuerySubmit_Click" />
-                            <button type="button" title="查询" id ="btnBorrowQueryConfirm" onclick="onborrowqueryconfirmclick();">
+                            <button type="button" title="查询" id="btnBorrowQueryConfirm" onclick="onborrowqueryconfirmclick();">
                                 <img src="../Image/query2_16.png" />
                                 查询
                             </button>
@@ -119,12 +119,11 @@
                                 <img src="../Image/back2_16.ico" />
                                 返回
                             </button>
-<%--                            <input type="button" id="btnBorrowQueryCanel" value="返回" class="btn btn-primary" onclick="DisplaySysdiv()" />--%>
                         </div>
                     </div>
                 </div>
             </div>
-            <hr id="fgdiv" style="border-color: #cccfd2;display:none;" />
+            <hr id="fgdiv" style="border-color: #cccfd2; display: none;" />
             <div class="margin">
                 <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                     <ContentTemplate>

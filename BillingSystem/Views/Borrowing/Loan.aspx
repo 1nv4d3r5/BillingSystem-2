@@ -16,8 +16,12 @@
         $(function () {
             $('#btnLoanAdd').button();
             $('#btnLoanQuery').button();
+
             $('#btnLoanAddCanel').button();
-            $('#btnLoanAddSubmit').button();
+            $('#btnLoanAddConfirm').button();
+
+            $('#btnLoanQueryConfirm').button();
+            $('#btnLoanQueryCanel').button();
 
             $('#txtLoanAddLender').change(loadLoanAccount);
 
@@ -60,7 +64,7 @@
                     alert(err);
                 }
             });
-        }      
+        }
     </script>
 </head>
 <body>
@@ -122,19 +126,21 @@
                     <asp:TextBox runat="server" ID="txtLoanAddLoanDate" CssClass="span2" />
                     <asp:Label ID="Label7" runat="server" Text="归还日期:" CssClass="span1" />
                     <asp:TextBox runat="server" ID="txtLoanAddReturnDate" CssClass="span2" />
+                    <asp:Label runat="server" Text="状态：" CssClass="span1" />
+                    <asp:DropDownList runat="server" ID="dropLoanAddStatus" CssClass="span2">
+                        <asp:ListItem Value="1" Text="未还" />
+                        <asp:ListItem Value="2" Text="已还" />
+                    </asp:DropDownList>
                 </div>
                 <div class="controls controls-row">
                     <asp:Label ID="Label8" runat="server" Text="备注:" CssClass="span1" />
                     <asp:TextBox runat="server" ID="txtLoanAddContent" CssClass="span8" TextMode="MultiLine" />
-                </div>
-                <div class="controls controls-row">
-                    <label class="span7">&nbsp;</label>
-                    <div class="span3">
-                        <asp:Button runat="server" ID="btnLoanAddSubmit" Text="提交" OnClientClick="checkForm()" OnClick="btnLoanAddSubmit_Click" />
-                        <%--<button type="button" id="btnLoanAddConfirm" title="提交" onclick="onclicksub();">
+                    <div class="span3" style="text-align: right">
+                        <asp:Button runat="server" ID="btnLoanAddSubmit" OnClick="btnLoanAddSubmit_Click" />
+                        <button type="button" id="btnLoanAddConfirm" title="提交" onclick="onLoanAddConfirmclick();">
                             <img src="../Image/submit1_16.png" />
                             提交
-                        </button>--%>
+                        </button>
                         <button type="button" id="btnLoanAddCanel" title="返回" onclick="DisplaySysdiv();">
                             <img src="../Image/back2_16.ico" />
                             返回
@@ -147,14 +153,27 @@
                 <div class="controls controls-row">
                     <asp:Label ID="Label9" runat="server" Text="出借人:" CssClass="span1" />
                     <asp:TextBox runat="server" ID="txtLoanQueryLoaner" CssClass="span2" />
+                    <asp:Label runat ="server" Text="状态：" CssClass="span1" />
+                    <asp:DropDownList runat="server" ID="dropLoanQueryStatus" CssClass="span2">
+                        <asp:ListItem  Value="" Text="请选择..." />
+                        <asp:ListItem Value="1" Text="未还" />
+                        <asp:ListItem Value="2" Text="已还" />
+                    </asp:DropDownList>
                     <asp:Label ID="Label10" runat="server" Text="借款日期:" CssClass="span1" />
                     <asp:TextBox runat="server" ID="txtLoanQueryBLoanDate" CssClass="span2" />
                     <asp:Label ID="Label11" runat="server" Text="到:" CssClass="span1" />
                     <asp:TextBox runat="server" ID="txtLoanQueryELoanDate" CssClass="span2" />
                     <label class="span1">&nbsp;</label>
                     <div class="span3">
-                        <asp:Button runat="server" ID="btnLoanQuerySubmit" Text="查询" CssClass="btn btn-primary" OnClick="btnLoanQuerySubmit_Click" />
-                        <input type="button" id="btnLoanQueryCanel" value="返回" class="btn btn-primary" onclick="DisplaySysdiv()" />
+                        <asp:Button runat="server" ID="btnLoanQuerySubmit" OnClick="btnLoanQuerySubmit_Click" />
+                        <button type="button" id="btnLoanQueryConfirm" title="查询" onclick="onLoanQueryConfirmclick();">
+                            <img src="../Image/query2_16.png" />
+                            查询
+                        </button>
+                        <button type="button" id="btnLoanQueryCanel" title="返回" onclick="DisplaySysdiv();">
+                            <img src="../Image/back2_16.ico" />
+                            返回
+                        </button>
                     </div>
                 </div>
             </div>
@@ -177,6 +196,7 @@
                             <asp:BoundColumn ReadOnly="true" DataField="Amount" HeaderText="金额" ItemStyle-Width="7%" ItemStyle-HorizontalAlign="Right" />
                             <asp:BoundColumn ReadOnly="true" DataField="HappenedDate" HeaderText="借款日期" ItemStyle-Width="7%" />
                             <asp:BoundColumn ReadOnly="true" DataField="ReturnDate" HeaderText="归还日期" ItemStyle-Width="7%" />
+                            <asp:BoundColumn ReadOnly="true" DataField="Status" HeaderText="状态" ItemStyle-Width="2%" />
                             <asp:BoundColumn ReadOnly="true" DataField="Content" HeaderText="备注" ItemStyle-Width="15%" />
                             <asp:TemplateColumn HeaderText="操作" HeaderStyle-HorizontalAlign="Center" FooterStyle-BorderStyle="None" ItemStyle-Width="3%">
                                 <ItemTemplate>

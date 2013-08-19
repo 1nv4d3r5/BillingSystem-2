@@ -95,13 +95,13 @@ namespace BillingSystem.DAL
             if (info.Id > 0)
             {
                 sb.Append(" update borrowing set BorrowORLoanType = @BorrowORLoanType,BorrowORLoanAccountId=@BorrowORLoanAccountId,BorrowedAccount = @BorrowedAccount,LoanAccount=@LoanAccount,");
-                sb.Append("Lender = @Lender,Amount = @Amount,HappenedDate = @HappenedDate,ReturnDate = @ReturnDate,Content = @Content ");
+                sb.Append("Lender = @Lender,Amount = @Amount,HappenedDate = @HappenedDate,ReturnDate = @ReturnDate,Status=@Status,Content = @Content ");
                 sb.Append(" where Id = @Id ");
             }
             else
             {
-                sb.Append(" insert into borrowing (borrowORLoan,BorrowORLoanType,BorrowORLoanAccountId,BorrowedAccount,Borrower,LoanAccount,Lender,Amount,HappenedDate,ReturnDate,Content) ");
-                sb.Append(" Values (@borrowORLoan,@BorrowORLoanType,@BorrowORLoanAccountId,@BorrowedAccount,@Borrower,@LoanAccount,@Lender,@Amount,@HappenedDate,@ReturnDate,@Content) ");
+                sb.Append(" insert into borrowing (borrowORLoan,BorrowORLoanType,BorrowORLoanAccountId,BorrowedAccount,Borrower,LoanAccount,Lender,Amount,HappenedDate,ReturnDate,Status,Content) ");
+                sb.Append(" Values (@borrowORLoan,@BorrowORLoanType,@BorrowORLoanAccountId,@BorrowedAccount,@Borrower,@LoanAccount,@Lender,@Amount,@HappenedDate,@ReturnDate,@Status,@Content) ");
             }
             MySqlParameter[] pars = new MySqlParameter[] 
             {
@@ -116,6 +116,7 @@ namespace BillingSystem.DAL
                 new MySqlParameter("@Amount",MySqlDbType.Float),
                 new MySqlParameter("@HappenedDate",MySqlDbType.DateTime),
                 new MySqlParameter("@ReturnDate",MySqlDbType.DateTime),
+                new MySqlParameter("@Status",MySqlDbType.Int32),
                 new MySqlParameter("@Content",MySqlDbType.String)
 
             };
@@ -130,7 +131,8 @@ namespace BillingSystem.DAL
             pars[8].Value = info.Amount;
             pars[9].Value = info.HappenedDate;
             pars[10].Value = info.ReturnDate;
-            pars[11].Value = info.Content;
+            pars[11].Value = info.Status;
+            pars[12].Value = info.Content;
             iSuccess = MySqlDBHelper.ExecuteCommand(sb.ToString(), pars);
         }
 

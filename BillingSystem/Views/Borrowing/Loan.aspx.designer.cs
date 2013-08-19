@@ -184,6 +184,15 @@ namespace BillingSystem.Views {
         protected global::System.Web.UI.WebControls.TextBox txtLoanAddReturnDate;
         
         /// <summary>
+        /// dropLoanAddStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList dropLoanAddStatus;
+        
+        /// <summary>
         /// Label8 control.
         /// </summary>
         /// <remarks>
@@ -227,6 +236,15 @@ namespace BillingSystem.Views {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtLoanQueryLoaner;
+        
+        /// <summary>
+        /// dropLoanQueryStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList dropLoanQueryStatus;
         
         /// <summary>
         /// Label10 control.

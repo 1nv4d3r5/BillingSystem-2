@@ -148,6 +148,15 @@ namespace BillingSystem.Views {
         protected global::System.Web.UI.WebControls.TextBox txtBorrowAddReturnDate;
         
         /// <summary>
+        /// dropStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList dropStatus;
+        
+        /// <summary>
         /// txtBorrowAddContent control.
         /// </summary>
         /// <remarks>
@@ -173,6 +182,15 @@ namespace BillingSystem.Views {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtBorrowQueryBorrower;
+        
+        /// <summary>
+        /// dropBorrowQueryStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList dropBorrowQueryStatus;
         
         /// <summary>
         /// txtBorrowQueryBBorrowDate control.
