@@ -139,10 +139,9 @@ namespace BillingSystem.Views
 
             if (RadioBorrowAddBorrowType.SelectedValue == "2")
             {
-                this.ClientScript.RegisterStartupScript(this.GetType(), "", "DisplayAddBorrowdiv('2');", true);
-
                 if (string.IsNullOrEmpty(this.HiddenField2.Value))
                 {
+                    this.ClientScript.RegisterStartupScript(this.GetType(), "", "DisplayAddBorrowdiv('2');", true);
                     Alert.Show(this, "请输入借款账户！");
                     this.ClientScript.RegisterStartupScript(this.GetType(), "", "$('#dropBorrowAddBorrowAccount').focus();", true);
                     return false;
@@ -151,26 +150,18 @@ namespace BillingSystem.Views
 
             if (string.IsNullOrEmpty(this.txtBorrowAddLender.Text.Trim()))
             {
-                if (this.RadioBorrowAddBorrowType.SelectedValue == "2")
-                {
-                    this.ClientScript.RegisterStartupScript(this.GetType(), "", "DisplayAddBorrowdiv('2');", true);
-                }
-                else
-                {
-                    this.ClientScript.RegisterStartupScript(this.GetType(), "", "DisplayAddBorrowdiv('1');", true);
-                }
+                //if (this.RadioBorrowAddBorrowType.SelectedValue == "2")
+                //{
+                //    this.ClientScript.RegisterStartupScript(this.GetType(), "", "DisplayAddBorrowdiv('2');", true);
+                //}
+                //else
+                //{
+                //    this.ClientScript.RegisterStartupScript(this.GetType(), "", "DisplayAddBorrowdiv('1');", true);
+                //}
 
 
                 Alert.Show(this, "请输入出借人！");
                 this.txtBorrowAddLender.Focus();
-                //if (this.RadioBorrowAddBorrowType.SelectedValue == "1")
-                //{
-                //    this.ClientScript.RegisterStartupScript(this.GetType(), "", "hideorshowAccount('1')", true);
-                //}
-                //else
-                //{
-                //    this.ClientScript.RegisterStartupScript(this.GetType(), "", "hideorshowAccount('2')", true);
-                //}
                 return false;
             }
 

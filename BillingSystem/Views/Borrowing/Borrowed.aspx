@@ -18,7 +18,7 @@
             $('#dropBorrowAddBorrowAccount').change(function () {
                 var accountType = $('#dropBorrowAddBorrowAccount').val();
                 var loanaccount = $("#dropBorrowAddBorrowAccount").find("option:selected").text();//¢
-                $('#HidderField2').val(accountType + "," + loanaccount);
+                $('#HiddenField2').val(accountType + "," + loanaccount);
             });
         });
 
@@ -49,10 +49,6 @@
                     $('#txtBorrowAddBorrower').val(d.Borrower);
 
                     buildBorrowAccountSelect(d.BorrowedAccountList);
-
-                    //var temp = d['BorrowORLoanAccountId'];
-                    //loadBorrowAccount(function () {$('#dropBorrowAddBorrowAccount').val(temp) });
-                    // $('#dropBorrowAddBorrowAccount').val(this['BorrowORLoanAccountId']);
                     $('#txtBorrowAddLender').val(d.Lender);
                     $('#txtBorrowAddLoanAccount').val(d.LoanAccount);
                     $('#txtBorrowAddBorrowAmount').val(d.Amount);
@@ -77,7 +73,7 @@
         }
 
         function fillFormField(params) {
-            alert(params);
+            //alert(params);
             alert(params.borrowAccount);
         }
 
