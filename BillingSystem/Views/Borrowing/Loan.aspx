@@ -36,6 +36,13 @@
             return false;
         }
 
+        function fillFormField(params) {
+            loadLoanAccount(function () {
+                var id = params.loanAccount.split(',')[0];
+                $("#dropLoanAddLoanAccount").val(id);
+            });
+        }
+
         function loadLoanAccount(callback) {
             //$.post('Loan.aspx/test', {}, function (msg) {
             //    alert(msg);
@@ -78,7 +85,7 @@
                 <div id="divSet" style="margin-top: 5px; vertical-align: middle;">
                     <div class="row">
                         <div class="span3" style="margin-left: 25px;">
-                            <button type="button" id="btnLoanAdd" title="新增" onclick="DisplayAddLoandiv();">
+                            <button type="button" id="btnLoanAdd" title="新增" onclick="newLoan();">
                                 <img src="../Image/add3_16.png" />
                                 新增
                             </button>

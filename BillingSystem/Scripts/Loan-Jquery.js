@@ -16,11 +16,15 @@ function DisplaySysdiv() {
 }
 
 //显示新增的div
-function DisplayAddLoandiv() {
-    $("#divLoan").hide();
-    $("#divBorrow").hide();
-    InitializeEditDivForm();
-    $('input[name="RadioLoanAddLoanType"]').val(['1']);
+function DisplayAddLoandiv(type) {
+    if (type == '1') {
+        $("#divLoan").hide();
+        $("#divBorrow").hide();
+    } else {
+        $("#divLoan").show();
+        $("#divBorrow").show();
+    }
+    $('input[name="RadioLoanAddLoanType"]').val([type]);
     document.getElementById("LoanEdit").style.display = '';
     document.getElementById("LoanQuery").style.display = 'none';
     document.getElementById("fgdiv").style.display = '';
@@ -47,8 +51,9 @@ function DisplayQueryLoandiv() {
 //清空编辑div
 function InitializeEditDivForm() {
     $('input[type="text"]').val('');
-    $('#dropLoanAddLoanAccount').val('');
+    $('#dropLoanAddLoanAccount').empty();
     $('#HiddenField1').val('');
+    $('#HiddenField2').val('');
     $("#txtLoanAddContent").val('');
 }
 
@@ -156,4 +161,9 @@ function onLoanQueryConfirmclick() {
     $('#btnLoanQuerySubmit').click();
 }
 
+
+function newLoan() {
+    InitializeEditDivForm();
+    DisplayAddLoandiv('1');
+}
 

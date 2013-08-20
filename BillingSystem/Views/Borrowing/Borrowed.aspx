@@ -66,6 +66,8 @@
 
         function buildBorrowAccountSelect(list) {
             $('#dropBorrowAddBorrowAccount').empty();
+            //返回的数据用data.d获取内容       
+            $("#dropBorrowAddBorrowAccount").append("<option value=''>请选择</option>");
             $(list).each(function () {
                 //插入结果到li里面     
                 $("#dropBorrowAddBorrowAccount").append("<option value='" + this["ValueField"] + "'>" + this["DisplayField"] + "</option>");
@@ -73,12 +75,13 @@
         }
 
         function fillFormField(params) {
-            //alert(params);
-            alert(params.borrowAccount);
+            loadBorrowAccount(function () {
+                var id = params.borrowAccount.split(',')[0];
+                $("#dropBorrowAddBorrowAccount").val(id);
+            });
         }
 
         function loadBorrowAccount(callback) {
-            $('#dropBorrowAddBorrowAccount').empty();
             $.ajax({
                 //要用post方式       
                 type: "POST",
@@ -89,11 +92,7 @@
                 data: "{ 'loanName':'" + $('#txtBorrowAddBorrower').val() + "'}",
                 success: function (data) {
                     //返回的数据用data.d获取内容       
-                    $("#dropBorrowAddBorrowAccount").append("<option value=''>请选择</option>");
-                    $(data.d).each(function () {
-                        //插入结果到li里面     
-                        $("#dropBorrowAddBorrowAccount").append("<option value='" + this["ValueField"] + "'>" + this["DisplayField"] + "</option>");
-                    });
+                    buildBorrowAccountSelect(data.d);
                     if (typeof (callback) == 'function')
                         callback();
                 },
@@ -135,7 +134,7 @@
                     <div class="controls controls-row">
                         <asp:RadioButtonList ID="RadioBorrowAddBorrowType" runat="server" RepeatDirection="Horizontal" CssClass="span2">
                             <asp:ListItem Value="1">现金</asp:ListItem>
-                            <asp:ListItem Value="2">刷卡</asp:ListItem>
+                            <asp:ListItem Value="2">转账</asp:ListItem>
                         </asp:RadioButtonList>
                         <label class="span1">&nbsp;</label>
 
@@ -226,11 +225,11 @@
                             HeaderStyle-HorizontalAlign="Center" HeaderStyle-VerticalAlign="Middle" ItemStyle-VerticalAlign="Middle" ItemStyle-Font-Size="Small" SelectedItemStyle-BorderColor="Red"
                             OnItemCommand="BorrowListDataGrid_ItemCommand">
                             <Columns>
-                                <asp:BoundColumn ReadOnly="true" DataField="Id" HeaderText="Id" ItemStyle-Width="5%" Visible="false" />
-                                <asp:HyperLinkColumn HeaderText="借款人" DataTextField="Borrower" DataNavigateUrlField="Id" DataNavigateUrlFormatString="javascript:openBorrowEditWin('{0}')" ItemStyle-Width="5%"></asp:HyperLinkColumn>
-                                <asp:BoundColumn ReadOnly="true" DataField="BorrowORLoanType" HeaderText="借入方式" ItemStyle-Width="5%" />
+                                <asp:BoundColumn ReadOnly="true" DataField="Id" HeaderText="Id" ItemStyle-Width="2%" Visible="false" />
+                                <asp:HyperLinkColumn HeaderText="借款人" DataTextField="Borrower" DataNavigateUrlField="Id" DataNavigateUrlFormatString="javascript:openBorrowEditWin('{0}')" ItemStyle-Width="4%"></asp:HyperLinkColumn>
+                                <asp:BoundColumn ReadOnly="true" DataField="BorrowORLoanType" HeaderText="借入方式" ItemStyle-Width="4%" />
                                 <asp:BoundColumn ReadOnly="true" DataField="BorrowORLoanAccountId" HeaderText="账户Id" ItemStyle-Width="1%" Visible="false" />
-                                <asp:BoundColumn ReadOnly="true" DataField="BorrowedAccount" HeaderText="借入账户" ItemStyle-Width="10%" />
+                                <asp:BoundColumn ReadOnly="true" DataField="BorrowedAccount" HeaderText="借入账户" ItemStyle-Width="13%" />
                                 <asp:BoundColumn ReadOnly="true" DataField="Lender" HeaderText="出借方" ItemStyle-Width="5%" />
                                 <asp:BoundColumn ReadOnly="true" DataField="LoanAccount" HeaderText="出借账户" ItemStyle-Width="10%" />
                                 <asp:BoundColumn ReadOnly="true" DataField="Amount" HeaderText="金额" ItemStyle-Width="7%" />

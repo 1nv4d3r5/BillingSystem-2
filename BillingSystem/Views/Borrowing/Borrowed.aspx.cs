@@ -56,6 +56,14 @@ namespace BillingSystem.Views
                 {
                     this.BorrowListDataGrid.Items[i].Cells[9].Text = string.Empty;
                 }
+                if (coll[i].Status == 2)
+                {
+                    this.BorrowListDataGrid.Items[i].Cells[10].Text = "已还";
+                }
+                else
+                {
+                    this.BorrowListDataGrid.Items[i].Cells[10].Text = "未还";
+                }
             }
         }
 
@@ -76,7 +84,8 @@ namespace BillingSystem.Views
             if (!CheckBorrowAddForm())
             {
                 string temp = this.HiddenField2.Value;
-                this.ClientScript.RegisterStartupScript(this.GetType(), "", "fillFormField({borrowAccount:'" + temp + "'});", true);
+                string type = this.RadioBorrowAddBorrowType.SelectedValue;
+                this.ClientScript.RegisterStartupScript(this.GetType(), "fillForm", "DisplayAddBorrowdiv('" + type + "');fillFormField({borrowAccount:'" + temp + "'});", true);
                 return;
             }
 

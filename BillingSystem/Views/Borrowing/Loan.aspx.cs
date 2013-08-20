@@ -89,34 +89,34 @@ namespace BillingSystem.Views
             }
         }
 
-        protected void btnLoanAddSubmit_Click(object sender, EventArgs e)
+        private bool CheckLoanAddForm()
         {
-            #region 验证
-            this.ClientScript.RegisterStartupScript(this.GetType(), "", "DisplayAddLoandiv();", true);
             if (string.IsNullOrEmpty(this.txtLoanAddLender.Text.Trim()))
             {
 
                 Alert.Show(this, "请输入出借人！");
                 this.txtLoanAddLender.Focus();
-                return;
+                return false;
             }
 
             if (this.RadioLoanAddLoanType.SelectedValue == "2")
             {
                 if (string.IsNullOrEmpty(this.HidderField2.Value.Trim()))
                 {
+                    //this.ClientScript.RegisterStartupScript(this.GetType(), "", "DisplayAddLoandiv('2');", true);
+
                     Alert.Show(this, "请输入出借账户！");
-                    this.ClientScript.RegisterStartupScript(this.GetType(), "", "$('#dropLoanAddLoanAccount').focus();", true);
-                   // this.dropLoanAddLoanAccount.Focus();
-                    return;
+                    this.ClientScript.RegisterStartupScript(this.GetType(), "focusLoanAccount", "$('#dropLoanAddLoanAccount').focus();", true);
+                    return false;
                 }
             }
 
             if (string.IsNullOrEmpty(this.txtLoanAddBorrower.Text.Trim()))
             {
+                this.ClientScript.RegisterStartupScript(this.GetType(), "", "DisplayAddLoandiv('2');", true);
                 Alert.Show(this, "请输入借款人！");
                 this.txtLoanAddBorrower.Focus();
-                return;
+                return false;
             }
 
             if (this.RadioLoanAddLoanType.SelectedValue == "2")
@@ -125,7 +125,7 @@ namespace BillingSystem.Views
                 {
                     Alert.Show(this, "请输入借款账户！");
                     this.txtLoanAddBorrowAccount.Focus();
-                    return;
+                    return false;
                 }
             }
 
@@ -133,17 +133,20 @@ namespace BillingSystem.Views
             {
                 Alert.Show(this, "请输入借出金额!");
                 this.txtLoanAddLoanAmount.Focus();
-                return;
+                return false;
             }
 
             if (string.IsNullOrEmpty(this.txtLoanAddLoanDate.Text.Trim()))
             {
                 Alert.Show(this, "请输入借款日期！");
                 this.txtLoanAddLoanDate.Focus();
-                return;
+                return false;
             }
-            #endregion
+            return true;
+        }
 
+        protected void btnLoanAddSubmit_Click(object sender, EventArgs e)
+        {
             BorrowORLoanInfo loanInfo = new BorrowORLoanInfo();
             if (!string.IsNullOrEmpty(this.HiddenField1.Value.Trim()))
             {
@@ -153,6 +156,15 @@ namespace BillingSystem.Views
             {
                 loanInfo.Id = 0;
             }
+            #region 验证
+            if (!CheckLoanAddForm())
+            {
+                string type = this.RadioLoanAddLoanType.SelectedValue;
+                string temp = this.HidderField2.Value;
+                this.ClientScript.RegisterStartupScript(this.GetType(), "fillForm", "DisplayAddLoandiv('" + type + "');fillFormField({loanAccount:'" + temp + "'});", true);
+                return;
+            }
+            #endregion
 
             loanInfo.Borrower = this.txtLoanAddBorrower.Text.Trim();
             if (this.RadioLoanAddLoanType.SelectedValue == "2" && !string.IsNullOrEmpty(this.HidderField2.Value.Trim()))

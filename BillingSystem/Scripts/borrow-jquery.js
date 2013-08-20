@@ -53,6 +53,8 @@ function DisplayQueryBorrowdiv() {
 function InitializeEditDivForm() {
     $('input[type="text"]').val('');
     $('#HiddenField1').val('');
+    $('#HiddenField2').val('');
+    $('#dropBorrowAddBorrowAccount').empty();
     $("#txtBorrowAddContent").val('');
 }
 
